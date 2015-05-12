@@ -1,6 +1,6 @@
 
 {
-  "name": "ow/agenda-bundle",
+  "name": "Open-Wide/agenda-bundle",
   "description": "For Ez Publish 5, provides a complete system to create and show events in a calendar view in front office via FullCalendar",
   "homepage": "https://github.com/Open-Wide/OwAgendaBundle",
   "license": "GPL-3.0+",
