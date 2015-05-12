@@ -1,0 +1,3 @@
+parameters:
+    # LocationId of Agenda
+    ow_agenda.root.location_id: 1420

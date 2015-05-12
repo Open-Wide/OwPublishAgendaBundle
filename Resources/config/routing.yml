@@ -1,0 +1,12 @@
+ow_agenda_homepage:
+    path:     /Agenda/calendar
+    defaults: { _controller: OwAgendaBundle:Default:index }
+
+ow_agenda_homepage_mini:
+    path:     /Agenda/calendarmini
+    defaults: { _controller: OwAgendaBundle:Default:indexMini }
+
+ow_agenda_list_json:
+    path:     /agenda/list/events.json
+    defaults: { _controller: OwAgendaBundle:Default:eventsListJSON, _format: json }
+    requirements: { _format: (xml|json), _method: GET }

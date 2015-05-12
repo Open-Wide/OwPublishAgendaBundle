@@ -1,0 +1,36 @@
+{% extends "OwBenevolatBundle::pagelayout.html.twig" %}
+
+{% block page_head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-xs-12">
+        <h1>{{ ez_render_field( content, 'name' ) }}</h1>
+
+        {#<span><a class="btn btn-default" href="Agenda/calendar" title="See Calendar">See Calendar</a></span>#}
+        {#<span class="pull-right"><a class="btn btn-default" href="Agenda/calendarmini" title="See MiniCalendar">See <b>Mini</b> Calendar</a></span>#}
+
+        {% for agenda in event_agenda %}
+            {{ render( controller( "ez_content:viewLocation", {
+                    "locationId": agenda.nodeId,
+                    "viewType": "line",
+                    "params": {
+                        "date": agenda.event_date
+                    }
+                } ) )
+            }}
+
+            {% if not loop.last %}
+                <div class="row">
+                    <div class="col-xs-12">
+                        <hr />
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock %}

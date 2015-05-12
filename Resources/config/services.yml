@@ -1,0 +1,17 @@
+imports:
+    - { resource: services/controllers.yml }
+    - { resource: services/helpers.yml }
+
+parameters:
+#    ow_agenda.example.class: Ow\Bundle\AgendaBundle\Example
+    ow_agenda.template.index: 'OwAgendaBundle::index.html.twig'
+    ow_agenda.template.indexmini: 'OwAgendaBundle::index_mini.html.twig'
+
+services:
+#    ow_agenda.example:
+#        class: %ow_agenda.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }

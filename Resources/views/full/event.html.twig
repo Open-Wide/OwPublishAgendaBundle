@@ -1,0 +1,39 @@
+{% extends "OwBenevolatBundle::pagelayout.html.twig" %}
+
+{% block page_head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="content-view-full class-event">
+            <h2>{{ ez_render_field( content, 'title' ) }}</h2>
+
+            {% if not ez_is_field_empty( content, 'image' ) %}
+                <span class="imgArticle">
+                    {{ez_render_field( content, 'image', { "parameters": { "image_alias": 'event_agenda_embed', "viewType": 'embed' } } ) }}
+                </span>
+            {% endif %}
+
+            {% if not ez_is_field_empty( content, 'description' ) %}
+                {{ ez_render_field( content, 'description' ) }}
+            {% endif %}
+
+            {% for date in event_date %}
+                {{ render( controller( "ez_content:viewContent", {
+                    "contentId": date,
+                    "viewType": "embed"
+                } ) )
+                }}
+            {% endfor %}
+
+            <a class="btn btn-default" href="{{ path( "ez_urlalias", {"locationId": location.parentLocationId} ) }}">
+                {{ "Return to list"|trans }}
+            </a>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

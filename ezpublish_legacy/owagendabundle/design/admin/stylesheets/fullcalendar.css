@@ -1,0 +1,24 @@
+.fc-ltr .fc-basic-view .fc-day-number {
+    text-align: center;
+}
+.fc-row.fc-rigid {
+    overflow: inherit;
+}
+.historial {
+    background-color: #8EAEDB!important;
+    border: 1px solid #637999!important;
+    color: #fff!important;
+}
+.haras {
+    background-color: #5E6878!important;
+    border: 1px solid #414854!important;
+    color: #fff!important;
+}
+.chabotterie {
+    background-color: #D5D1B0!important;
+    color: #fff!important;
+}
+.abbayes {
+    background-color: #31418D!important;
+    color: #fff!important;
+}

@@ -1,0 +1,23 @@
+
+{
+  "name": "ow/agenda-bundle",
+  "description": "For Ez Publish 5, provides a complete system to create and show events in a calendar view in front office via FullCalendar",
+  "homepage": "https://github.com/Open-Wide/OwAgendaBundle",
+  "license": "GPL-3.0+",
+  "keywords": ["ezpublish", "agenda", "calendar"],
+  "authors": [
+    {
+      "name": "Sabatier Laurent for Open Wide",
+      "email": "laurent.sabatier@openwide.fr",
+      "role": "Developer",
+      "homepage" : "https://github.com/Open-Wide"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.3",
+    "symfony/symfony": ">2.0",
+    "ezsystems/ezpublish-kernel": "~5.3 | >=2014.03"
+  },
+
+  "target-dir": "Ow/AgendaBundle"
+}

@@ -1,0 +1,6 @@
+.fc-toolbar h2:first-letter {
+    text-transform: uppercase;
+}
+.fc-row.fc-rigid {
+    overflow: inherit;
+}

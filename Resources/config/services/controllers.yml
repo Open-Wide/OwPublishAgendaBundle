@@ -1,0 +1,17 @@
+parameters:
+    agenda.controller.agenda.view.class: Ow\Bundle\AgendaBundle\Controller\AgendaViewController
+    agenda.controller.event.view.class: Ow\Bundle\AgendaBundle\Controller\EventViewController
+
+services:
+    agenda.controller.agenda.view:
+        class: %agenda.controller.agenda.view.class%
+        arguments:
+            - @ezpublish.view_manager
+            - @security.context
+        parent: ezpublish.controller.content.view
+    agenda.controller.event.view:
+        class: %agenda.controller.event.view.class%
+        arguments:
+            - @ezpublish.view_manager
+            - @security.context
+        parent: ezpublish.controller.content.view

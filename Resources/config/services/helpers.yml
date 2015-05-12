@@ -1,0 +1,8 @@
+parameters:
+    ow_agenda.fetch_by_legacy.class: 'Ow\Bundle\AgendaBundle\Helper\FetchByLegacy'
+
+services:
+    ow_agenda.fetch_by_legacy:
+        class: %ow_agenda.fetch_by_legacy.class%
+        calls:
+            - [ setContainer,[ @service_container ] ]

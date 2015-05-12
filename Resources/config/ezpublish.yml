@@ -1,0 +1,59 @@
+ezpublish:
+#    imagemagick:
+#        enabled: true
+#        path: /usr/bin/convert
+#        filters:
+#            geometry/scale: '-geometry {1}x{2}'
+#            geometry/scalewidth: '-geometry {1}'
+#            geometry/scaleheight: '-geometry x{1}'
+#            geometry/scaledownonly: '-geometry {1}x{2}>'
+#            geometry/scalewidthdownonly: '-geometry {1}>'
+#            geometry/scaleheightdownonly: '-geometry x{1}>'
+#            geometry/scaleexact: '-geometry {1}x{2}!'
+#            geometry/scalepercent: '-geometry {1}x{2}%'
+#            geometry/crop: '-crop {1}x{2}+{3}+{4}'
+#            filter/noise: '-noise {1}'
+#            filter/swirl: '-swirl {1}'
+#            colorspace/gray: '-colorspace GRAY'
+#            colorspace/transparent: '-colorspace Transparent'
+#            colorspace: '-colorspace {1}'
+#            border: '-border {1}x{2}'
+#            border/color: '-bordercolor rgb({1},{2},{3})'
+#            border/width: '-borderwidth {1}'
+#            flatten: '-flatten'
+#            resize: '-resize {1}'
+    system:
+        cg85_group_front:
+            location_view:
+                full:
+                    events_list:
+                        template: OwAgendaBundle::events_list.html.twig
+                        controller: "agenda.controller.agenda.view:viewLocation"
+                        match:
+                            Identifier\ContentType: events_folder
+                    event:
+                        template: OwAgendaBundle:full:event.html.twig
+                        controller: "agenda.controller.event.view:viewLocation"
+                        match:
+                            Identifier\ContentType: event_agenda
+                line:
+                    event:
+                        template: OwAgendaBundle:line:event.html.twig
+                        match:
+                            Identifier\ContentType: event_agenda
+            content_view:
+                embed:
+                    image:
+                        template: OwAgendaBundle:content_view/embed:ezimage.html.twig
+                        match:
+                            Identifier\ContentType: image
+                    event_date:
+                        template: OwAgendaBundle:content_view/embed:event_date.html.twig
+                        match:
+                            Identifier\ContentType: event_date
+            image_variations:
+                    event_agenda_embed:
+                        reference: original
+                        filters:
+                            - { name: geometry/scalewidthdownonly, params: [220] }
+                            - { name: geometry/crop, params: [220, 165, 0, 0] }
