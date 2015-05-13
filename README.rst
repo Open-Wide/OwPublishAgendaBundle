@@ -65,7 +65,7 @@ Installation via composer
     $ php ezpublish/console ezpublish:legacybundles:install_extensions
 
 
- By default, it will create an absolute symlink, but options exist to use a hard copy (–copy) or a relative link (--relative).
+By default, it will create an absolute symlink, but options exist to use a hard copy (–copy) or a relative link (--relative).
 
 
 5. Create contents on back-office with the following structure:
