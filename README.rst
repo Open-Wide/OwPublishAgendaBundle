@@ -3,7 +3,6 @@ OWAgendaBundle for eZ Publish documentation
 ===========================================
 
 .. image:: https://github.com/Open-Wide/OWAgendaBundle/raw/master/doc/images/Open-Wide_logo.png
-:align: center
 
 :Extension: OW AgendaBundle v1.0
 :Requires: eZ Publish 5.3.x
@@ -18,16 +17,39 @@ LICENCE
 -------
 This eZ Publish extension is provided *as is*, in GPL v3 (see LICENCE).
 
-Installation
-============
+Installation via composer
+=========================
 
-1. Clone the repository in the extension folder:
+1. Add AgendaBundle in your project's composer.json
 
-.. code-block:: sh
+.. code-block:: json
 
-    $ git clone https://github.com/Open-Wide/OWAgendaBundle.git
+    {
+      "require": {
+        "open-wide/ezpublish-agenda-bundle": "dev-master"
+      }
+    }
 
-2. Create the following classes using the content package in ``Package`` directory or using [OWMigration](https://github.com/Open-Wide/OWMigration):
+
+2. Enable the Bundle in your EzPublishKernel.php file:
+
+.. code-block:: php
+
+    <?php
+    // ezpublish/EzPublishKernel.php
+    use OpenWide\AgendaBundle;
+    ...
+
+    public function registerBundles()
+    {
+      $bundles = array(
+        // ...
+        new OpenWide\AgendaBundle\OpenWideAgendaBundle(),
+      );
+    }
+
+
+3. Create the following classes using the content package in ``Package`` directory or using [OWMigration](https://github.com/Open-Wide/OWMigration):
 
 
 * In the class group ``Agenda``
@@ -36,16 +58,17 @@ Installation
     * event_date
 
 
-3. Run the legacy bundle install script manually:
+4. Run the legacy bundle install script manually:
 
 .. code-block:: sh
 
-    $ php ezpublish/console [ezpublish:legacybundles:install_extensions]
+    $ php ezpublish/console ezpublish:legacybundles:install_extensions
+
 
  By default, it will create an absolute symlink, but options exist to use a hard copy (–copy) or a relative link (--relative).
 
 
-4. Create contents on back-office with the following structure:
+5. Create contents on back-office with the following structure:
 
 
 * events_folder
@@ -55,7 +78,7 @@ Installation
       * event_date
 
 
-4. Add your events_folder LocationId in ``AgendaBundle/Resources/config/default_settings.yml``:
+6. Add your events_folder LocationId in ``AgendaBundle/Resources/config/default_settings.yml``:
 
 .. code-block:: yml
 
@@ -64,7 +87,7 @@ Installation
         ow_agenda.root.location_id: ...
 
 
-5. Add your events_folder LocationId in Legacy ini ``AgendaBundle/ezpublish_legacy/owagendabundle/settings/site.ini.append.php``:
+7. Add your events_folder LocationId in Legacy ini ``AgendaBundle/ezpublish_legacy/owagendabundle/settings/site.ini.append.php``:
 
 .. code-block:: ini
 
@@ -72,23 +95,41 @@ Installation
     RootFolderNodeId=...
 
 
-6. Add this bundle on your assetic bundles array in ``src/symfony/ezpublish/config/config.yml``:
+8. Add this bundle on your assetic bundles array in ``src/symfony/ezpublish/config/config.yml``:
 
 
 .. code-block:: yml
 
     # Assetic Configuration
     assetic:
-        bundles:        [ OtherBundle, OwAgendaBundle ]
+        bundles:        [ OtherBundle, OpenWideAgendaBundle ]
 
 
-7. Import ezpublish.yml configuration in ``src/symfony/ezpublish/config/ezpublish.yml``:
+9. Import ezpublish.yml configuration in ``src/symfony/ezpublish/config/ezpublish.yml``:
 
 
 .. code-block:: yml
 
     imports:
-        - {resource: @OwAgendaBundle/Resources/config/ezpublish.yml}
+    - {resource: @OpenWideAgendaBundle/Resources/config/ezpublish.yml}
+
+
+10. Import routing.yml configuration in ``src/symfony/ezpublish/config/routing.yml``:
+
+
+.. code-block:: yml
+
+    agenda:
+      resource: "@OpenWideAgendaBundle/Resources/config/routing.yml"
+
+
+11. Regenerate the Assetic with the following command:
+
+
+.. code-block:: sh
+
+    $ php ezpublish/console assetic:dump web
+
 
 
 Usage
