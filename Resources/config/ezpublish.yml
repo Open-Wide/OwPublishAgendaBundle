@@ -27,28 +27,28 @@ ezpublish:
             location_view:
                 full:
                     events_list:
-                        template: OwAgendaBundle::events_list.html.twig
+                        template: OpenWideAgendaBundle::events_list.html.twig
                         controller: "agenda.controller.agenda.view:viewLocation"
                         match:
                             Identifier\ContentType: events_folder
                     event:
-                        template: OwAgendaBundle:full:event.html.twig
+                        template: OpenWideAgendaBundle:full:event.html.twig
                         controller: "agenda.controller.event.view:viewLocation"
                         match:
                             Identifier\ContentType: event_agenda
                 line:
                     event:
-                        template: OwAgendaBundle:line:event.html.twig
+                        template: OpenWideAgendaBundle:line:event.html.twig
                         match:
                             Identifier\ContentType: event_agenda
             content_view:
-                embed:
+                embed_agenda:
                     image:
-                        template: OwAgendaBundle:content_view/embed:ezimage.html.twig
+                        template: OpenWideAgendaBundle:content_view/embed:ezimage.html.twig
                         match:
                             Identifier\ContentType: image
                     event_date:
-                        template: OwAgendaBundle:content_view/embed:event_date.html.twig
+                        template: OpenWideAgendaBundle:content_view/embed:event_date.html.twig
                         match:
                             Identifier\ContentType: event_date
             image_variations:
