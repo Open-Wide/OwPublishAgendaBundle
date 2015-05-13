@@ -1,6 +1,6 @@
 <?php
 
-namespace Ow\Bundle\AgendaBundle\Tests\Controller;
+namespace OpenWide\AgendaBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

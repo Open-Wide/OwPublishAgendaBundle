@@ -1,6 +1,6 @@
 <?php
 
-namespace Ow\Bundle\AgendaBundle\Controller;
+namespace OpenWide\AgendaBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use eZ\Bundle\EzPublishCoreBundle\Controller;
@@ -12,7 +12,7 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        $templateName = $this->container->getParameter( 'ow_agenda.template.index' );
+        $templateName = $this->container->getParameter( 'openwide_agenda.template.index' );
 
         $type = 'normal';
         return $this->render( $templateName, array( 'type' => $type ) );
@@ -20,7 +20,7 @@ class DefaultController extends Controller
 
     public function indexMiniAction()
     {
-        $templateName = $this->container->getParameter( 'ow_agenda.template.indexmini' );
+        $templateName = $this->container->getParameter( 'openwide_agenda.template.indexmini' );
 
         $type = 'mini';
         return $this->render( $templateName, array( 'type' => $type ) );
@@ -29,7 +29,7 @@ class DefaultController extends Controller
     public function eventsListJSONAction()
     {
         $repository = $this->getRepository();
-        $agendaLocationId = $this->container->getParameter( 'ow_agenda.root.location_id' );
+        $agendaLocationId = $this->container->getParameter( 'openwide_agenda.root.location_id' );
         $agendaLocation = $repository->getLocationService()->loadLocation( $agendaLocationId );
 
         $criteria = array(

@@ -1,6 +1,6 @@
 parameters:
-    agenda.controller.agenda.view.class: Ow\Bundle\AgendaBundle\Controller\AgendaViewController
-    agenda.controller.event.view.class: Ow\Bundle\AgendaBundle\Controller\EventViewController
+    agenda.controller.agenda.view.class: OpenWide\AgendaBundle\Controller\AgendaViewController
+    agenda.controller.event.view.class: OpenWide\AgendaBundle\Controller\EventViewController
 
 services:
     agenda.controller.agenda.view:

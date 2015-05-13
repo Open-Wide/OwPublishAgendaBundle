@@ -1,6 +1,6 @@
 <?php
 
-namespace Ow\Bundle\AgendaBundle\Helper;
+namespace OpenWide\AgendaBundle\Helper;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
@@ -160,7 +160,7 @@ class FetchByLegacy extends ContainerAware {
 
     /**
      * Return fetch criterion
-     * 
+     *
      * @return array
      */
     protected function getCriterion() {
@@ -169,7 +169,7 @@ class FetchByLegacy extends ContainerAware {
 
     /**
      * Set fetch criterion
-     * 
+     *
      * @param array $criterion
      * @return \Ow\Bundle\AgendaBundle\Helper\FetchByLegacy
      */
@@ -181,7 +181,7 @@ class FetchByLegacy extends ContainerAware {
 
     /**
      * Set fetch criterion
-     * 
+     *
      * @return \Ow\Bundle\AgendaBundle\Helper\FetchByLegacy
      */
     protected function removeCriterion() {
@@ -192,7 +192,7 @@ class FetchByLegacy extends ContainerAware {
 
     /**
      * Add a critera in the $criterion
-     * 
+     *
      * @param string $type
      * @param mixed $value
      * @return \Ow\Bundle\AgendaBundle\Helper\FetchByLegacy

@@ -1,6 +1,6 @@
 <?php
 
-namespace Ow\Bundle\AgendaBundle\Controller;
+namespace OpenWide\AgendaBundle\Controller;
 
 
 class EventViewController extends ViewController
@@ -70,9 +70,9 @@ class EventViewController extends ViewController
     /**
      * Return the legacy content service
      *
-     * return Ow\Bundle\AgendaBundle\Helper\FetchByLegacy
+     * return OpenWide\Bundle\AgendaBundle\Helper\FetchByLegacy
      */
     public function getLegacyContentService() {
-        return $this->container->get( 'ow_agenda.fetch_by_legacy' );
+        return $this->container->get( 'openwide_agenda.fetch_by_legacy' );
     }
 }

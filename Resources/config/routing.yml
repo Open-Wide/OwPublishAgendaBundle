@@ -1,12 +1,12 @@
-ow_agenda_homepage:
+openwide_agenda_homepage:
     path:     /Agenda/calendar
-    defaults: { _controller: OwAgendaBundle:Default:index }
+    defaults: { _controller: OpenWideAgendaBundle:Default:index }
 
-ow_agenda_homepage_mini:
+openwide_agenda_homepage_mini:
     path:     /Agenda/calendarmini
-    defaults: { _controller: OwAgendaBundle:Default:indexMini }
+    defaults: { _controller: OpenWideAgendaBundle:Default:indexMini }
 
-ow_agenda_list_json:
+openwide_agenda_list_json:
     path:     /agenda/list/events.json
-    defaults: { _controller: OwAgendaBundle:Default:eventsListJSON, _format: json }
+    defaults: { _controller: OpenWideAgendaBundle:Default:eventsListJSON, _format: json }
     requirements: { _format: (xml|json), _method: GET }
