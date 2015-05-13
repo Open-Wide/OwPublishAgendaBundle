@@ -18,7 +18,7 @@
     "symfony/symfony": ">=2.3"
   },
   "autoload": {
-    "psr-0": { "Ow\\AgendaBundle": "" }
+    "psr-0": { "OpenWide\\AgendaBundle": "" }
   },
 
   "target-dir": "OpenWide/AgendaBundle"
