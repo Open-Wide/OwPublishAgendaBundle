@@ -71,11 +71,11 @@ By default, it will create an absolute symlink, but options exist to use a hard 
 5. Create contents on back-office with the following structure:
 
 
-* events_folder
-    * event_agenda
-      * event_date
-    * event_agenda
-      * event_date
+    * events_folder
+        * event_agenda
+            * event_date
+        * event_agenda
+            * event_date
 
 
 6. Add your events_folder LocationId in ``AgendaBundle/Resources/config/default_settings.yml``:
