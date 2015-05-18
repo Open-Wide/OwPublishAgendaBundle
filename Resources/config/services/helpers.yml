@@ -1,8 +1,8 @@
 parameters:
-    openwide_agenda.fetch_by_legacy.class: 'OpenWide\AgendaBundle\Helper\FetchByLegacy'
+    open_wide_agenda.fetch_by_legacy.class: 'OpenWide\AgendaBundle\Helper\FetchByLegacy'
 
 services:
-    openwide_agenda.fetch_by_legacy:
-        class: %openwide_agenda.fetch_by_legacy.class%
+    open_wide_agenda.fetch_by_legacy:
+        class: %open_wide_agenda.fetch_by_legacy.class%
         calls:
             - [ setContainer,[ @service_container ] ]

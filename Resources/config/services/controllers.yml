@@ -1,16 +1,16 @@
 parameters:
-    agenda.controller.agenda.view.class: OpenWide\AgendaBundle\Controller\AgendaViewController
-    agenda.controller.event.view.class: OpenWide\AgendaBundle\Controller\EventViewController
+    open_wide_agenda.controller.agenda.view.class: OpenWide\AgendaBundle\Controller\AgendaViewController
+    open_wide_agenda.controller.event.view.class: OpenWide\AgendaBundle\Controller\EventViewController
 
 services:
     agenda.controller.agenda.view:
-        class: %agenda.controller.agenda.view.class%
+        class: %open_wide_agenda.controller.agenda.view.class%
         arguments:
             - @ezpublish.view_manager
             - @security.context
         parent: ezpublish.controller.content.view
     agenda.controller.event.view:
-        class: %agenda.controller.event.view.class%
+        class: %open_wide_agenda.controller.event.view.class%
         arguments:
             - @ezpublish.view_manager
             - @security.context

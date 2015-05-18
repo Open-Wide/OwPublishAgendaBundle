@@ -12,7 +12,7 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        $templateName = $this->container->getParameter( 'openwide_agenda.template.index' );
+        $templateName = $this->container->getParameter( 'open_wide_agenda.template.index' );
 
         $type = 'normal';
         return $this->render( $templateName, array( 'type' => $type ) );
@@ -20,7 +20,7 @@ class DefaultController extends Controller
 
     public function indexMiniAction()
     {
-        $templateName = $this->container->getParameter( 'openwide_agenda.template.indexmini' );
+        $templateName = $this->container->getParameter( 'open_wide_agenda.template.indexmini' );
 
         $type = 'mini';
         return $this->render( $templateName, array( 'type' => $type ) );
@@ -29,7 +29,7 @@ class DefaultController extends Controller
     public function eventsListJSONAction()
     {
         $repository = $this->getRepository();
-        $agendaLocationId = $this->container->getParameter( 'openwide_agenda.root.location_id' );
+        $agendaLocationId = $this->container->getParameter( 'open_wide_agenda.root.location_id' );
         $agendaLocation = $repository->getLocationService()->loadLocation( $agendaLocationId );
 
         $criteria = array(
