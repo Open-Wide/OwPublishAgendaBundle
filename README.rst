@@ -4,7 +4,7 @@ OWAgendaBundle for eZ Publish documentation
 
 .. image:: https://github.com/Open-Wide/OWAgendaBundle/raw/master/doc/images/Open-Wide_logo.png
 
-:Extension: OW AgendaBundle v1.0
+:Extension: OW AgendaBundle v1.1
 :Requires: eZ Publish 5.3.x
 :Author: Open Wide http://www.openwide.fr
 
