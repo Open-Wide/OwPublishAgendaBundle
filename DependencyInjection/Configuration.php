@@ -18,11 +18,33 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('openwide_agenda');
+        $rootNode = $treeBuilder->root('open_wide_agenda');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $rootNode
+            ->children()
+                ->arrayNode('root')
+                    ->children()
+                        ->integerNode('location_id')->min(0)->defaultValue(2)->end()
+                    ->end()
+                ->end()
+                ->arrayNode('template')
+                    ->children()
+                        ->scalarNode('index')->defaultValue('OpenWideAgendaBundle::index.html.twig')->end()
+                        ->scalarNode('indexmini')->defaultValue('OpenWideAgendaBundle::index_mini.html.twig')->end()
+                    ->end()
+                ->end()
+                ->arrayNode('controller')
+                    ->children()
+                        ->scalarNode('agendaview')->defaultValue('OpenWide\AgendaBundle\Controller\AgendaViewController')->end()
+                        ->scalarNode('eventview')->defaultValue('OpenWide\AgendaBundle\Controller\EventViewController')->end()
+                    ->end()
+                ->end()
+                ->arrayNode('helpers')
+                    ->children()
+                        ->scalarNode('agenda_fetch_by_legacy')->defaultValue('OpenWide\AgendaBundle\Helper\FetchByLegacy')->end()
+                    ->end()
+                ->end()
+            ->end();
 
         return $treeBuilder;
     }
