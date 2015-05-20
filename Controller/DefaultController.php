@@ -56,6 +56,7 @@ class DefaultController extends Controller
                     'start' => $this->childrenFormattedDate( $searchHit, 'start' ),
                     'end' => $this->childrenFormattedDate( $searchHit, 'end' ),
                     'duration' => $this->childrenFormattedDate( $searchHit, 'duration' ),
+                    'url' => $this->getUrl( $searchHit ),
                 );
             }
 
@@ -134,5 +135,16 @@ class DefaultController extends Controller
         $content = new \SimpleXMLElement( $content );
 
         return (string) $content->paragraph;
+    }
+
+    function getUrl( $value ) {
+        $LocationId = $value->valueObject->versionInfo->contentInfo->mainLocationId;
+
+        $repository = $this->getRepository();
+        $hitLocation = $repository->getLocationService()->loadLocation( $LocationId );
+
+        $url = $this->generateUrl( $hitLocation );
+
+        return $url;
     }
 }

@@ -12,6 +12,7 @@ $(document).ready(function() {
             right: 'next'
         },
         height: 'auto',
+        timeFormat: 'H:mm',
         handleWindowResize: true,
         eventLimit: true, // allow "more" link when too many events
         events: 'http://'  + hostname + '/agenda/list/events.json',
@@ -19,6 +20,12 @@ $(document).ready(function() {
         eventMouseover: function(event, jsEvent, view) {
             if (view.name !== 'agendaDay') {
                 $(jsEvent.target).attr('title', event.title);
+            }
+        },
+        eventClick: function(event) {
+            if (event.url) {
+                window.open(event.url);
+                return false;
             }
         }
     });
