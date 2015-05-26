@@ -60,6 +60,12 @@ class AgendaViewController extends ViewController
 
             if ($hasDate) {
                 $params['event_agenda'][$nodeId] = $eventAgenda;
+            } else {
+                // init an empty event_date
+                $params['event_agenda'][$nodeId] = array(
+                    'nodeId' => $nodeId,
+                    'event_date' => array()
+                );
             }
         }
 
