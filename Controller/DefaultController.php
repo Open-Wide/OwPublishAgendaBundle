@@ -51,8 +51,8 @@ class DefaultController extends Controller
 
             if ( ( $this->childrenFormattedDate( $searchHit, 'publish_start') <= $dateNow ) && ( $this->childrenFormattedDate( $searchHit, 'publish_end') >= $dateNow ) ) {
                 $content[] = array(
-                    'title' => $searchHit->valueObject->getFieldValue('subtitle')->__toString(),
-                    'description' => $this->render_xml_data( $searchHit->valueObject->getFieldValue('description') ),
+                    'title' => $searchHit->valueObject->getFieldValue('title')->__toString(),
+                    'description' => $searchHit->valueObject->getFieldValue('subtitle')->__toString(),
                     'start' => $this->childrenFormattedDate( $searchHit, 'start' ),
                     'end' => $this->childrenFormattedDate( $searchHit, 'end' ),
                     'duration' => $this->childrenFormattedDate( $searchHit, 'duration' ),
