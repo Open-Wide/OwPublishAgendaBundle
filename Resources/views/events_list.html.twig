@@ -12,14 +12,14 @@
         {#<span><a class="btn btn-default" href="Agenda/calendar" title="See Calendar">See Calendar</a></span>#}
         {#<span class="pull-right"><a class="btn btn-default" href="Agenda/calendarmini" title="See MiniCalendar">See <b>Mini</b> Calendar</a></span>#}
 
-        {% for agenda in event_agenda %}
+        {% for date in date_start %}
             {{ render( controller( "ez_content:viewLocation", {
-                    "locationId": agenda.nodeId,
-                    "viewType": "line",
-                    "params": {
-                        "date": agenda.event_date
-                    }
-                } ) )
+                "locationId": date.1.nodeId,
+                "viewType": "line",
+                "params": {
+                    "date": date.1.event_date
+                }
+            } ) )
             }}
 
             {% if not loop.last %}

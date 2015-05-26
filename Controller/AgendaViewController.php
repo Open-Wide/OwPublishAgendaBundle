@@ -20,13 +20,11 @@ class AgendaViewController extends ViewController
     {
         $repository = $this->getRepository();
         $contentService = $repository->getContentService();
-
         $content = $contentService->loadContentByContentInfo( $location->getContentInfo() );
 
         $params = array(
             'location' => $location,
-            'content' => $content,
-            'event_agenda' => array()
+            'content' => $content
         );
 
         $nodeList = $this->getLegacyContentService()->fetchNodeList( array(
@@ -54,12 +52,19 @@ class AgendaViewController extends ViewController
 
                 if( ( $dataMap['publish_start']->DataInt <= $dateNow ) && ( $dataMap['publish_end']->DataInt >= $dateNow ) ) {
                     $hasDate = true;
+                    $eventAgenda['date_start'] = $dataMap['date_start']->DataInt;
                     $eventAgenda['event_date'][] = $date->ContentObjectID;
                 }
             }
 
             if ($hasDate) {
-                $params['event_agenda'][$nodeId] = $eventAgenda;
+                $params['date_start'][$nodeId] = array(
+                    $eventAgenda['date_start'],
+                    $params['event_agenda'][$nodeId] = $eventAgenda
+                );
+
+                // if date, init an empty event_type
+                $params['event_agenda'][$nodeId]['event_type'] = array();
             } else {
                 // init an empty event_date
                 $params['event_agenda'][$nodeId] = array(
@@ -68,6 +73,9 @@ class AgendaViewController extends ViewController
                 );
             }
         }
+
+        // sort by date_start
+        asort($params['date_start']);
 
         return $params;
     }
