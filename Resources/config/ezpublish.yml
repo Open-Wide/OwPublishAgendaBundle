@@ -30,7 +30,7 @@ ezpublish:
                         template: OpenWideAgendaBundle::events_list.html.twig
                         controller: "agenda.controller.agenda.view:viewLocation"
                         match:
-                            Identifier\ContentType: events_folder
+                            Identifier\ContentType: event_folder
                     event:
                         template: OpenWideAgendaBundle:full:event.html.twig
                         controller: "agenda.controller.event.view:viewLocation"
