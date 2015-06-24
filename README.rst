@@ -58,16 +58,17 @@ Installation via composer
     * event_agenda
     * event_date
 
+4. Add your event_folder LocationId in ``src/symfony/ezpublish/config/config.yml``:
 
-4. Run the legacy bundle install script manually:
+.. code-block:: yml
 
-.. code-block:: sh
-
-    $ php ezpublish/console ezpublish:legacybundles:install_extensions
-
-
-By default, it will create an absolute symlink, but options exist to use a hard copy (–copy) or a relative link (--relative).
-
+        # LocationId of Agenda
+        open_wide_agenda:
+            root:
+                location_id: ....
+             # Nb of element per page
+            paginate:
+                max_per_page: ...
 
 5. Create contents on back-office with the following structure:
 
@@ -79,19 +80,19 @@ By default, it will create an absolute symlink, but options exist to use a hard 
         * event_agenda
             * event_date
 
+6. Run the legacy bundle install script manually:
 
-6. Add your event_folder LocationId in ``src/symfony/ezpublish/config/config.yml``:
+.. code-block:: sh
 
-.. code-block:: yml
+    $ php ezpublish/console ezpublish:legacybundles:install_extensions
 
-        # LocationId of Agenda
-        root:
-            location_id: ....
-         # Nb of element per page
-        paginate:
-            max_per_page: ...
 
-7. Add your event_folder LocationId in Legacy ini ``AgendaBundle/ezpublish_legacy/owagendabundle/settings/site.ini.append.php``:
+By default, it will create an absolute symlink, but options exist to use a hard copy (–copy) or a relative link (--relative).
+
+
+
+
+7. Add your event_folder LocationId in Legacy ini ``/settings/override/site.ini.append.php``:
 
 .. code-block:: ini
 
@@ -134,7 +135,7 @@ By default, it will create an absolute symlink, but options exist to use a hard 
 
     $ php ezpublish/console assetic:dump web
 
-12. Configure yours views in ``src/symfony/ezpublish/config/rezpublish.yml``:
+12. Configure yours views in ``src/symfony/ezpublish/config/ezpublish.yml``:
 
 .. code-block:: yml
 

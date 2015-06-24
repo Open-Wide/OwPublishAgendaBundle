@@ -377,4 +377,27 @@ class FetchByLegacy extends ContainerAware {
             default: return "";
         }
     }
+    
+    /**
+     * Renvoie l'objet de l'image correspondant au contentId
+     * @param type $contentId
+     * @return type
+     */
+    public function getImageByContentId($contentId) {
+        $contentImage = null;
+        if ($contentId) {
+            $image_info = $this->loadService('Content')->loadContentInfo($contentId);
+            $contentImage = $this->loadService('Content')->loadContentByContentInfo($image_info);
+        }
+        return $contentImage;
+    }
+    
+    public function loadService($service) {
+        $attribut = $service . 'Service';
+        $function = 'get' . $attribut;
+        if (!$this->{$attribut}) {
+            $this->{$attribut} = call_user_func(array($this->repository, $function));
+        }
+        return $this->{$attribut};
+    }    
 }

@@ -27,7 +27,7 @@ class EventAgendaViewController extends ViewController
         $liste = $request->query->get('liste', 0);        
         
         $image = $content->getFieldValue('image');
-        $contentImage = $this->container->get('ow_intra_vendee.common_helper')->getImageByContentId($image->destinationContentId);
+        $contentImage = $this->container->get('open_wide_agenda.fetch_by_legacy')->getImageByContentId($image->destinationContentId);
 
         $params = array(
             'location' => $location,
