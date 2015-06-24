@@ -45,6 +45,12 @@ class FetchByLegacy extends ContainerAware {
      * @var container
      */
     protected $container;
+    
+
+    private $ContentService;
+    private $LocationService;
+    private $SearchService;
+
 
     public function __construct($container) {
         $this->container = $container;
