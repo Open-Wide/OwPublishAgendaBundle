@@ -54,6 +54,7 @@ Installation via composer
 
 * In the class group ``Agenda``
     * event_folder
+    * event_liste
     * event_agenda
     * event_date
 
@@ -72,20 +73,23 @@ By default, it will create an absolute symlink, but options exist to use a hard 
 
 
     * event_folder
+        * event_liste
         * event_agenda
             * event_date
         * event_agenda
             * event_date
 
 
-6. Add your event_folder LocationId in ``AgendaBundle/Resources/config/default_settings.yml``:
+6. Add your event_folder LocationId in ``src/symfony/ezpublish/config/config.yml``:
 
 .. code-block:: yml
 
-    parameters:
         # LocationId of Agenda
-        ow_agenda.root.location_id: ...
-
+        root:
+            location_id: ....
+         # Nb of element per page
+        paginate:
+            max_per_page: ...
 
 7. Add your event_folder LocationId in Legacy ini ``AgendaBundle/ezpublish_legacy/owagendabundle/settings/site.ini.append.php``:
 
@@ -129,6 +133,58 @@ By default, it will create an absolute symlink, but options exist to use a hard 
 .. code-block:: sh
 
     $ php ezpublish/console assetic:dump web
+
+12. Configure yours views in ``src/symfony/ezpublish/config/rezpublish.yml``:
+
+.. code-block:: yml
+    ezpublish:
+        system:
+            your-siteaccess:
+                location_view
+                    event_folder:
+                        template: OwIntraVendeeBundle:full:event_folder.html.twig
+                        controller: "agenda.controller.event_folder.view:viewLocation"
+                        match:
+                            Identifier\ContentType: event_folder                                 
+
+                    event_agenda:
+                        template: OwIntraVendeeBundle:full:event_agenda.html.twig
+                        controller: "agenda.controller.event_agenda.view:viewLocation"
+                        match:
+                            Identifier\ContentType: event_agenda
+
+                    event_liste:
+                        template: OwIntraVendeeBundle:full:event_liste.html.twig
+                        controller: "agenda.controller.event_liste.view:viewLocation"
+                        match:
+                            Identifier\ContentType: event_liste
+                            
+                line:
+                    event_agenda:
+                        template: OwIntraVendeeBundle:line:event_agenda.html.twig
+                        controller: "agenda.controller.event_agenda.view:viewLocation"
+                        match:
+                            Identifier\ContentType: event_agenda             
+
+                    event_date:
+                        template: OwIntraVendeeBundle:line:event_date.html.twig
+                        controller: "agenda.controller.event_date.view:viewLocation"
+                        match:
+                            Identifier\ContentType: event_date  
+                bloc:
+                    event_folder:
+                        template: OwIntraVendeeBundle:bloc:event_folder.html.twig
+                        controller: "agenda.controller.event_folder.view:viewLocation"
+                        match:
+                            Identifier\ContentType: event_folder                                
+
+            content_view:
+                embed_agenda:
+                    event_date:
+                        template: OwIntraVendeeBundle:content_view/embed:event_date.html.twig
+                        controller: "agenda.controller.event_date.view:viewContent"
+                        match:
+                            Identifier\ContentType: event_date
 
 
 
