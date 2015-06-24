@@ -1,0 +1,32 @@
+{% set date_start = ez_field_value( content, "date_start" )|date("d/m/Y") %}
+{% set date_end = ez_field_value( content, "date_end" )|date("d/m/Y") %}
+{% if date_start==date_end %}
+<p>
+    Le
+    {{ ez_field_value( content, "date_start" )|date("d/m/Y")  }}
+    de 
+    {{ ez_field_value( content, "hour_start" )|date("G:i") }}
+    à
+    {{ ez_field_value( content, "hour_end" )|date("G:i") }}
+    ,
+    {% if not ez_is_field_empty( content, "duration" ) %}
+        durée {{ ez_field_value( content, "duration" )|date("G:i") }}
+    {% endif %}        
+</p>
+{% else %}
+<p>
+    Du
+    {{ ez_field_value( content, "date_start" )|date("d/m/Y") }}
+    au 
+    {{ ez_field_value( content, "date_end" )|date("d/m/Y") }},
+    de
+    {{ ez_field_value( content, "hour_start" )|date("G:i") }}
+    à
+    {{ ez_field_value( content, "hour_end" )|date("G:i") }}
+    ,
+    {% if not ez_is_field_empty( content, "duration" ) %}
+        durée {{ ez_field_value( content, "duration" )|date("G:i") }}
+    {% endif %}        
+</p>        
+{% endif %}
+

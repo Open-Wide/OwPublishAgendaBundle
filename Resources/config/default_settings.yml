@@ -1,3 +1,4 @@
 parameters:
     # LocationId of Agenda
     open_wide_agenda.root.location_id: 1420
+    open_wide_agenda.paginate.max_per_page: 10

@@ -2,15 +2,7 @@ imports:
     - { resource: services/controllers.yml }
     - { resource: services/helpers.yml }
 
-parameters:
-#    open_wide_agenda.example.class: OpenWide\Bundle\AgendaBundle\Example
-    open_wide_agenda.template.index: 'OpenWideAgendaBundle::index.html.twig'
-    open_wide_agenda.template.indexmini: 'OpenWideAgendaBundle::index_mini.html.twig'
-
 services:
-#    open_wide_agenda.example:
-#        class: %open_wide_agenda.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
     twig.extension.intl:
         class: Twig_Extensions_Extension_Intl
         tags:

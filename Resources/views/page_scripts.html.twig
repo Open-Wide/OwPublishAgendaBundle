@@ -9,18 +9,11 @@
 <script type="text/javascript" src="{{ asset_url }}"></script>
 {% endjavascripts %}
 
-{% if type == 'mini' %}
-    {% javascripts
-        '@OpenWideAgendaBundle/Resources/public/js/fonctions_mini.js'
-        '@OpenWideAgendaBundle/Resources/public/js/moment_fr.js'
-    %}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-{% else %}
-    {% javascripts
-        '@OpenWideAgendaBundle/Resources/public/js/fonctions.js'
-        '@OpenWideAgendaBundle/Resources/public/js/moment_fr.js'
-    %}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-{% endif %}
+
+{% javascripts
+    '@OpenWideAgendaBundle/Resources/public/js/fonctions.js'
+    '@OpenWideAgendaBundle/Resources/public/js/moment_fr.js'
+%}
+<script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+

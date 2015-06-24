@@ -26,34 +26,54 @@ ezpublish:
         cg85_group_front:
             location_view:
                 full:
-                    events_list:
-                        template: OpenWideAgendaBundle::events_list.html.twig
-                        controller: "agenda.controller.agenda.view:viewLocation"
+                    event_folder:
+                        template: OpenWideAgendaBundle:full:event_folder.html.twig
+                        controller: "agenda.controller.event_folder.view:viewLocation"
                         match:
-                            Identifier\ContentType: event_folder
-                    event:
-                        template: OpenWideAgendaBundle:full:event.html.twig
-                        controller: "agenda.controller.event.view:viewLocation"
+                            Identifier\ContentType: event_folder   
+
+                    event_liste:
+                        template: OpenWideAgendaBundle::event_liste.html.twig
+                        controller: "agenda.controller.event_liste.view:viewLocation"
+                        match:
+                            Identifier\ContentType: event_liste
+
+                    event_agenda:
+                        template: OpenWideAgendaBundle:full:event_agenda.html.twig
+                        controller: "agenda.controller.event_agenda.view:viewLocation"
                         match:
                             Identifier\ContentType: event_agenda
+
                 line:
-                    event:
-                        template: OpenWideAgendaBundle:line:event.html.twig
+                    event_agenda:
+                        template: OpenWideAgendaBundle:line:event_agenda.html.twig
+                        controller: "agenda.controller.event_agenda.view:viewLocation"
                         match:
                             Identifier\ContentType: event_agenda
+                    event_date:
+                        template: OpenWideAgendaBundle:line:event_date.html.twig
+                        controller: "agenda.controller.event_date.view:viewLocation"
+                        match:
+                            Identifier\ContentType: event_date  
+
+                bloc:
+                    event_folder:
+                        template: OpenWideAgendaBundle:bloc:event_folder.html.twig
+                        controller: "agenda.controller.event_folder.view:viewLocation"
+                        match:
+                            Identifier\ContentType: event_folder                                
+
             content_view:
                 embed_agenda:
-                    image:
-                        template: OpenWideAgendaBundle:content_view/embed:ezimage.html.twig
-                        match:
-                            Identifier\ContentType: image
                     event_date:
                         template: OpenWideAgendaBundle:content_view/embed:event_date.html.twig
+                        controller: "agenda.controller.event_date.view:viewLocation"
                         match:
                             Identifier\ContentType: event_date
+
             image_variations:
-                    event_agenda_embed:
-                        reference: original
-                        filters:
-                            - { name: geometry/scalewidthdownonly, params: [220] }
-                            - { name: geometry/crop, params: [220, 165, 0, 0] }
+                event_agenda_embed:
+                    reference: original
+                    filters:
+                        - { name: geometry/scalewidthdownonly, params: [220] }
+                        - { name: geometry/crop, params: [220, 165, 0, 0] }

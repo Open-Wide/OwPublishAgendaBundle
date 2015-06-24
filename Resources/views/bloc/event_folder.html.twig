@@ -1,9 +1,8 @@
+<!-- START BLOCK EVENT FOLDER -->
 {% include 'OpenWideAgendaBundle::page_styles.html.twig' %}
 {% include 'OpenWideAgendaBundle::page_scripts.html.twig' %}
-
-<div class="container-fluid">
-    <div id='calendar'></div>
-</div>
+<div id='calendarMini'></div>
+<input type="hidden" name="locationId" id="locationId" value="{{location.id}}">
 
 <div id="fullCalModal" class="modal fade">
     <div class="modal-dialog">
@@ -20,3 +19,4 @@
         </div>
     </div>
 </div>
+<!-- END BLOCK EVENT FOLDER -->

@@ -1,0 +1,37 @@
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="content-view-full class-event">
+                <h2>{{ ez_render_field( content, 'title' ) }}</h2>
+
+                {% if image %}
+                    {{ ez_render_field( image, "image", {parameters:{ alias:'event_agenda_embed', no_tag: true} } ) }}
+                {% endif %} 
+
+                {% if not ez_is_field_empty( content, 'description' ) %}
+                    {{ ez_render_field( content, 'description' ) }}
+                {% endif %}
+
+                {% if event_date|length > 0 %}
+                    {% for date in event_date %}
+                        {{ render( controller( "ez_content:viewContent", {
+                    "contentId": date,
+                    "viewType": "embed_agenda"
+                } ) )
+                        }}
+                    {% endfor %}
+                {% endif %}
+
+                {% if liste == 0 %}
+                    {% if location.parentLocationId is defined %}
+                        <a class="btn btn-default" href="{{ path( "ez_urlalias", {"locationId": location.parentLocationId} ) }}">
+                            {{ "Return to list"|trans }}
+                        </a>
+                    {% endif %}
+                {% else%}
+                    <a href="{{ path( "ez_urlalias", {"locationId": liste} ) }}">{{ "Return to list"|trans }}</a>
+                {% endif %}                
+            </div>
+        </div>
+    </div>
+{% endblock %}

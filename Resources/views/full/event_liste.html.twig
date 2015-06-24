@@ -1,0 +1,64 @@
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>{{ ez_render_field( content, 'name' ) }}</h1>
+
+            {#<span><a class="btn btn-default" href="Agenda/calendar" title="See Calendar">See Calendar</a></span>#}
+            {#<span class="pull-right"><a class="btn btn-default" href="Agenda/calendarmini" title="See MiniCalendar">See <b>Mini</b> Calendar</a></span>#}
+
+            {% if items %}
+                {% for content in items %}
+                    <div class="row liste ">
+                        <div class="col-md-12">
+                            <div class="row  {% if loop.index % 2 == 1 %} listeBackground {% endif %} listeBorder ">
+                                <div class="col-md-12">              
+                                    {{ render( controller( "ez_content:viewLocation", {
+                                        "locationId": content['eventAgenda'],
+                                        "viewType": "line",
+                                        "params": { "liste" : location.id
+                                        }
+                                    } ) )
+                                    }}   
+                                    {{ render( controller( "ez_content:viewLocation", {
+                                        "locationId": content['eventDate'],
+                                        "viewType": "line",
+                                        "params": { }
+                                    } ) )
+                                    }}                                       
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+                {% endfor %}
+
+                {% if nb_pages > 1 %}
+                    <nav style="text-align: center">
+                        <ul class="pagination">
+                            {% if prev_page > 0 %}
+                                <li>
+                                    <a href="{{ href_pagination }}&page={{ prev_page }}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% for i in 1..nb_pages %}
+                                <li {% if (i == current_page) %} class="active" {% endif %}><a href="{{ href_pagination }}&page={{ i }}">{{ i }}</a></li>
+                                {% endfor %}
+                                {% if next_page > 0 %}
+                                <li>
+                                    <a href="{{ href_pagination }}&page={{ next_page }}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                {% else %}
+                    <nav style="text-align: center">&nbsp;<br/>&nbsp;</nav>
+                    {% endif %}
+
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}

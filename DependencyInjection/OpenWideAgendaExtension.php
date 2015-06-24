@@ -28,13 +28,6 @@ class OpenWideAgendaExtension extends Extension
         $loader->load('default_settings.yml');
 
         $container->setParameter('open_wide_agenda.root.location_id', $config['root']['location_id']);
-
-        $container->setParameter('open_wide_agenda.template.index', $config['template']['index']);
-        $container->setParameter('open_wide_agenda.template.indexmini', $config['template']['indexmini']);
-
-        $container->setParameter('open_wide_agenda.controller.agenda.view.class', $config['controller']['agendaview']);
-        $container->setParameter('open_wide_agenda.controller.event.view.class', $config['controller']['eventview']);
-
-//        $container->setParameter('open_wide_agenda.fetch_by_legacy', $config['helpers']['agenda_fetch_by_legacy']);
+        $container->setParameter('open_wide_agenda.paginate.max_per_page', $config['paginate']['max_per_page']);
     }
 }

@@ -3,7 +3,7 @@
 namespace OpenWide\AgendaBundle\Controller;
 
 
-class EventViewController extends ViewController
+class EventDateViewController extends ViewController
 {
     protected function renderLocation( $location, $viewType, $layout = false, array $params = array() )
     {
@@ -26,7 +26,8 @@ class EventViewController extends ViewController
         $params = array(
             'location' => $location,
             'content' => $content,
-            'event_date' => array()
+            'event_date' => array(),
+            'type' => 'normal'
         );
 
         $event_dateList = $this->getLegacyContentService()->fetchNodeList( array(

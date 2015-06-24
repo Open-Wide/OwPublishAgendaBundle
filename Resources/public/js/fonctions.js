@@ -4,6 +4,7 @@
 $(document).ready(function() {
 
     var hostname = window.location.hostname;
+    var locationId = $('#locationId').val();
 
     $('#calendar').fullCalendar({
         // http://fullcalendar.io/docs/
@@ -14,7 +15,7 @@ $(document).ready(function() {
         },
         defaultView: 'month',
         eventLimit: true, // allow "more" link when too many events
-        events: 'http://'  + hostname + '/agenda/list/events.json',
+        events: 'http://'  + hostname + '/agenda/list/events.json?locationId='+locationId,
         eventRender: function(event, element) {
             element.tooltip({
                 "title": truncateString( event.description ),
@@ -22,13 +23,33 @@ $(document).ready(function() {
                 "placement": 'auto'
             });
         },
-        eventClick:  function(event, jsEvent, view) {
-            $('#modalTitle').html(event.title);
-            $('#modalBody').html(event.description);
-            $('#eventUrl').attr('href',event.url);
-            $('#fullCalModal').modal();
-        }
+
     });
+
+    $('#calendarMini').fullCalendar({
+        header: {
+            left: 'prev',
+            center: 'title',
+            right: 'next'
+        },
+        height: 'auto',
+        timeFormat: 'H:mm',
+        handleWindowResize: true,
+        eventLimit: true, // allow "more" link when too many events
+        events: 'http://'  + hostname + '/agenda/list/events.json?locationId='+locationId,
+        // add event name to title attribute on mouseover
+        eventMouseover: function(event, jsEvent, view) {
+            if (view.name !== 'agendaDay') {
+                $(jsEvent.target).attr('title', event.title);
+            }
+        },
+        /*eventClick: function(event) {
+            if (event.url) {
+                window.open(event.url);
+                return false;
+            }
+        }*/
+    });    
 
     function truncateString( myString ) {
         var length = 100;
