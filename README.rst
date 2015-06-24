@@ -143,44 +143,44 @@ By default, it will create an absolute symlink, but options exist to use a hard 
             your-siteaccess:
                 location_view
                     event_folder:
-                        template: OwIntraVendeeBundle:full:event_folder.html.twig
+                        template: OpenWideAgendaBundle:full:event_folder.html.twig
                         controller: "agenda.controller.event_folder.view:viewLocation"
                         match:
                             Identifier\ContentType: event_folder                                 
 
                     event_agenda:
-                        template: OwIntraVendeeBundle:full:event_agenda.html.twig
+                        template: OpenWideAgendaBundle:full:event_agenda.html.twig
                         controller: "agenda.controller.event_agenda.view:viewLocation"
                         match:
                             Identifier\ContentType: event_agenda
 
                     event_liste:
-                        template: OwIntraVendeeBundle:full:event_liste.html.twig
+                        template: OpenWideAgendaBundle:full:event_liste.html.twig
                         controller: "agenda.controller.event_liste.view:viewLocation"
                         match:
                             Identifier\ContentType: event_liste
                 line:
                     event_agenda:
-                        template: OwIntraVendeeBundle:line:event_agenda.html.twig
+                        template: OpenWideAgendaBundle:line:event_agenda.html.twig
                         controller: "agenda.controller.event_agenda.view:viewLocation"
                         match:
                             Identifier\ContentType: event_agenda             
 
                     event_date:
-                        template: OwIntraVendeeBundle:line:event_date.html.twig
+                        template: OpenWideAgendaBundle:line:event_date.html.twig
                         controller: "agenda.controller.event_date.view:viewLocation"
                         match:
                             Identifier\ContentType: event_date  
                 bloc:
                     event_folder:
-                        template: OwIntraVendeeBundle:bloc:event_folder.html.twig
+                        template: OpenWideAgendaBundle:bloc:event_folder.html.twig
                         controller: "agenda.controller.event_folder.view:viewLocation"
                         match:
                             Identifier\ContentType: event_folder                                
             content_view:
                 embed_agenda:
                     event_date:
-                        template: OwIntraVendeeBundle:content_view/embed:event_date.html.twig
+                        template: OpenWideAgendaBundle:content_view/embed:event_date.html.twig
                         controller: "agenda.controller.event_date.view:viewContent"
                         match:
                             Identifier\ContentType: event_date
