@@ -142,7 +142,7 @@ By default, it will create an absolute symlink, but options exist to use a hard 
     ezpublish:
         system:
             your-siteaccess:
-                location_view
+                location_view:
                     event_folder:
                         template: OpenWideAgendaBundle:full:event_folder.html.twig
                         controller: "agenda.controller.event_folder.view:viewLocation"
