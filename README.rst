@@ -137,6 +137,7 @@ By default, it will create an absolute symlink, but options exist to use a hard 
 12. Configure yours views in ``src/symfony/ezpublish/config/rezpublish.yml``:
 
 .. code-block:: yml
+
     ezpublish:
         system:
             your-siteaccess:
@@ -158,7 +159,6 @@ By default, it will create an absolute symlink, but options exist to use a hard 
                         controller: "agenda.controller.event_liste.view:viewLocation"
                         match:
                             Identifier\ContentType: event_liste
-                            
                 line:
                     event_agenda:
                         template: OwIntraVendeeBundle:line:event_agenda.html.twig
@@ -177,7 +177,6 @@ By default, it will create an absolute symlink, but options exist to use a hard 
                         controller: "agenda.controller.event_folder.view:viewLocation"
                         match:
                             Identifier\ContentType: event_folder                                
-
             content_view:
                 embed_agenda:
                     event_date:
