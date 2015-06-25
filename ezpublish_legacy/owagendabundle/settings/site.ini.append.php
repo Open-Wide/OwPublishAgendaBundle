@@ -4,6 +4,6 @@
 TranslationExtensions[]=owagenda
 
 [AgendaSettings]
-RootFolderNodeId=484
+RootFolderNodeId=498
 
 */ ?>

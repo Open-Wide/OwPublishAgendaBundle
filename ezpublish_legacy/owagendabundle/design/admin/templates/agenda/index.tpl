@@ -1,7 +1,7 @@
 {def $timestamp = currentdate()
      $agenda_root_node_id = ezini( 'AgendaSettings', 'RootFolderNodeId', 'site.ini' )
      $node = fetch('content', 'node', hash(
-        'node_id', $agenda_root_node_id,
+        'node_id', array($agenda_root_node_id),
         'class_filter_type', 'include',
         'class_filter_array', array( 'event' )
 ) )}

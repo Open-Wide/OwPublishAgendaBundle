@@ -39,7 +39,7 @@
                                     <div class="box-mr">
                                         <div class="box-tl">
                                             <div class="box-tr">
-                                                <h1 class="context-title">{'Events calendar'|i18n('owagenda')}</h1>
+                                                <h1 class="context-title">{'Events calendar'|i18n('design/admin/templates/agenda/calendar')}</h1>
                                                 <div class="header-mainline"></div>
                                             </div>
                                         </div>
@@ -55,6 +55,7 @@
                                             <div class="box-content">
                                                 {* Calendar call *}
                                                 <div id='calendar'></div>
+                                                <input type="hidden" name="locationId" id="locationId" value="{$agenda_root_node_id}">
                                             </div>
                                         </div>
                                     </div>

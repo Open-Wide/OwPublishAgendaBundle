@@ -1,6 +1,6 @@
 <?php /* #?ini charset="utf-8"?
 
-[DataTypeSettings]
-ExtensionDirectories[]=owagendabundle
+#[DataTypeSettings]
+#ExtensionDirectories[]=owagendabundle
 
 */ ?>
