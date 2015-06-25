@@ -2,6 +2,13 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="fr_FR">
     <context>
+        <name>kernel/navigationpart</name>
+        <message>
+            <source>Agenda</source>
+            <translation>Agenda</translation>
+        </message>
+    </context>    
+    <context>
         <name>design/admin/templates/agenda/index</name>
         <message>
             <source>Agenda</source>

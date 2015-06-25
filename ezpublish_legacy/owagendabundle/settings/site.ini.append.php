@@ -1,7 +1,7 @@
 <?php /* #?ini charset="utf-8"?
 
 [RegionalSettings]
-TranslationExtensions[]=owagenda
+TranslationExtensions[]=owagendabundle
 
 [AgendaSettings]
 RootFolderNodeId=498
