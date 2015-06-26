@@ -16,6 +16,7 @@ class JsonController extends Controller {
 
         $agendaLocationId = $request->query->get('locationId', 0);
         $agendaLocation = $repository->getLocationService()->loadLocation($agendaLocationId);
+        $admin = $request->query->get('admin', 0);
 
         $criteria = array(
             new Criterion\ParentLocationId($agendaLocation->contentInfo->mainLocationId),
@@ -43,27 +44,29 @@ class JsonController extends Controller {
                     'start' => $this->get('open_wide_agenda.fetch_by_legacy')->childrenFormattedDate($eventDate, 'start'),
                     'end' => $this->get('open_wide_agenda.fetch_by_legacy')->childrenFormattedDate($eventDate, 'end'),
                     'duration' => $this->get('open_wide_agenda.fetch_by_legacy')->childrenFormattedDate($eventDate, 'duration'),
-                    'url' => $this->getUrl($searchHit),
+                    'url' => $this->getUrl($searchHit,$admin),
                 );
             }
         }
 
         $response = new Response();
         $response->headers->set('Content-Type', 'application/json');
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        $response->headers->set('Access-Control-Expose-Headers', 'Cache-Control,Content-Encoding');
 
         $response->setContent(json_encode($content));
+        
 
         return $response;
     }
 
 
-    function getUrl($value) {
+    function getUrl($value,$admin) {
         $LocationId = $value->valueObject->versionInfo->contentInfo->mainLocationId;
-
-        $repository = $this->getRepository();
-        $hitLocation = $repository->getLocationService()->loadLocation($LocationId);
-
-        $url = $this->generateUrl($hitLocation);
+        $locationService = $this->getRepository()->getLocationService();
+        $hitLocation = $locationService->loadLocation($LocationId);
+        $prefix = $admin==1?"/Accueil-du-site":"";
+        $url = $prefix.$this->generateUrl($hitLocation);
 
         return $url;
     }

@@ -3,6 +3,9 @@
  */
 $(document).ready(function() {
 
+    var hostname = window.location.hostname;
+    var locationId = $('#locationId').val();
+
     $('#calendar').fullCalendar({
         // http://fullcalendar.io/docs/
         header: {
@@ -11,16 +14,15 @@ $(document).ready(function() {
             right: 'month,agendaWeek,agendaDay'
         },
         defaultView: 'month',
-        //editable: true,
-        //selectable: true,
         eventLimit: true, // allow "more" link when too many events
-        events: 'http://benevolat.local/agenda/list/events.json', // Put front-office hostname
+        events: 'http://intra-vendee.loc/agenda/list/events.json?locationId='+locationId+'&admin=1',
         eventRender: function(event, element) {
             element.tooltip({
                 "title": event.description,
                 "html": true,
                 "placement": 'auto'
             });
-        }
+        },
+     
     });
 });
