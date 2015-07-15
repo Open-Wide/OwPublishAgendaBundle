@@ -36,14 +36,14 @@ class JsonController extends Controller {
         $content = array();
 
         foreach ($searchResult->searchHits as $searchHit) {
-            $listeDates = $this->get('open_wide_agenda.fetch_by_legacy')->getChildren($searchHit);
+            $listeDates = $this->get('owp_agenda.fetch_by_legacy')->getChildren($searchHit);
             foreach ($listeDates->searchHits as $eventDate) {
                 $content[] = array(
                     'title' => $searchHit->valueObject->getFieldValue('title')->__toString(),
                     'description' => $searchHit->valueObject->getFieldValue('subtitle')->__toString(),
-                    'start' => $this->get('open_wide_agenda.fetch_by_legacy')->childrenFormattedDate($eventDate, 'start'),
-                    'end' => $this->get('open_wide_agenda.fetch_by_legacy')->childrenFormattedDate($eventDate, 'end'),
-                    'duration' => $this->get('open_wide_agenda.fetch_by_legacy')->childrenFormattedDate($eventDate, 'duration'),
+                    'start' => $this->get('owp_agenda.fetch_by_legacy')->childrenFormattedDate($eventDate, 'start'),
+                    'end' => $this->get('owp_agenda.fetch_by_legacy')->childrenFormattedDate($eventDate, 'end'),
+                    'duration' => $this->get('owp_agenda.fetch_by_legacy')->childrenFormattedDate($eventDate, 'duration'),
                     'url' => $this->getUrl($searchHit,$admin),
                 );
             }

@@ -63,7 +63,7 @@ Installation via composer
 .. code-block:: yml
 
         # LocationId of Agenda
-        open_wide_agenda:
+        owp_agenda:
             root:
                 location_id: ....
              # Nb of element per page
@@ -145,44 +145,44 @@ By default, it will create an absolute symlink, but options exist to use a hard 
                 location_view:
                     event_folder:
                         template: OpenWideAgendaBundle:full:event_folder.html.twig
-                        controller: "agenda.controller.event_folder.view:viewLocation"
+                        controller: "owp_agenda.controller.event_folder.view:viewLocation"
                         match:
                             Identifier\ContentType: event_folder                                 
 
                     event_agenda:
                         template: OpenWideAgendaBundle:full:event_agenda.html.twig
-                        controller: "agenda.controller.event_agenda.view:viewLocation"
+                        controller: "owp_agenda.controller.event_agenda.view:viewLocation"
                         match:
                             Identifier\ContentType: event_agenda
 
                     event_liste:
                         template: OpenWideAgendaBundle:full:event_liste.html.twig
-                        controller: "agenda.controller.event_liste.view:viewLocation"
+                        controller: "owp_agenda.controller.event_liste.view:viewLocation"
                         match:
                             Identifier\ContentType: event_liste
                 line:
                     event_agenda:
                         template: OpenWideAgendaBundle:line:event_agenda.html.twig
-                        controller: "agenda.controller.event_agenda.view:viewLocation"
+                        controller: "owp_agenda.controller.event_agenda.view:viewLocation"
                         match:
                             Identifier\ContentType: event_agenda             
 
                     event_date:
                         template: OpenWideAgendaBundle:line:event_date.html.twig
-                        controller: "agenda.controller.event_date.view:viewLocation"
+                        controller: "owp_agenda.controller.event_date.view:viewLocation"
                         match:
                             Identifier\ContentType: event_date  
                 bloc:
                     event_folder:
                         template: OpenWideAgendaBundle:bloc:event_folder.html.twig
-                        controller: "agenda.controller.event_folder.view:viewLocation"
+                        controller: "owp_agenda.controller.event_folder.view:viewLocation"
                         match:
                             Identifier\ContentType: event_folder                                
             content_view:
                 embed_agenda:
                     event_date:
                         template: OpenWideAgendaBundle:content_view/embed:event_date.html.twig
-                        controller: "agenda.controller.event_date.view:viewContent"
+                        controller: "owp_agenda.controller.event_date.view:viewContent"
                         match:
                             Identifier\ContentType: event_date
 

@@ -1,33 +1,33 @@
 parameters:
-    open_wide_agenda.controller.event_folder.view.class: OpenWide\Bundle\PublishAgendaBundle\Controller\EventFolderViewController
-    open_wide_agenda.controller.event_liste.view.class:  OpenWide\Bundle\PublishAgendaBundle\Controller\EventListeViewController
-    open_wide_agenda.controller.event_agenda.view.class: OpenWide\Bundle\PublishAgendaBundle\Controller\EventAgendaViewController    
-    open_wide_agenda.controller.event_date.view.class:   OpenWide\Bundle\PublishAgendaBundle\Controller\EventDateViewController    
+    owp_agenda.controller.event_folder.view.class: OpenWide\Bundle\PublishAgendaBundle\Controller\EventFolderViewController
+    owp_agenda.controller.event_liste.view.class:  OpenWide\Bundle\PublishAgendaBundle\Controller\EventListeViewController
+    owp_agenda.controller.event_agenda.view.class: OpenWide\Bundle\PublishAgendaBundle\Controller\EventAgendaViewController    
+    owp_agenda.controller.event_date.view.class:   OpenWide\Bundle\PublishAgendaBundle\Controller\EventDateViewController    
 
 services:
-    agenda.controller.event_folder.view:
-        class: %open_wide_agenda.controller.event_folder.view.class%
+    owp_agenda.controller.event_folder.view:
+        class: %owp_agenda.controller.event_folder.view.class%
         arguments:
             - @ezpublish.view_manager
             - @security.context
         parent: ezpublish.controller.content.view
 
-    agenda.controller.event_liste.view:
-        class: %open_wide_agenda.controller.event_liste.view.class%
+    owp_agenda.controller.event_liste.view:
+        class: %owp_agenda.controller.event_liste.view.class%
         arguments:
             - @ezpublish.view_manager
             - @security.context
         parent: ezpublish.controller.content.view
 
-    agenda.controller.event_agenda.view:
-        class: %open_wide_agenda.controller.event_agenda.view.class%
+    owp_agenda.controller.event_agenda.view:
+        class: %owp_agenda.controller.event_agenda.view.class%
         arguments:
             - @ezpublish.view_manager
             - @security.context
         parent: ezpublish.controller.content.view
 
-    agenda.controller.event_date.view:
-        class: %open_wide_agenda.controller.event_date.view.class%
+    owp_agenda.controller.event_date.view:
+        class: %owp_agenda.controller.event_date.view.class%
         arguments:
             - @ezpublish.view_manager
             - @security.context

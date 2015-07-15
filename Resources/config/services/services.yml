@@ -1,0 +1,9 @@
+parameters:
+    owp_agenda.fetch_by_legacy.class: 'OpenWide\Bundle\PublishAgendaBundle\Service\FetchByLegacy'
+
+services:
+    owp_agenda.fetch_by_legacy:
+        class: %owp_agenda.fetch_by_legacy.class%
+        arguments: [@service_container]
+        calls:
+            - [ setContainer,[ @service_container ] ]

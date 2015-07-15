@@ -69,6 +69,6 @@ class EventFolderViewController extends ViewController
      * return OpenWide\Bundle\AgendaBundle\Helper\FetchByLegacy
      */
     public function getLegacyContentService() {
-        return $this->container->get( 'open_wide_agenda.fetch_by_legacy' );
+        return $this->container->get( 'owp_agenda.fetch_by_legacy' );
     }
 }
