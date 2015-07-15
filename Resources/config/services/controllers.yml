@@ -1,8 +1,8 @@
 parameters:
-    open_wide_agenda.controller.event_folder.view.class: OpenWide\AgendaBundle\Controller\EventFolderViewController
-    open_wide_agenda.controller.event_liste.view.class:  OpenWide\AgendaBundle\Controller\EventListeViewController
-    open_wide_agenda.controller.event_agenda.view.class: OpenWide\AgendaBundle\Controller\EventAgendaViewController    
-    open_wide_agenda.controller.event_date.view.class:   OpenWide\AgendaBundle\Controller\EventDateViewController    
+    open_wide_agenda.controller.event_folder.view.class: OpenWide\Bundle\PublishAgendaBundle\Controller\EventFolderViewController
+    open_wide_agenda.controller.event_liste.view.class:  OpenWide\Bundle\PublishAgendaBundle\Controller\EventListeViewController
+    open_wide_agenda.controller.event_agenda.view.class: OpenWide\Bundle\PublishAgendaBundle\Controller\EventAgendaViewController    
+    open_wide_agenda.controller.event_date.view.class:   OpenWide\Bundle\PublishAgendaBundle\Controller\EventDateViewController    
 
 services:
     agenda.controller.event_folder.view:

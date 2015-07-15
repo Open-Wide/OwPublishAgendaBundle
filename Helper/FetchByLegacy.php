@@ -1,6 +1,6 @@
 <?php
 
-namespace OpenWide\AgendaBundle\Helper;
+namespace OpenWide\Bundle\PublishAgendaBundle\Helper;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
 use eZ\Publish\API\Repository\Values\Content\Query;

@@ -1,6 +1,6 @@
 <?php
 
-namespace OpenWide\AgendaBundle\Controller;
+namespace OpenWide\Bundle\PublishAgendaBundle\Controller;
 
 
 class EventAgendaViewController extends ViewController

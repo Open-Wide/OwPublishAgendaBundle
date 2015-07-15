@@ -1,8 +1,8 @@
 ===========================================
-OWAgendaBundle for eZ Publish documentation
+OWPublishAgendaBundle for eZ Publish documentation
 ===========================================
 
-.. image:: https://github.com/Open-Wide/OWAgendaBundle/raw/master/doc/images/Open-Wide_logo.png
+.. image:: https://github.com/Open-Wide/OWPublishAgendaBundle/raw/master/doc/images/Open-Wide_logo.png
 
 :Extension: OW AgendaBundle v1.1
 :Requires: eZ Publish 5.3.x
@@ -37,14 +37,14 @@ Installation via composer
 
     <?php
     // ezpublish/EzPublishKernel.php
-    use OpenWide\AgendaBundle;
+    use OpenWide\Bundle\PublishAgendaBundle;
     ...
 
     public function registerBundles()
     {
       $bundles = array(
         // ...
-        new OpenWide\AgendaBundle\OpenWideAgendaBundle(),
+        new OpenWide\Bundle\PublishAgendaBundle\OpenWideAgendaBundle(),
       );
     }
 
@@ -193,12 +193,12 @@ Usage
 
 Front Office Calendar View
 --------------------------
-.. image:: https://github.com/Open-Wide/OWAgendaBundle/raw/master/doc/images/calendar.png
+.. image:: https://github.com/Open-Wide/OWPublishAgendaBundle/raw/master/doc/images/calendar.png
 
 
 Front Office Calendar Mini View
 --------------------------
-.. image:: https://github.com/Open-Wide/OWAgendaBundle/raw/master/doc/images/calendar_mini.png
+.. image:: https://github.com/Open-Wide/OWPublishAgendaBundle/raw/master/doc/images/calendar_mini.png
 
 
 Other
