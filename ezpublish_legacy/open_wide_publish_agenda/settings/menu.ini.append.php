@@ -1,13 +1,13 @@
 <?php /* #?ini charset="utf-8"?
 
 [NavigationPart]
-Part[owagendanavigationpart]=Agenda
+Part[owpublishagendanavigationpart]=Agenda
 
 [TopAdminMenu]
-Tabs[]=owagenda
+Tabs[]=open_wide_publish_agenda
 
-[Topmenu_owagenda]
-NavigationPartIdentifier=owagendanavigationpart
+[Topmenu_open_wide_publish_agenda]
+NavigationPartIdentifier=owpublishagendanavigationpart
 URL[]
 URL[default]=agenda/index
 Name=Agenda
@@ -22,5 +22,3 @@ Shown[edit]=true
 Shown[navigation]=true
 Shown[browse]=true
 PolicyList[]=agenda/index
-
-*/ ?>

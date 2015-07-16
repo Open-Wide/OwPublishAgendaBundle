@@ -4,7 +4,7 @@ OWPublishAgendaBundle for eZ Publish documentation
 
 .. image:: https://github.com/Open-Wide/OWPublishAgendaBundle/raw/master/doc/images/Open-Wide_logo.png
 
-:Extension: OW AgendaBundle v1.1
+:Extension: OW Publish Agenda Bundle v1.1
 :Requires: eZ Publish 5.3.x
 :Author: Open Wide http://www.openwide.fr
 
@@ -17,10 +17,15 @@ LICENCE
 -------
 This eZ Publish extension is provided *as is*, in GPL v3 (see LICENCE).
 
-Installation via composer
-=========================
+Installation
+============
 
-1. Add AgendaBundle in your project's composer.json
+1. Add ``PublishAgendaBundle`` in your project
+
+Via composer
+------------
+
+Add the bundle in your ``composer.json``
 
 .. code-block:: json
 
@@ -30,21 +35,26 @@ Installation via composer
       }
     }
 
+Via a submodule
+---------------
 
-2. Enable the Bundle in your EzPublishKernel.php file:
+.. code-block:: bash
+
+    mkdir -p src/OpenWide/Bundle
+    git submodule add https://github.com/Open-Wide/OwPublishAgendaBundle.git src/OpenWide/Bundle/PublishAgendaBundle
+
+2. Enable the Bundle in your ``EzPublishKernel.php`` file:
 
 .. code-block:: php
 
     <?php
     // ezpublish/EzPublishKernel.php
-    use OpenWide\Bundle\PublishAgendaBundle;
-    ...
 
     public function registerBundles()
     {
       $bundles = array(
         // ...
-        new OpenWide\Bundle\PublishAgendaBundle\OpenWideAgendaBundle(),
+        new OpenWide\Bundle\PublishAgendaBundle\OpenWidePublishAgendaBundle(),
       );
     }
 
@@ -58,13 +68,13 @@ Installation via composer
     * event_agenda
     * event_date
 
-4. Add your event_folder LocationId in ``src/symfony/ezpublish/config/config.yml``:
+4. Add your ``event_folder`` LocationId in ``src/symfony/ezpublish/config/config.yml``:
 
 .. code-block:: yml
 
         # LocationId of Agenda
-        owp_agenda:
-            root:
+        open_wide_publish_agenda:
+            event_folder:
                 location_id: ....
              # Nb of element per page
             paginate:
@@ -107,7 +117,7 @@ By default, it will create an absolute symlink, but options exist to use a hard 
 
     # Assetic Configuration
     assetic:
-        bundles:        [ OtherBundle, OpenWideAgendaBundle ]
+        bundles:        [ OtherBundle, OpenWidePublishAgendaBundle ]
 
 
 9. Import ezpublish.yml configuration in ``src/symfony/ezpublish/config/ezpublish.yml``:
@@ -116,7 +126,7 @@ By default, it will create an absolute symlink, but options exist to use a hard 
 .. code-block:: yml
 
     imports:
-    - {resource: @OpenWideAgendaBundle/Resources/config/ezpublish.yml}
+    - {resource: @OpenWidePublishAgendaBundle/Resources/config/ezpublish.yml}
 
 
 10. Import routing.yml configuration in ``src/symfony/ezpublish/config/routing.yml``:
@@ -125,7 +135,7 @@ By default, it will create an absolute symlink, but options exist to use a hard 
 .. code-block:: yml
 
     agenda:
-      resource: "@OpenWideAgendaBundle/Resources/config/routing.yml"
+      resource: "@OpenWidePublishAgendaBundle/Resources/config/routing.yml"
 
 
 11. Regenerate the Assetic with the following command:
@@ -144,45 +154,45 @@ By default, it will create an absolute symlink, but options exist to use a hard 
             your-siteaccess:
                 location_view:
                     event_folder:
-                        template: OpenWideAgendaBundle:full:event_folder.html.twig
-                        controller: "owp_agenda.controller.event_folder.view:viewLocation"
+                        template: OpenWidePublishAgendaBundle:full:event_folder.html.twig
+                        controller: "open_wide_publish_agenda.controller.event_folder.view:viewLocation"
                         match:
                             Identifier\ContentType: event_folder                                 
 
                     event_agenda:
-                        template: OpenWideAgendaBundle:full:event_agenda.html.twig
-                        controller: "owp_agenda.controller.event_agenda.view:viewLocation"
+                        template: OpenWidePublishAgendaBundle:full:event_agenda.html.twig
+                        controller: "open_wide_publish_agenda.controller.event_agenda.view:viewLocation"
                         match:
                             Identifier\ContentType: event_agenda
 
                     event_liste:
-                        template: OpenWideAgendaBundle:full:event_liste.html.twig
-                        controller: "owp_agenda.controller.event_liste.view:viewLocation"
+                        template: OpenWidePublishAgendaBundle:full:event_liste.html.twig
+                        controller: "open_wide_publish_agenda.controller.event_liste.view:viewLocation"
                         match:
                             Identifier\ContentType: event_liste
                 line:
                     event_agenda:
-                        template: OpenWideAgendaBundle:line:event_agenda.html.twig
-                        controller: "owp_agenda.controller.event_agenda.view:viewLocation"
+                        template: OpenWidePublishAgendaBundle:line:event_agenda.html.twig
+                        controller: "open_wide_publish_agenda.controller.event_agenda.view:viewLocation"
                         match:
                             Identifier\ContentType: event_agenda             
 
                     event_date:
-                        template: OpenWideAgendaBundle:line:event_date.html.twig
-                        controller: "owp_agenda.controller.event_date.view:viewLocation"
+                        template: OpenWidePublishAgendaBundle:line:event_date.html.twig
+                        controller: "open_wide_publish_agenda.controller.event_date.view:viewLocation"
                         match:
                             Identifier\ContentType: event_date  
                 bloc:
                     event_folder:
-                        template: OpenWideAgendaBundle:bloc:event_folder.html.twig
-                        controller: "owp_agenda.controller.event_folder.view:viewLocation"
+                        template: OpenWidePublishAgendaBundle:bloc:event_folder.html.twig
+                        controller: "open_wide_publish_agenda.controller.event_folder.view:viewLocation"
                         match:
                             Identifier\ContentType: event_folder                                
             content_view:
                 embed_agenda:
                     event_date:
-                        template: OpenWideAgendaBundle:content_view/embed:event_date.html.twig
-                        controller: "owp_agenda.controller.event_date.view:viewContent"
+                        template: OpenWidePublishAgendaBundle:content_view/embed:event_date.html.twig
+                        controller: "open_wide_publish_agenda.controller.event_date.view:viewContent"
                         match:
                             Identifier\ContentType: event_date
 

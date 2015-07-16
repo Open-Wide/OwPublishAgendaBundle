@@ -1,26 +1,26 @@
 {% stylesheets filter='cssrewrite'
-    '@OpenWideAgendaBundle/Resources/public/css/2.3.1/fullcalendar.min.css'
-    '@OpenWideAgendaBundle/Resources/public/css/bootstrap.min.css'
-    '@OpenWideAgendaBundle/Resources/public/css/bootstrap-theme.min.css'
+    '@OpenWidePublishAgendaBundle/Resources/public/css/2.3.1/fullcalendar.min.css'
+    '@OpenWidePublishAgendaBundle/Resources/public/css/bootstrap.min.css'
+    '@OpenWidePublishAgendaBundle/Resources/public/css/bootstrap-theme.min.css'
 %}
 <link rel="stylesheet" type="text/css" href="{{ asset_url }}" media="screen" />
 {% endstylesheets %}
 
 {% stylesheets filter='cssrewrite'
-    '@OpenWideAgendaBundle/Resources/public/css/2.3.1/fullcalendar.print.css'
+    '@OpenWidePublishAgendaBundle/Resources/public/css/2.3.1/fullcalendar.print.css'
 %}
 <link rel="stylesheet" type="text/css" href="{{ asset_url }}" media="print" />
 {% endstylesheets %}
 
 {% if type == 'mini' %}
     {% stylesheets filter='cssrewrite'
-        '@OpenWideAgendaBundle/Resources/public/css/fullcalendar_mini.css'
+        '@OpenWidePublishAgendaBundle/Resources/public/css/fullcalendar_mini.css'
     %}
     <link rel="stylesheet" type="text/css" href="{{ asset_url }}" media="screen" />
     {% endstylesheets %}
 {% else %}
     {% stylesheets filter='cssrewrite'
-        '@OpenWideAgendaBundle/Resources/public/css/fullcalendar.css'
+        '@OpenWidePublishAgendaBundle/Resources/public/css/fullcalendar.css'
     %}
     <link rel="stylesheet" type="text/css" href="{{ asset_url }}" media="screen" />
     {% endstylesheets %}

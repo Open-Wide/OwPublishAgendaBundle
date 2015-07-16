@@ -31,9 +31,9 @@ class EventListeViewController extends ViewController
         
         $currentPage = $request->query->get('page', 1);
 
-        $result = $this->container->get('owp_agenda.fetch_by_legacy')->getFolderChildrens(
+        $result = $this->container->get('open_wide_publish_agenda.fetch_by_legacy')->getFolderChildrens(
                     $location, 
-                    $this->container->getParameter('owp_agenda.paginate.max_per_page'), 
+                    $this->container->getParameter('open_wide_publish_agenda.paginate.max_per_page'), 
                     $currentPage
             );        
         
@@ -78,6 +78,6 @@ class EventListeViewController extends ViewController
      * return OpenWide\Bundle\PublishAgendaBundle\Helper\FetchByLegacy
      */
     public function getLegacyContentService() {
-        return $this->container->get( 'owp_agenda.fetch_by_legacy' );
+        return $this->container->get( 'open_wide_publish_agenda.fetch_by_legacy' );
     }
 }

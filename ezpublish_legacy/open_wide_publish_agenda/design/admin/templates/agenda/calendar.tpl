@@ -1,4 +1,4 @@
-{def $agenda_root_node_id = ezini( 'AgendaSettings', 'RootFolderNodeId', 'site.ini' )
+{def $agenda_root_node_id = ezini( 'AgendaSettings', 'FolderNodeId', 'owpagenda.ini' )
      $node = fetch('content', 'node', hash(
         'node_id', $agenda_root_node_id,
         'class_filter_type', 'include',
@@ -10,7 +10,7 @@
 </style>
 
 {ezcss_require( array(
-                        'owagendabundle_admin.css',
+                        'open_wide_publish_agenda_admin.css',
                         'fullcalendar.css' ) )}
 
 {ezscript_require( array(   'bootstrap.min.js',

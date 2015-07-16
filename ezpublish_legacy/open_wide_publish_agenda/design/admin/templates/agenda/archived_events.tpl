@@ -1,5 +1,5 @@
 {def $timestamp = currentdate()
-     $agenda_root_node_id = ezini( 'AgendaSettings', 'RootFolderNodeId', 'site.ini' )
+     $agenda_root_node_id = ezini( 'AgendaSettings', 'FolderNodeId', 'owpagenda.ini' )
      $node = fetch('content', 'node', hash( 'node_id', $agenda_root_node_id ) ) }
 
 <div class="content-view-children">

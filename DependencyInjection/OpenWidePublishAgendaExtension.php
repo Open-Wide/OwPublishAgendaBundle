@@ -27,12 +27,7 @@ class OpenWidePublishAgendaExtension extends Extension
         $loader->load('services.yml');
         $loader->load('default_settings.yml');
 
-        $container->setParameter('owp_agenda.root.location_id', $config['root']['location_id']);
-        $container->setParameter('owp_agenda.paginate.max_per_page', $config['paginate']['max_per_page']);
-    }
-    
-    public function getAlias()
-    {
-        return 'owp_agenda';
+        $container->setParameter('open_wide_publish_agenda.event_folder.location_id', $config['event_folder']['location_id']);
+        $container->setParameter('open_wide_publish_agenda.paginate.max_per_page', $config['paginate']['max_per_page']);
     }
 }

@@ -1,7 +1,5 @@
 <?php /* #?ini charset="utf-8"? 
 
 [ModuleSettings]
-ExtensionRepositories[]=owagendabundle
+ExtensionRepositories[]=open_wide_publish_agenda
 ModuleList[]=agenda
-
-*/ ?>

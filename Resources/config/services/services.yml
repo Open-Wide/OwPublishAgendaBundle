@@ -1,9 +1,17 @@
 parameters:
-    owp_agenda.fetch_by_legacy.class: 'OpenWide\Bundle\PublishAgendaBundle\Service\FetchByLegacy'
+    open_wide_publish_agenda.fetch_by_legacy.class: 'OpenWide\Bundle\PublishAgendaBundle\Service\FetchByLegacy'
+    open_wide_publish_agenda.configuration_mapper.class: 'OpenWide\Bundle\PublishAgendaBundle\LegacyMapper\Configuration'
 
 services:
-    owp_agenda.fetch_by_legacy:
-        class: %owp_agenda.fetch_by_legacy.class%
+    open_wide_publish_agenda.fetch_by_legacy:
+        class: %open_wide_publish_agenda.fetch_by_legacy.class%
         arguments: [@service_container]
         calls:
             - [ setContainer,[ @service_container ] ]
+
+    open_wide_publish_agenda.configuration_mapper:
+        class: %open_wide_publish_agenda.configuration_mapper.class%
+        arguments:
+            - @ezpublish.config.resolver
+        tags:
+            - { name: kernel.event_subscriber }

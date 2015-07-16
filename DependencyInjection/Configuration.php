@@ -18,11 +18,11 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('owp_agenda');
+        $rootNode = $treeBuilder->root('open_wide_publish_agenda');
 
         $rootNode
             ->children()
-                ->arrayNode('root')
+                ->arrayNode('event_folder')
                     ->children()
                         ->integerNode('location_id')->min(0)->defaultValue(2)->end()
                     ->end()
