@@ -1,6 +1,6 @@
 <?php
 
-namespace OpenWide\Bundle\PublishAgendaBundle;
+namespace OpenWide\Publish\AgendaBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

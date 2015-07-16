@@ -1,6 +1,6 @@
 <?php
 
-namespace OpenWide\Bundle\PublishAgendaBundle\DependencyInjection;
+namespace OpenWide\Publish\AgendaBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;

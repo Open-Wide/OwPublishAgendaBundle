@@ -40,8 +40,8 @@ Via a submodule
 
 .. code-block:: bash
 
-    mkdir -p src/OpenWide/Bundle
-    git submodule add https://github.com/Open-Wide/OwPublishAgendaBundle.git src/OpenWide/Bundle/PublishAgendaBundle
+    mkdir -p src/OpenWide/Publish
+    git submodule add https://github.com/Open-Wide/OwPublishAgendaBundle.git src/OpenWide/Publish/AgendaBundle
 
 2. Enable the Bundle in your ``EzPublishKernel.php`` file:
 
@@ -54,7 +54,7 @@ Via a submodule
     {
       $bundles = array(
         // ...
-        new OpenWide\Bundle\PublishAgendaBundle\OpenWidePublishAgendaBundle(),
+        new OpenWide\Publish\AgendaBundle\OpenWidePublishAgendaBundle(),
       );
     }
 

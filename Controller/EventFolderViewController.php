@@ -1,6 +1,6 @@
 <?php
 
-namespace OpenWide\Bundle\PublishAgendaBundle\Controller;
+namespace OpenWide\Publish\AgendaBundle\Controller;
 
 
 class EventFolderViewController extends ViewController

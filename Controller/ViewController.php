@@ -7,7 +7,7 @@
  * @version //autogentag//
  */
 
-namespace OpenWide\Bundle\PublishAgendaBundle\Controller;
+namespace OpenWide\Publish\AgendaBundle\Controller;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\Core\Base\Exceptions\NotFoundException;

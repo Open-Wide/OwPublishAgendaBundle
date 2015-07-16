@@ -1,6 +1,6 @@
 <?php
 
-namespace OpenWide\Bundle\PublishAgendaBundle\LegacyMapper;
+namespace OpenWide\Publish\AgendaBundle\LegacyMapper;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use eZ\Publish\Core\MVC\Legacy\Event\PreBuildKernelEvent;

@@ -1,6 +1,6 @@
 <?php
 
-namespace OpenWide\Bundle\PublishAgendaBundle\Controller;
+namespace OpenWide\Publish\AgendaBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use eZ\Bundle\EzPublishCoreBundle\Controller;
