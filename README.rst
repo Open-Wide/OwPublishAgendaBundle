@@ -80,14 +80,14 @@ Installation
 
 
     * agenda_folder
-        * aganda
+        * agenda
             * agenda_event
                 * agenda_schedule
                 * agenda_schedule
                 * agenda_schedule
             * agenda_event
                 * agenda_schedule
-        * aganda
+        * agenda
             * agenda_event
                 * agenda_schedule
 
