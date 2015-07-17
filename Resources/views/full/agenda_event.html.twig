@@ -5,15 +5,15 @@
                 <h2>{{ ez_render_field( content, 'title' ) }}</h2>
 
                 {% if image %}
-                    {{ ez_render_field( image, "image", {parameters:{ alias:'event_agenda_embed', no_tag: true} } ) }}
+                    {{ ez_render_field( image, "image", {parameters:{ alias:'agenda_event_embed', no_tag: true} } ) }}
                 {% endif %} 
 
                 {% if not ez_is_field_empty( content, 'description' ) %}
                     {{ ez_render_field( content, 'description' ) }}
                 {% endif %}
 
-                {% if event_date|length > 0 %}
-                    {% for date in event_date %}
+                {% if agenda_schedule|length > 0 %}
+                    {% for date in agenda_schedule %}
                         {{ render( controller( "ez_content:viewContent", {
                     "contentId": date,
                     "viewType": "embed_agenda"

@@ -10,6 +10,12 @@
             "email": "laurent.sabatier@openwide.fr",
             "role": "Developer",
             "homepage": "https://github.com/Open-Wide"
+        },
+        {
+            "name": "Madeline Veyrenc for Open Wide",
+            "email": "madeline.veyrenc@openwide.fr",
+            "role": "Developer",
+            "homepage": "https://github.com/Open-Wide"
         }
     ],
     "require": {
@@ -18,8 +24,8 @@
     },
     "autoload": {
         "psr-0": {
-            "OpenWide\\AgendaBundle": ""
+            "OpenWide\\Publish\\AgendaBundle": ""
         }
     },
-    "target-dir": "OpenWide/AgendaBundle"
+    "target-dir": "OpenWide/Publish/AgendaBundle"
 }

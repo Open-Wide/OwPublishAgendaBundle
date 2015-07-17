@@ -2,7 +2,7 @@
 
 namespace OpenWide\Publish\AgendaBundle\Controller;
 
-class EventListeViewController extends ViewController
+class AgendaViewController extends ViewController
 {
 
     protected function renderLocation( $location, $viewType, $layout = false, array $params = array() )
@@ -33,7 +33,7 @@ class EventListeViewController extends ViewController
 
         $currentPage = $request->query->get( 'page', 1 );
 
-        $result = $this->container->get( 'open_wide_publish_agenda.fetch_by_legacy' )->getFolderChildrens(
+        $result = $this->getAgendaContentService()->getFolderChildrens(
                 $location, $this->container->getParameter( 'open_wide_publish_agenda.paginate.max_per_page' ), $currentPage
         );
 
@@ -45,44 +45,6 @@ class EventListeViewController extends ViewController
         $params['href_pagination'] = $result['base_href'];
 
         return $params;
-    }
-
-    /**
-     * Returns value for $parameterName and fallbacks to $defaultValue if not defined
-     *
-     * @param string $parameterName
-     * @param mixed $defaultValue
-     *
-     * @return mixed
-     */
-    public function getConfigParameter( $parameterName, $namespace = null, $scope = null )
-    {
-        if( $this->getConfigResolver()->hasParameter( $parameterName, $namespace, $scope ) )
-        {
-            return $this->getConfigResolver()->getParameter( $parameterName, $namespace, $scope );
-        }
-    }
-
-    /**
-     * Checks if $parameterName is defined
-     *
-     * @param string $parameterName
-     *
-     * @return boolean
-     */
-    public function hasConfigParameter( $parameterName, $namespace = null, $scope = null )
-    {
-        return $this->getConfigResolver()->hasParameter( $parameterName, $namespace, $scope );
-    }
-
-    /**
-     * Return the legacy content service
-     *
-     * return OpenWide\Publish\AgendaBundle\Helper\FetchByLegacy
-     */
-    public function getLegacyContentService()
-    {
-        return $this->container->get( 'open_wide_publish_agenda.fetch_by_legacy' );
     }
 
 }

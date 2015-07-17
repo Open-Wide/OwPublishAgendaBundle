@@ -57,7 +57,7 @@ class Configuration implements EventSubscriberInterface
         }
 
         $settings = array();
-        $settings["owpagenda.ini/AgendaSettings/FolderNodeId"] = $this->configResolver->getParameter( "open_wide_publish_agenda.event_folder.location_id" );
+        $settings["owpagenda.ini/AgendaSettings/FolderNodeId"] = $this->configResolver->getParameter( "open_wide_publish_agenda.agenda_folder.location_id" );
         $event->getParameters()->set(
                 "injected-settings", $settings + (array) $event->getParameters()->get( "injected-settings" )
         );

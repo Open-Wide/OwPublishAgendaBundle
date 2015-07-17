@@ -1,10 +1,10 @@
 parameters:
-    open_wide_publish_agenda.fetch_by_legacy.class: 'OpenWide\Publish\AgendaBundle\Service\FetchByLegacy'
+    open_wide_publish_agenda.content_repository.class: 'OpenWide\Publish\AgendaBundle\Service\ContentRepository'
     open_wide_publish_agenda.configuration_mapper.class: 'OpenWide\Publish\AgendaBundle\LegacyMapper\Configuration'
 
 services:
-    open_wide_publish_agenda.fetch_by_legacy:
-        class: %open_wide_publish_agenda.fetch_by_legacy.class%
+    open_wide_publish_agenda.content_repository:
+        class: %open_wide_publish_agenda.content_repository.class%
         arguments: [@service_container]
         calls:
             - [ setContainer,[ @service_container ] ]

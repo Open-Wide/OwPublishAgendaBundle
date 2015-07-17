@@ -3,53 +3,53 @@ ezpublish:
         default:
             location_view:
                 full:
-                    event_folder:
-                        template: OpenWidePublishAgendaBundle:full:event_folder.html.twig
-                        controller: "open_wide_publish_agenda.controller.event_folder.view:viewLocation"
+                    agenda_folder:
+                        template: OpenWidePublishAgendaBundle:full:agenda_folder.html.twig
+                        controller: "open_wide_publish_agenda.controller.agenda_folder.view:viewLocation"
                         match:
-                            Identifier\ContentType: event_folder   
+                            Identifier\ContentType: agenda_folder   
 
-                    event_liste:
-                        template: OpenWidePublishAgendaBundle::event_liste.html.twig
-                        controller: "open_wide_publish_agenda.controller.event_liste.view:viewLocation"
+                    agenda:
+                        template: OpenWidePublishAgendaBundle::agenda.html.twig
+                        controller: "open_wide_publish_agenda.controller.agenda.view:viewLocation"
                         match:
-                            Identifier\ContentType: event_liste
+                            Identifier\ContentType: agenda
 
-                    event_agenda:
-                        template: OpenWidePublishAgendaBundle:full:event_agenda.html.twig
-                        controller: "open_wide_publish_agenda.controller.event_agenda.view:viewLocation"
+                    agenda_event:
+                        template: OpenWidePublishAgendaBundle:full:agenda_event.html.twig
+                        controller: "open_wide_publish_agenda.controller.agenda_event.view:viewLocation"
                         match:
-                            Identifier\ContentType: event_agenda
+                            Identifier\ContentType: agenda_event
 
                 line:
-                    event_agenda:
-                        template: OpenWidePublishAgendaBundle:line:event_agenda.html.twig
-                        controller: "open_wide_publish_agenda.controller.event_agenda.view:viewLocation"
+                    agenda_event:
+                        template: OpenWidePublishAgendaBundle:line:agenda_event.html.twig
+                        controller: "open_wide_publish_agenda.controller.agenda_event.view:viewLocation"
                         match:
-                            Identifier\ContentType: event_agenda
-                    event_date:
-                        template: OpenWidePublishAgendaBundle:line:event_date.html.twig
-                        controller: "open_wide_publish_agenda.controller.event_date.view:viewLocation"
+                            Identifier\ContentType: agenda_event
+                    agenda_schedule:
+                        template: OpenWidePublishAgendaBundle:line:agenda_schedule.html.twig
+                        controller: "open_wide_publish_agenda.controller.agenda_schedule.view:viewLocation"
                         match:
-                            Identifier\ContentType: event_date  
+                            Identifier\ContentType: agenda_schedule  
 
                 bloc:
-                    event_folder:
-                        template: OpenWidePublishAgendaBundle:bloc:event_folder.html.twig
-                        controller: "open_wide_publish_agenda.controller.event_folder.view:viewLocation"
+                    agenda_folder:
+                        template: OpenWidePublishAgendaBundle:bloc:agenda_folder.html.twig
+                        controller: "open_wide_publish_agenda.controller.agenda_folder.view:viewLocation"
                         match:
-                            Identifier\ContentType: event_folder                                
+                            Identifier\ContentType: agenda_folder                                
 
             content_view:
                 embed_agenda:
-                    event_date:
-                        template: OpenWidePublishAgendaBundle:content_view/embed:event_date.html.twig
-                        controller: "open_wide_publish_agenda.controller.event_date.view:viewContent"
+                    agenda_schedule:
+                        template: OpenWidePublishAgendaBundle:content_view/embed:agenda_schedule.html.twig
+                        controller: "open_wide_publish_agenda.controller.agenda_schedule.view:viewContent"
                         match:
-                            Identifier\ContentType: event_date
+                            Identifier\ContentType: agenda_schedule
 
             image_variations:
-                event_agenda_embed:
+                agenda_event_embed:
                     reference: original
                     filters:
                         - { name: geometry/scalewidthdownonly, params: [220] }

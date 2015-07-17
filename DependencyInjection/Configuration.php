@@ -21,20 +21,6 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root( 'open_wide_publish_agenda' );
 
-        $rootNode
-                ->children()
-                ->arrayNode( 'event_folder' )
-                ->children()
-                ->integerNode( 'location_id' )->min( 0 )->defaultValue( 2 )->end()
-                ->end()
-                ->end()
-                ->arrayNode( 'paginate' )
-                ->children()
-                ->integerNode( 'max_per_page' )->min( 1 )->defaultValue( 10 )->end()
-                ->end()
-                ->end()
-                ->end();
-
         return $treeBuilder;
     }
 

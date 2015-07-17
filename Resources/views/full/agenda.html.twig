@@ -13,14 +13,14 @@
                             <div class="row  {% if loop.index % 2 == 1 %} listeBackground {% endif %} listeBorder ">
                                 <div class="col-md-12">              
                                     {{ render( controller( "ez_content:viewLocation", {
-                                        "locationId": content['eventAgenda'],
+                                        "locationId": content['AgendaEvent'],
                                         "viewType": "line",
                                         "params": { "liste" : location.id
                                         }
                                     } ) )
                                     }}   
                                     {{ render( controller( "ez_content:viewLocation", {
-                                        "locationId": content['eventDate'],
+                                        "locationId": content['AgendaSchedule'],
                                         "viewType": "line",
                                         "params": { }
                                     } ) )

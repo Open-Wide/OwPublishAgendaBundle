@@ -17,8 +17,8 @@
     $children_count = fetch( content, list_count, hash( 'parent_node_id', $node.node_id,
                                                         'objectname_filter', $view_parameters.namefilter,
                                                         'class_filter_type', 'include',
-    'class_filter_array', array( 'event_date' ),
-    'attribute_filter', array( array( 'event_date/publish_end', '<', $timestamp )  ) ) )
+    'class_filter_array', array( 'agenda_schedule' ),
+    'attribute_filter', array( array( 'agenda_schedule/publish_end', '<', $timestamp )  ) ) )
     $children    = array()
     $priority    = and( eq( $node.sort_array[0][0], 'priority' ), $node.can_edit, $children_count ) }
 
@@ -35,8 +35,8 @@
                         'offset', $view_parameters.offset,
                         'objectname_filter', $view_parameters.namefilter,
                         'class_filter_type', 'include',
-                        'class_filter_array', array( 'event_date' ),
-                        'attribute_filter', array( array( 'event_date/publish_end', '<', $timestamp )  ) ) ) }
+                        'class_filter_array', array( 'agenda_schedule' ),
+                        'attribute_filter', array( array( 'agenda_schedule/publish_end', '<', $timestamp )  ) ) ) }
             {/if}
 
             {* DESIGN: Header START *}<div class="box-header">

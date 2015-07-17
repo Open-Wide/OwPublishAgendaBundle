@@ -402,4 +402,52 @@ class ViewController extends Controller
             throw new AccessDeniedException();
     }
 
+    /**
+     * Returns value for $parameterName and fallbacks to $defaultValue if not defined
+     *
+     * @param string $parameterName
+     * @param mixed $defaultValue
+     *
+     * @return mixed
+     */
+    public function getConfigParameter( $parameterName, $namespace = null, $scope = null )
+    {
+        if( $this->getConfigResolver()->hasParameter( $parameterName, $namespace, $scope ) )
+        {
+            return $this->getConfigResolver()->getParameter( $parameterName, $namespace, $scope );
+        }
+    }
+
+    /**
+     * Checks if $parameterName is defined
+     *
+     * @param string $parameterName
+     *
+     * @return boolean
+     */
+    public function hasConfigParameter( $parameterName, $namespace = null, $scope = null )
+    {
+        return $this->getConfigResolver()->hasParameter( $parameterName, $namespace, $scope );
+    }
+
+    /**
+     * Return the legacy content service
+     *
+     * return OpenWide\Publish\AgendaBundle\Helper\FetchByLegacy
+     */
+    public function getLegacyContentService()
+    {
+        return $this->container->get( 'open_wide_publish_hook.legacy_fetch' );
+    }
+
+    /**
+     * Return the legacy content service
+     *
+     * return OpenWide\Publish\AgendaBundle\Helper\FetchByLegacy
+     */
+    public function getAgendaContentService()
+    {
+        return $this->container->get( 'open_wide_publish_agenda.content_repository' );
+    }
+
 }

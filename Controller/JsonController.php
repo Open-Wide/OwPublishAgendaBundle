@@ -22,7 +22,7 @@ class JsonController extends Controller
 
         $criteria = array(
             new Criterion\ParentLocationId( $agendaLocation->contentInfo->mainLocationId ),
-            new Criterion\ContentTypeIdentifier( array( 'event_agenda' ) ),
+            new Criterion\ContentTypeIdentifier( array( 'agenda_event' ) ),
             new Criterion\Field( 'publish_start', Criterion\Operator::LT, time() ),
             new Criterion\Field( 'publish_end', Criterion\Operator::GT, time() ),
             new Criterion\Visibility( Criterion\Visibility::VISIBLE ),
@@ -39,15 +39,15 @@ class JsonController extends Controller
 
         foreach( $searchResult->searchHits as $searchHit )
         {
-            $listeDates = $this->get( 'open_wide_publish_agenda.fetch_by_legacy' )->getChildren( $searchHit );
-            foreach( $listeDates->searchHits as $eventDate )
+            $listeDates = $this->getAgendaContentService()->getChildren( $searchHit );
+            foreach( $listeDates->searchHits as $agendaSchedule )
             {
                 $content[] = array(
                     'title' => $searchHit->valueObject->getFieldValue( 'title' )->__toString(),
                     'description' => $searchHit->valueObject->getFieldValue( 'subtitle' )->__toString(),
-                    'start' => $this->get( 'open_wide_publish_agenda.fetch_by_legacy' )->childrenFormattedDate( $eventDate, 'start' ),
-                    'end' => $this->get( 'open_wide_publish_agenda.fetch_by_legacy' )->childrenFormattedDate( $eventDate, 'end' ),
-                    'duration' => $this->get( 'open_wide_publish_agenda.fetch_by_legacy' )->childrenFormattedDate( $eventDate, 'duration' ),
+                    'start' => $this->getAgendaContentService()->childrenFormattedDate( $agendaSchedule, 'start' ),
+                    'end' => $this->getAgendaContentService()->childrenFormattedDate( $agendaSchedule, 'end' ),
+                    'duration' => $this->getAgendaContentService()->childrenFormattedDate( $agendaSchedule, 'duration' ),
                     'url' => $this->getUrl( $searchHit, $admin ),
                 );
             }

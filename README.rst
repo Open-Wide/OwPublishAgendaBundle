@@ -66,13 +66,13 @@ Installation
         * ``agenda_event`` : Event
         * ``agenda_schedule`` : Event schedule
 
-4. Add your ``event_folder`` LocationId in ``ezpublish/config/config.yml``:
+4. Add your ``agenda_folder`` LocationId in ``ezpublish/config/config.yml``:
 
     .. code-block:: yaml
             
             parameters:
                 # LocationId of Agenda
-                ezsettings.default.open_wide_publish_agenda.event_folder.location_id: ...
+                ezsettings.default.open_wide_publish_agenda.agenda_folder.location_id: ...
                 # Nb of element per page
                 ezsettings.default.open_wide_publish_agenda.paginate.max_per_page: 10
 
@@ -144,48 +144,48 @@ Installation
         system:
             your-siteaccess:
                 location_view:
-                    event_folder:
-                        template: OpenWidePublishAgendaBundle:full:event_folder.html.twig
-                        controller: "open_wide_publish_agenda.controller.event_folder.view:viewLocation"
+                    agenda_folder:
+                        template: OpenWidePublishAgendaBundle:full:agenda_folder.html.twig
+                        controller: "open_wide_publish_agenda.controller.agenda_folder.view:viewLocation"
                         match:
-                            Identifier\ContentType: event_folder                                 
+                            Identifier\ContentType: agenda_folder                                 
 
-                    event_agenda:
-                        template: OpenWidePublishAgendaBundle:full:event_agenda.html.twig
-                        controller: "open_wide_publish_agenda.controller.event_agenda.view:viewLocation"
+                    agenda_event:
+                        template: OpenWidePublishAgendaBundle:full:agenda_event.html.twig
+                        controller: "open_wide_publish_agenda.controller.agenda_event.view:viewLocation"
                         match:
-                            Identifier\ContentType: event_agenda
+                            Identifier\ContentType: agenda_event
 
-                    event_liste:
-                        template: OpenWidePublishAgendaBundle:full:event_liste.html.twig
-                        controller: "open_wide_publish_agenda.controller.event_liste.view:viewLocation"
+                    agenda:
+                        template: OpenWidePublishAgendaBundle:full:agenda.html.twig
+                        controller: "open_wide_publish_agenda.controller.agenda.view:viewLocation"
                         match:
-                            Identifier\ContentType: event_liste
+                            Identifier\ContentType: agenda
                 line:
-                    event_agenda:
-                        template: OpenWidePublishAgendaBundle:line:event_agenda.html.twig
-                        controller: "open_wide_publish_agenda.controller.event_agenda.view:viewLocation"
+                    agenda_event:
+                        template: OpenWidePublishAgendaBundle:line:agenda_event.html.twig
+                        controller: "open_wide_publish_agenda.controller.agenda_event.view:viewLocation"
                         match:
-                            Identifier\ContentType: event_agenda             
+                            Identifier\ContentType: agenda_event             
 
-                    event_date:
-                        template: OpenWidePublishAgendaBundle:line:event_date.html.twig
-                        controller: "open_wide_publish_agenda.controller.event_date.view:viewLocation"
+                    agenda_schedule:
+                        template: OpenWidePublishAgendaBundle:line:agenda_schedule.html.twig
+                        controller: "open_wide_publish_agenda.controller.agenda_schedule.view:viewLocation"
                         match:
-                            Identifier\ContentType: event_date  
+                            Identifier\ContentType: agenda_schedule  
                 bloc:
-                    event_folder:
-                        template: OpenWidePublishAgendaBundle:bloc:event_folder.html.twig
-                        controller: "open_wide_publish_agenda.controller.event_folder.view:viewLocation"
+                    agenda_folder:
+                        template: OpenWidePublishAgendaBundle:bloc:agenda_folder.html.twig
+                        controller: "open_wide_publish_agenda.controller.agenda_folder.view:viewLocation"
                         match:
-                            Identifier\ContentType: event_folder                                
+                            Identifier\ContentType: agenda_folder                                
             content_view:
                 embed_agenda:
-                    event_date:
-                        template: OpenWidePublishAgendaBundle:content_view/embed:event_date.html.twig
-                        controller: "open_wide_publish_agenda.controller.event_date.view:viewContent"
+                    agenda_schedule:
+                        template: OpenWidePublishAgendaBundle:content_view/embed:agenda_schedule.html.twig
+                        controller: "open_wide_publish_agenda.controller.agenda_schedule.view:viewContent"
                         match:
-                            Identifier\ContentType: event_date
+                            Identifier\ContentType: agenda_schedule
 
 
 
