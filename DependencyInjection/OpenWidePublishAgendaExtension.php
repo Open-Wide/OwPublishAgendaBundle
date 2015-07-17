@@ -14,20 +14,22 @@ use Symfony\Component\DependencyInjection\Loader;
  */
 class OpenWidePublishAgendaExtension extends Extension
 {
+
     /**
      * {@inheritDoc}
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load( array $configs, ContainerBuilder $container )
     {
         $configuration = new Configuration();
-        $config = $this->processConfiguration($configuration, $configs);
+        $config = $this->processConfiguration( $configuration, $configs );
 
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new Loader\YamlFileLoader( $container, new FileLocator( __DIR__ . '/../Resources/config' ) );
 
-        $loader->load('services.yml');
-        $loader->load('default_settings.yml');
+        $loader->load( 'services.yml' );
+        $loader->load( 'default_settings.yml' );
 
-        $container->setParameter('open_wide_publish_agenda.event_folder.location_id', $config['event_folder']['location_id']);
-        $container->setParameter('open_wide_publish_agenda.paginate.max_per_page', $config['paginate']['max_per_page']);
+        $container->setParameter( 'open_wide_publish_agenda.event_folder.location_id', $config['event_folder']['location_id'] );
+        $container->setParameter( 'open_wide_publish_agenda.paginate.max_per_page', $config['paginate']['max_per_page'] );
     }
+
 }

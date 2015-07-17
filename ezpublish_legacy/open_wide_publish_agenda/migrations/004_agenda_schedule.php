@@ -55,7 +55,6 @@ class OWPAgenda_004_AgendaSchedule
         ) );
         $migration->addAttribute( 'duration', array(
             'data_type_string' => 'eztime',
-            'is_required' => TRUE,
             'is_searchable' => FALSE,
             'name' => array(
                 'eng-GB' => 'Duration',

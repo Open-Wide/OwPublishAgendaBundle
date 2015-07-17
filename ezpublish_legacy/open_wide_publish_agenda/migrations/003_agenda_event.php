@@ -74,13 +74,11 @@ class OWPAgenda_003_AgendaEvent
         ) );
         $migration->addAttribute( 'publish_end', array(
             'data_type_string' => 'ezdatetime',
-            'is_required' => TRUE,
             'name' => array(
                 'eng-GB' => 'Unpublish date',
                 'fre-FR' => 'Date de dépublication',
                 'always-available' => 'eng-GB'
-            ),
-            'set_with_current_date' => TRUE
+            )
         ) );
 
         $migration->addToContentClassGroup( 'Agenda' );

@@ -12,4 +12,4 @@ $Result['left_menu'] = 'design:agenda/leftmenu.tpl';
 $Result['path'] = array(
     array(
         'url' => 'agenda/index',
-        'text' => ezpI18n::tr( 'owagenda', 'Agenda' ) ));
+        'text' => ezpI18n::tr( 'owagenda', 'Agenda' ) ) );

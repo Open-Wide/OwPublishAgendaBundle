@@ -2,21 +2,22 @@
 
 namespace OpenWide\Publish\AgendaBundle\Controller;
 
-
 class EventDateViewController extends ViewController
 {
+
     protected function renderLocation( $location, $viewType, $layout = false, array $params = array() )
     {
-        switch( $viewType ) {
+        switch( $viewType )
+        {
             case 'full' :
-                $params += $this->getViewFullParams($location);
+                $params += $this->getViewFullParams( $location );
                 break;
         }
 
         return parent::renderLocation( $location, $viewType, $layout, $params );
     }
 
-    protected function getViewFullParams($location)
+    protected function getViewFullParams( $location )
     {
         $repository = $this->getRepository();
         $contentService = $repository->getContentService();
@@ -33,10 +34,11 @@ class EventDateViewController extends ViewController
         $event_dateList = $this->getLegacyContentService()->fetchNodeList( array(
             'ParentNodeId' => $location->id,
             'ContentTypeIdentifier' => 'event_date'
-        ) );
+                ) );
 
         /** @var \eZContentObjectTreeNode $date */
-        foreach( $event_dateList as $date ) {
+        foreach( $event_dateList as $date )
+        {
             $params['event_date'][] = $date->ContentObjectID;
         }
 
@@ -51,8 +53,10 @@ class EventDateViewController extends ViewController
      *
      * @return mixed
      */
-    public function getConfigParameter( $parameterName, $namespace = null, $scope = null ) {
-        if( $this->getConfigResolver()->hasParameter( $parameterName, $namespace, $scope ) ) {
+    public function getConfigParameter( $parameterName, $namespace = null, $scope = null )
+    {
+        if( $this->getConfigResolver()->hasParameter( $parameterName, $namespace, $scope ) )
+        {
             return $this->getConfigResolver()->getParameter( $parameterName, $namespace, $scope );
         }
     }
@@ -64,7 +68,8 @@ class EventDateViewController extends ViewController
      *
      * @return boolean
      */
-    public function hasConfigParameter( $parameterName, $namespace = null, $scope = null ) {
+    public function hasConfigParameter( $parameterName, $namespace = null, $scope = null )
+    {
         return $this->getConfigResolver()->hasParameter( $parameterName, $namespace, $scope );
     }
 
@@ -73,7 +78,9 @@ class EventDateViewController extends ViewController
      *
      * return OpenWide\Bundle\AgendaBundle\Helper\FetchByLegacy
      */
-    public function getLegacyContentService() {
+    public function getLegacyContentService()
+    {
         return $this->container->get( 'open_wide_publish_agenda.fetch_by_legacy' );
     }
+
 }

@@ -25,7 +25,7 @@ class OWPAgenda_001_AgendaFolder
                 'always-available' => 'eng-GB'
             )
         ) );
-        
+
         $migration->addAttribute( 'short_name', array(
             'name' => array(
                 'eng-GB' => 'Short name',

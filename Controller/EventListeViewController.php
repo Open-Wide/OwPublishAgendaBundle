@@ -4,39 +4,39 @@ namespace OpenWide\Publish\AgendaBundle\Controller;
 
 class EventListeViewController extends ViewController
 {
+
     protected function renderLocation( $location, $viewType, $layout = false, array $params = array() )
     {
-        switch( $viewType ) {
+        switch( $viewType )
+        {
             case 'full' :
-                $params += $this->getViewFullParams($location);
+                $params += $this->getViewFullParams( $location );
                 break;
         }
 
         return parent::renderLocation( $location, $viewType, $layout, $params );
     }
 
-    protected function getViewFullParams($location)
+    protected function getViewFullParams( $location )
     {
         /* @var $location eZ\Publish\Core\Repository\Values\Content\Location */
         $repository = $this->getRepository();
         $request = $this->getRequest();
         $contentService = $repository->getContentService();
         $content = $contentService->loadContentByContentInfo( $location->getContentInfo() );
-        
+
         $params = array(
             'location' => $location,
             'content' => $content,
             'type' => 'normal'
         );
-        
-        $currentPage = $request->query->get('page', 1);
 
-        $result = $this->container->get('open_wide_publish_agenda.fetch_by_legacy')->getFolderChildrens(
-                    $location, 
-                    $this->container->getParameter('open_wide_publish_agenda.paginate.max_per_page'), 
-                    $currentPage
-            );        
-        
+        $currentPage = $request->query->get( 'page', 1 );
+
+        $result = $this->container->get( 'open_wide_publish_agenda.fetch_by_legacy' )->getFolderChildrens(
+                $location, $this->container->getParameter( 'open_wide_publish_agenda.paginate.max_per_page' ), $currentPage
+        );
+
         $params['items'] = $result['items'];
         $params['current_page'] = $result['current_page'];
         $params['nb_pages'] = $result['nb_pages'];
@@ -55,8 +55,10 @@ class EventListeViewController extends ViewController
      *
      * @return mixed
      */
-    public function getConfigParameter( $parameterName, $namespace = null, $scope = null ) {
-        if( $this->getConfigResolver()->hasParameter( $parameterName, $namespace, $scope ) ) {
+    public function getConfigParameter( $parameterName, $namespace = null, $scope = null )
+    {
+        if( $this->getConfigResolver()->hasParameter( $parameterName, $namespace, $scope ) )
+        {
             return $this->getConfigResolver()->getParameter( $parameterName, $namespace, $scope );
         }
     }
@@ -68,7 +70,8 @@ class EventListeViewController extends ViewController
      *
      * @return boolean
      */
-    public function hasConfigParameter( $parameterName, $namespace = null, $scope = null ) {
+    public function hasConfigParameter( $parameterName, $namespace = null, $scope = null )
+    {
         return $this->getConfigResolver()->hasParameter( $parameterName, $namespace, $scope );
     }
 
@@ -77,7 +80,9 @@ class EventListeViewController extends ViewController
      *
      * return OpenWide\Publish\AgendaBundle\Helper\FetchByLegacy
      */
-    public function getLegacyContentService() {
+    public function getLegacyContentService()
+    {
         return $this->container->get( 'open_wide_publish_agenda.fetch_by_legacy' );
     }
+
 }

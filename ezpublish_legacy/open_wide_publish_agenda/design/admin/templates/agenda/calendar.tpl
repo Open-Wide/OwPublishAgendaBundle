@@ -20,11 +20,11 @@
                             'fonctions.js') )}
 
 {*{ezscript_require( array(   'jquery-2.1.3.min.js',*}
-                            {*'bootstrap.min.js',*}
-                            {*'moment.min.js',*}
-                            {*'fullcalendar.min.js',*}
-                            {*'fullcalendar_fr.js',*}
-                            {*'fonctions.js') )}*}
+{*'bootstrap.min.js',*}
+{*'moment.min.js',*}
+{*'fullcalendar.min.js',*}
+{*'fullcalendar_fr.js',*}
+{*'fonctions.js') )}*}
 
 <div class="agenda">
     <div class="border-box">

@@ -1,18 +1,18 @@
 {% spaceless %}
-<div class="block_event_date">
-    <p>
-        {{ "From"|trans }}
-        {{ ez_field_value( content, "date_start" )|raw }}
-        {{ "at"|trans }}
-        {{ ez_field_value( content, "hour_start" )|date("G:i") }}
-        {{ "to"|trans }}
-        {{ ez_field_value( content, "date_end" )|raw }}
-        {{ "at"|trans }}
-        {{ ez_field_value( content, "hour_end" )|date("G:i") }}
-    </p>
+    <div class="block_event_date">
+        <p>
+            {{ "From"|trans }}
+            {{ ez_field_value( content, "date_start" )|raw }}
+            {{ "at"|trans }}
+            {{ ez_field_value( content, "hour_start" )|date("G:i") }}
+            {{ "to"|trans }}
+            {{ ez_field_value( content, "date_end" )|raw }}
+            {{ "at"|trans }}
+            {{ ez_field_value( content, "hour_end" )|date("G:i") }}
+        </p>
 
-    {% if not ez_is_field_empty( content, "duration" ) %}
-        <p>{{ "Duration:"|trans }} {{ ez_field_value( content, "duration" )|date("G:i") }}</p>
-    {% endif %}
-</div>
+        {% if not ez_is_field_empty( content, "duration" ) %}
+            <p>{{ "Duration:"|trans }} {{ ez_field_value( content, "duration" )|date("G:i") }}</p>
+        {% endif %}
+    </div>
 {% endspaceless %}

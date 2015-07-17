@@ -1,4 +1,5 @@
 <?php
+
 /**
  * File containing the ViewController class.
  *
@@ -27,6 +28,7 @@ use Exception;
 
 class ViewController extends Controller
 {
+
     /**
      * @var \eZ\Publish\Core\MVC\Symfony\View\ViewManagerInterface
      */
@@ -55,30 +57,30 @@ class ViewController extends Controller
     {
         $request = $this->getRequest();
         $response = new Response();
-        if ( $this->getParameter( 'content.view_cache' ) === true )
+        if( $this->getParameter( 'content.view_cache' ) === true )
         {
             $response->setPublic();
-            if ( $etag !== null )
+            if( $etag !== null )
             {
                 $response->setEtag( $etag );
             }
 
-            if ( $this->getParameter( 'content.ttl_cache' ) === true )
+            if( $this->getParameter( 'content.ttl_cache' ) === true )
             {
                 $response->setSharedMaxAge(
-                    $this->getParameter( 'content.default_ttl' )
+                        $this->getParameter( 'content.default_ttl' )
                 );
             }
 
             // Make the response vary against X-User-Hash header ensures that an HTTP
             // reverse proxy caches the different possible variations of the
             // response as it can depend on user role for instance.
-            if ( $request->headers->has( 'X-User-Hash' ) )
+            if( $request->headers->has( 'X-User-Hash' ) )
             {
                 $response->setVary( 'X-User-Hash' );
             }
 
-            if ( $lastModified != null )
+            if( $lastModified != null )
             {
                 $response->setLastModified( $lastModified );
             }
@@ -107,14 +109,13 @@ class ViewController extends Controller
 
         try
         {
-            if ( isset( $params['location'] ) && $params['location'] instanceof Location )
+            if( isset( $params['location'] ) && $params['location'] instanceof Location )
             {
                 $location = $params['location'];
-            }
-            else
+            } else
             {
                 $location = $this->getRepository()->getLocationService()->loadLocation( $locationId );
-                if ( $location->invisible )
+                if( $location->invisible )
                 {
                     throw new NotFoundHttpException( "Location #$locationId cannot be displayed as it is flagged as invisible." );
                 }
@@ -122,29 +123,22 @@ class ViewController extends Controller
 
             $response->headers->set( 'X-Location-Id', $locationId );
             $response->setContent(
-                $this->renderLocation(
-                    $location,
-                    $viewType,
-                    $layout,
-                    $params
-                )
+                    $this->renderLocation(
+                            $location, $viewType, $layout, $params
+                    )
             );
 
             return $response;
-        }
-        catch ( UnauthorizedException $e )
+        } catch( UnauthorizedException $e )
         {
             throw new AccessDeniedException();
-        }
-        catch ( NotFoundException $e )
+        } catch( NotFoundException $e )
         {
             throw new NotFoundHttpException( $e->getMessage(), $e );
-        }
-        catch ( NotFoundHttpException $e )
+        } catch( NotFoundHttpException $e )
         {
             throw $e;
-        }
-        catch ( Exception $e )
+        } catch( Exception $e )
         {
             return $this->handleViewException( $response, $params, $e, $viewType, null, $locationId );
         }
@@ -173,64 +167,53 @@ class ViewController extends Controller
         {
             /** @var \eZ\Publish\API\Repository\Values\Content\Location $location */
             $location = $this->getRepository()->sudo(
-                function ( $repository ) use ( $locationId )
-                {
-                    return $repository->getLocationService()->loadLocation( $locationId );
-                }
+                    function ( $repository ) use ( $locationId )
+            {
+                return $repository->getLocationService()->loadLocation( $locationId );
+            }
             );
 
-            if ( $location->invisible )
+            if( $location->invisible )
             {
                 throw new NotFoundHttpException( "Location #{$locationId} cannot be displayed as it is flagged as invisible." );
             }
 
             // Check both 'content/read' and 'content/view_embed'.
-            if (
-                !$this->securityContext->isGranted(
-                    new AuthorizationAttribute(
-                        'content',
-                        'read',
-                        array( 'valueObject' => $location->contentInfo, 'targets' => $location )
+            if(
+                    !$this->securityContext->isGranted(
+                            new AuthorizationAttribute(
+                            'content', 'read', array( 'valueObject' => $location->contentInfo, 'targets' => $location )
+                            )
+                    ) && !$this->securityContext->isGranted(
+                            new AuthorizationAttribute(
+                            'content', 'view_embed', array( 'valueObject' => $location->contentInfo, 'targets' => $location )
+                            )
                     )
-                )
-                && !$this->securityContext->isGranted(
-                    new AuthorizationAttribute(
-                        'content',
-                        'view_embed',
-                        array( 'valueObject' => $location->contentInfo, 'targets' => $location )
-                    )
-                )
             )
             {
                 throw new AccessDeniedException();
             }
 
-            if ( $response->isNotModified( $this->getRequest() ) )
+            if( $response->isNotModified( $this->getRequest() ) )
             {
                 return $response;
             }
 
             $response->headers->set( 'X-Location-Id', $locationId );
             $response->setContent(
-                $this->renderLocation(
-                    $location,
-                    $viewType,
-                    $layout,
-                    $params
-                )
+                    $this->renderLocation(
+                            $location, $viewType, $layout, $params
+                    )
             );
 
             return $response;
-        }
-        catch ( UnauthorizedException $e )
+        } catch( UnauthorizedException $e )
         {
             throw new AccessDeniedException();
-        }
-        catch ( NotFoundException $e )
+        } catch( NotFoundException $e )
         {
             throw new NotFoundHttpException( $e->getMessage(), $e );
-        }
-        catch ( Exception $e )
+        } catch( Exception $e )
         {
             return $this->handleViewException( $response, $params, $e, $viewType, null, $locationId );
         }
@@ -252,7 +235,7 @@ class ViewController extends Controller
      */
     public function viewContent( $contentId, $viewType, $layout = false, array $params = array() )
     {
-        if ( $viewType === "embed" )
+        if( $viewType === "embed" )
         {
             return $this->embedContent( $contentId, $viewType, $layout, $params );
         }
@@ -264,27 +247,24 @@ class ViewController extends Controller
         {
             $content = $this->getRepository()->getContentService()->loadContent( $contentId );
 
-            if ( $response->isNotModified( $this->getRequest() ) )
+            if( $response->isNotModified( $this->getRequest() ) )
             {
                 return $response;
             }
 
             $response->headers->set( 'X-Location-Id', $content->contentInfo->mainLocationId );
             $response->setContent(
-                $this->renderContent( $content, $viewType, $layout, $params )
+                    $this->renderContent( $content, $viewType, $layout, $params )
             );
 
             return $response;
-        }
-        catch ( UnauthorizedException $e )
+        } catch( UnauthorizedException $e )
         {
             throw new AccessDeniedException();
-        }
-        catch ( NotFoundException $e )
+        } catch( NotFoundException $e )
         {
             throw new NotFoundHttpException( $e->getMessage(), $e );
-        }
-        catch ( Exception $e )
+        } catch( Exception $e )
         {
             return $this->handleViewException( $response, $params, $e, $viewType, $contentId );
         }
@@ -313,56 +293,51 @@ class ViewController extends Controller
         {
             /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
             $content = $this->getRepository()->sudo(
-                function ( $repository ) use ( $contentId )
-                {
-                    return $repository->getContentService()->loadContent( $contentId );
-                }
+                    function ( $repository ) use ( $contentId )
+            {
+                return $repository->getContentService()->loadContent( $contentId );
+            }
             );
 
             // Check both 'content/read' and 'content/view_embed'.
-            if (
-                !$this->securityContext->isGranted(
-                    new AuthorizationAttribute( 'content', 'read', array( 'valueObject' => $content ) )
-                )
-                && !$this->securityContext->isGranted(
-                    new AuthorizationAttribute( 'content', 'view_embed', array( 'valueObject' => $content ) )
-                )
+            if(
+                    !$this->securityContext->isGranted(
+                            new AuthorizationAttribute( 'content', 'read', array( 'valueObject' => $content ) )
+                    ) && !$this->securityContext->isGranted(
+                            new AuthorizationAttribute( 'content', 'view_embed', array( 'valueObject' => $content ) )
+                    )
             )
             {
                 throw new AccessDeniedException();
             }
 
             // Check that Content is published, since sudo allows loading unpublished content.
-            if (
-                $content->getVersionInfo()->status !== APIVersionInfo::STATUS_PUBLISHED
-                && !$this->securityContext->isGranted(
-                    new AuthorizationAttribute( 'content', 'versionread', array( 'valueObject' => $content ) )
-                )
+            if(
+                    $content->getVersionInfo()->status !== APIVersionInfo::STATUS_PUBLISHED && !$this->securityContext->isGranted(
+                            new AuthorizationAttribute( 'content', 'versionread', array( 'valueObject' => $content ) )
+                    )
             )
             {
                 throw new AccessDeniedException();
             }
 
-            if ( $response->isNotModified( $this->getRequest() ) )
+            if( $response->isNotModified( $this->getRequest() ) )
             {
                 return $response;
             }
 
             $response->setContent(
-                $this->renderContent( $content, $viewType, $layout, $params )
+                    $this->renderContent( $content, $viewType, $layout, $params )
             );
 
             return $response;
-        }
-        catch ( UnauthorizedException $e )
+        } catch( UnauthorizedException $e )
         {
             throw new AccessDeniedException();
-        }
-        catch ( NotFoundException $e )
+        } catch( NotFoundException $e )
         {
             throw new NotFoundHttpException( $e->getMessage(), $e );
-        }
-        catch ( Exception $e )
+        } catch( Exception $e )
         {
             return $this->handleViewException( $response, $params, $e, $viewType, $contentId );
         }
@@ -371,21 +346,19 @@ class ViewController extends Controller
     protected function handleViewException( Response $response, $params, Exception $e, $viewType, $contentId = null, $locationId = null )
     {
         $event = new APIContentExceptionEvent(
-            $e,
-            array(
-                'contentId'    => $contentId,
-                'locationId'   => $locationId,
-                'viewType'     => $viewType
-            )
+                $e, array(
+            'contentId' => $contentId,
+            'locationId' => $locationId,
+            'viewType' => $viewType
+                )
         );
         $this->getEventDispatcher()->dispatch( MVCEvents::API_CONTENT_EXCEPTION, $event );
-        if ( $event->hasContentView() )
+        if( $event->hasContentView() )
         {
             $response->setContent(
-                $this->viewManager->renderContentView(
-                    $event->getContentView(),
-                    $params
-                )
+                    $this->viewManager->renderContentView(
+                            $event->getContentView(), $params
+                    )
             );
 
             return $response;
@@ -425,7 +398,8 @@ class ViewController extends Controller
      */
     protected function performAccessChecks()
     {
-        if ( !$this->isGranted( new AuthorizationAttribute( 'content', 'read' ) ) )
+        if( !$this->isGranted( new AuthorizationAttribute( 'content', 'read' ) ) )
             throw new AccessDeniedException();
     }
+
 }

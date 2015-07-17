@@ -2,32 +2,33 @@
 
 namespace OpenWide\Publish\AgendaBundle\Controller;
 
-
 class EventAgendaViewController extends ViewController
 {
+
     protected function renderLocation( $location, $viewType, $layout = false, array $params = array() )
     {
-        switch( $viewType ) {
+        switch( $viewType )
+        {
             case 'full' :
             case 'line' :
-                $params += $this->getViewFullParams($location);
-                break;            
+                $params += $this->getViewFullParams( $location );
+                break;
         }
 
         return parent::renderLocation( $location, $viewType, $layout, $params );
     }
 
-    protected function getViewFullParams($location)
+    protected function getViewFullParams( $location )
     {
         $repository = $this->getRepository();
         $contentService = $repository->getContentService();
 
         $content = $contentService->loadContentByContentInfo( $location->getContentInfo() );
         $request = $this->getRequest();
-        $liste = $request->query->get('liste', 0);        
-        
-        $image = $content->getFieldValue('image');
-        $contentImage = $this->container->get('open_wide_publish_agenda.fetch_by_legacy')->getImageByContentId($image->destinationContentId);
+        $liste = $request->query->get( 'liste', 0 );
+
+        $image = $content->getFieldValue( 'image' );
+        $contentImage = $this->container->get( 'open_wide_publish_agenda.fetch_by_legacy' )->getImageByContentId( $image->destinationContentId );
 
         $params = array(
             'location' => $location,
@@ -41,10 +42,11 @@ class EventAgendaViewController extends ViewController
         $event_dateList = $this->getLegacyContentService()->fetchNodeList( array(
             'ParentNodeId' => $location->id,
             'ContentTypeIdentifier' => 'event_date'
-        ) );
+                ) );
 
         /** @var \eZContentObjectTreeNode $date */
-        foreach( $event_dateList as $date ) {
+        foreach( $event_dateList as $date )
+        {
             $params['event_date'][] = $date->ContentObjectID;
         }
 
@@ -59,8 +61,10 @@ class EventAgendaViewController extends ViewController
      *
      * @return mixed
      */
-    public function getConfigParameter( $parameterName, $namespace = null, $scope = null ) {
-        if( $this->getConfigResolver()->hasParameter( $parameterName, $namespace, $scope ) ) {
+    public function getConfigParameter( $parameterName, $namespace = null, $scope = null )
+    {
+        if( $this->getConfigResolver()->hasParameter( $parameterName, $namespace, $scope ) )
+        {
             return $this->getConfigResolver()->getParameter( $parameterName, $namespace, $scope );
         }
     }
@@ -72,7 +76,8 @@ class EventAgendaViewController extends ViewController
      *
      * @return boolean
      */
-    public function hasConfigParameter( $parameterName, $namespace = null, $scope = null ) {
+    public function hasConfigParameter( $parameterName, $namespace = null, $scope = null )
+    {
         return $this->getConfigResolver()->hasParameter( $parameterName, $namespace, $scope );
     }
 
@@ -81,7 +86,9 @@ class EventAgendaViewController extends ViewController
      *
      * return OpenWide\Bundle\AgendaBundle\Helper\FetchByLegacy
      */
-    public function getLegacyContentService() {
+    public function getLegacyContentService()
+    {
         return $this->container->get( 'open_wide_publish_agenda.fetch_by_legacy' );
     }
+
 }
