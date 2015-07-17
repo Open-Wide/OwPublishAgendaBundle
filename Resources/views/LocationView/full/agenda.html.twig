@@ -1,0 +1,56 @@
+{% extends noLayout ? viewbaseLayout : "::pagelayout.html.twig" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>{{ ez_render_field( content, 'name' ) }}</h1>
+            {% if paginatedItems.getNbResults %}
+                {% for result in paginatedItems.getCurrentPageResults %}
+                    <div class="row liste ">
+                        <div class="col-md-12">
+                            <div class="row  {% if loop.index % 2 == 1 %} listeBackground {% endif %} listeBorder ">
+                                <div class="col-md-12">              
+                                    {{ render( controller( "ez_content:viewLocation", {
+                                        "locationId": result.id,
+                                        "viewType": "line"
+                                    } ) )
+                                    }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+                {% endfor %}
+
+                {% if paginatedItems.haveToPaginate %}
+                    <nav style="text-align: center">
+                        <ul class="pagination">
+                            {% if paginatedItems.hasPreviousPage %}
+                                <li>
+                                    <a href="{{ url(location, {"page": paginatedItems.getPreviousPage }) }}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% for i in 1..paginatedItems.getNbPages %}
+                                <li {% if (i == paginatedItems.getCurrentPage) %} class="active" {% endif %}>
+                                    <a href="{{ url(location, {"page": i }) }}">{{ i }}</a>
+                                </li>
+                            {% endfor %}
+                            {% if next_page > 0 %}
+                                <li>
+                                    <a href="{{ url(location, {"page": paginatedItems.getNextPage }) }}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                {% else %}
+                    <nav style="text-align: center">
+                        &nbsp;<br/>&nbsp;
+                    </nav>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -4,12 +4,12 @@ namespace OpenWide\Publish\AgendaBundle\Service;
 
 use eZ\Publish\Core\Repository\Values\Content\Location;
 
-class AgendaScheduleContentRepositiry extends ContentRepository
+class AgendaScheduleContentRepository extends ContentRepository
 {
 
     const CHILDREN_TYPE = 'agenda_schedule';
 
-    public function getPeriods( Location $location )
+    public function getPeriodList( Location $location )
     {
         $periodList = array();
         $startDate = $this->getTranslatedLocationFieldValue( $location, 'date_start' )->date;

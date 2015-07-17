@@ -5,14 +5,26 @@ namespace OpenWide\Publish\AgendaBundle\Service;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
 use eZ\Publish\Core\Repository\Values\Content\Location;
 
-class AgendaEventContentRepositiry extends ContentRepository
+class AgendaEventContentRepository extends ContentRepository
 {
 
     const CHILDREN_TYPE = 'agenda_schedule';
 
-    public function getSchedule( Location $location, $params = array() )
+    public function getAgendaScheduleList( Location $location, $params = array() )
     {
-        $criteria = array();
+        $criteria = $this->getAgendaScheduleListCriteria( $location, $params );
+        return $this->getLocationSearchResult( $criteria );
+    }
+
+    protected function getAgendaScheduleListCriteria( Location $location, $params = array() )
+    {
+        $time = time();
+        $criteria = array(
+            new Criterion\ParentLocationId( $location->id ),
+            new Criterion\ContentTypeIdentifier( array( static::CHILDREN_TYPE ) ),
+            new Criterion\Visibility( Criterion\Visibility::VISIBLE ),
+        );
+
         if( isset( $params['start'] ) && isset( $params['end'] ) )
         {
             $startTime = strtotime( $params['start'] );
@@ -40,7 +52,8 @@ class AgendaEventContentRepositiry extends ContentRepository
             $time = strtotime( $params['end'] ) + 24 * 60;
             $criteria[] = new Criterion\Field( 'date_end', Criterion\Operator::LTE, $time );
         }
-        return $this->getChildren( $location, $criteria );
+
+        return $criteria;
     }
 
 }

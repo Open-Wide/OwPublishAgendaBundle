@@ -6,7 +6,7 @@ use eZ\Publish\Core\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
 
-class AgendaFolderContentRepositiry extends ContentRepository
+class AgendaFolderContentRepository extends ContentRepository
 {
 
     const CHILDREN_TYPE = 'agenda';
@@ -18,10 +18,10 @@ class AgendaFolderContentRepositiry extends ContentRepository
 
         foreach( $agendaEventList as $agendaEvent )
         {
-            $listeDates = $this->getAgendaEventContentRepository()->getSchedule( $agendaEvent, $params );
+            $listeDates = $this->getAgendaEventContentRepository()->getAgendaScheduleList( $agendaEvent, $params );
             foreach( $listeDates as $agendaSchedule )
             {
-                $periodList = $this->getAgendaScheduleContentRepository()->getPeriods( $agendaSchedule );
+                $periodList = $this->getAgendaScheduleContentRepository()->getPeriodList( $agendaSchedule );
                 if( !$periodList )
                 {
                     continue;
@@ -52,20 +52,29 @@ class AgendaFolderContentRepositiry extends ContentRepository
 
     public function getAgendaEventList( Location $location, $params = array() )
     {
-        $time = time();
-        $criteria = array(
-            new Criterion\Subtree( $location->pathString ),
-            new Criterion\ContentTypeIdentifier( array( 'agenda_event' ) ),
-            new Criterion\Field( 'publish_start', Criterion\Operator::LT, $time ),
-            new Criterion\Field( 'publish_end', Criterion\Operator::GT, $time ),
-            new Criterion\Visibility( Criterion\Visibility::VISIBLE ),
-        );
+        $criteria = $this->getAgendaEventCriteria( $location, $params );
 
         $query = new LocationQuery();
         $query->filter = new Criterion\LogicalAnd( $criteria );
 
         $searchResult = $this->repository->getSearchService()->findLocations( $query );
         return $this->extractObjectsFromSearchResult( $searchResult );
+    }
+
+    public function getAgendaEventCriteria( Location $location, $params = array() )
+    {
+        $time = time();
+        $criteria = array(
+            new Criterion\Subtree( $location->pathString ),
+            new Criterion\ContentTypeIdentifier( array( 'agenda_event' ) ),
+            new Criterion\Field( 'publish_start', Criterion\Operator::LT, $time ),
+            new Criterion\LogicalOr( array(
+                new Criterion\Field( 'publish_end', Criterion\Operator::GT, time() ),
+                new Criterion\Field( 'publish_end', Criterion\Operator::EQ, 0 )
+                    ) ),
+            new Criterion\Visibility( Criterion\Visibility::VISIBLE ),
+        );
+        return $criteria;
     }
 
 }

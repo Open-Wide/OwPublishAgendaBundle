@@ -33,7 +33,7 @@ class ContentRepository extends ContainerAware
 
     /**
      * 
-     * @return OpenWide\Publish\AgendaBundle\Service\AgendaFolderContentRepositiry
+     * @return OpenWide\Publish\AgendaBundle\Service\AgendaFolderContentRepository
      */
     public function getAgendaFolderContentRepository()
     {
@@ -42,7 +42,7 @@ class ContentRepository extends ContainerAware
 
     /**
      * 
-     * @return OpenWide\Publish\AgendaBundle\Service\AgendaContentRepositiry
+     * @return OpenWide\Publish\AgendaBundle\Service\AgendaContentRepository
      */
     public function getAgendaContentRepository()
     {
@@ -51,7 +51,7 @@ class ContentRepository extends ContainerAware
 
     /**
      * 
-     * @return OpenWide\Publish\AgendaBundle\Service\AgendaEventContentRepositiry
+     * @return OpenWide\Publish\AgendaBundle\Service\AgendaEventContentRepository
      */
     public function getAgendaEventContentRepository()
     {
@@ -60,7 +60,7 @@ class ContentRepository extends ContainerAware
 
     /**
      * 
-     * @return OpenWide\Publish\AgendaBundle\Service\AgendaScheduleContentRepositiry
+     * @return OpenWide\Publish\AgendaBundle\Service\AgendaScheduleContentRepository
      */
     public function getAgendaScheduleContentRepository()
     {
@@ -82,9 +82,9 @@ class ContentRepository extends ContainerAware
             new Criterion\ContentTypeIdentifier( array( 'agenda_event' ) ),
             new Criterion\Visibility( Criterion\Visibility::VISIBLE ),
             new Criterion\Field( 'publish_start', Criterion\Operator::LT, time() ),
-            new Criterion\LogicalOr(
-                    new Criterion\Field( 'publish_end', Criterion\Operator::GT, time() ), new Criterion\Field( 'publish_end', Criterion\Operator::EQ, 0 )
-            )
+            new Criterion\LogicalOr( array(
+                new Criterion\Field( 'publish_end', Criterion\Operator::GT, time() ), new Criterion\Field( 'publish_end', Criterion\Operator::EQ, 0 )
+                    ) )
         );
         $query = new Query();
         $query->filter = new Criterion\LogicalAnd( $criteria );
@@ -141,14 +141,8 @@ class ContentRepository extends ContainerAware
         return (intval( $a['start'] ) < intval( $b['start'] )) ? -1 : 1;
     }
 
-    function getChildren( Location $parentLocation, $criteria = array() )
+    function getLocationSearchResult( $criteria = array() )
     {
-        $criteria += array(
-            new Criterion\ParentLocationId( $parentLocation->contentInfo->id ),
-            new Criterion\ContentTypeIdentifier( array( static::CHILDREN_TYPE ) ),
-            new Criterion\Visibility( Criterion\Visibility::VISIBLE ),
-        );
-
         $query = new LocationQuery();
         $query->filter = new Criterion\LogicalAnd( $criteria );
 
@@ -243,6 +237,34 @@ class ContentRepository extends ContainerAware
             $this->{$attribut} = call_user_func( array( $this->repository, $function ) );
         }
         return $this->{$attribut};
+    }
+
+    /**
+     * Returns value for $parameterName and fallbacks to $defaultValue if not defined
+     *
+     * @param string $parameterName
+     * @param mixed $defaultValue
+     *
+     * @return mixed
+     */
+    public function getConfigParameter( $parameterName, $namespace = null, $scope = null )
+    {
+        if( $this->container->get( 'ezpublish.config.resolver' )->hasParameter( $parameterName, $namespace, $scope ) )
+        {
+            return $this->container->get( 'ezpublish.config.resolver' )->getParameter( $parameterName, $namespace, $scope );
+        }
+    }
+
+    /**
+     * Checks if $parameterName is defined
+     *
+     * @param string $parameterName
+     *
+     * @return boolean
+     */
+    public function hasConfigParameter( $parameterName, $namespace = null, $scope = null )
+    {
+        return $this->container->get( 'ezpublish.config.resolver' )->hasParameter( $parameterName, $namespace, $scope );
     }
 
     /**

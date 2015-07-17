@@ -1,0 +1,28 @@
+{% extends noLayout ? viewbaseLayout : "::pagelayout.html.twig" %}
+
+{% block content %}
+    {% include 'OpenWidePublishAgendaBundle::page_styles.html.twig' %}
+    {% include 'OpenWidePublishAgendaBundle::page_scripts.html.twig' %}
+
+    <div class="container-fluid">
+        <h1>{{ ez_render_field( content, 'name' ) }}</h1>
+        <div id='calendar'></div>
+        <input type="hidden" name="locationId" id="locationId" value="{{location.id}}">
+    </div>
+
+    <div id="fullCalModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+                    <h4 id="modalTitle" class="modal-title"></h4>
+                </div>
+                <div id="modalBody" class="modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary"><a id="eventUrl" target="_blank">Event Page</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
