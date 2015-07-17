@@ -18,8 +18,8 @@ class AgendaFolderContentRepository extends ContentRepository
 
         foreach( $agendaEventList as $agendaEvent )
         {
-            $listeDates = $this->getAgendaEventContentRepository()->getAgendaScheduleList( $agendaEvent, $params );
-            foreach( $listeDates as $agendaSchedule )
+            $listDates = $this->getAgendaEventContentRepository()->getAgendaScheduleList( $agendaEvent, $params );
+            foreach( $listDates as $agendaSchedule )
             {
                 $periodList = $this->getAgendaScheduleContentRepository()->getPeriodList( $agendaSchedule );
                 if( !$periodList )

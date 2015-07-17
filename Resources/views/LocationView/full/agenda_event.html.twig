@@ -24,14 +24,14 @@
                     {% endfor %}
                 {% endif %}
 
-                {% if liste == 0 %}
+                {% if list == 0 %}
                     {% if location.parentLocationId is defined %}
                         <a class="btn btn-default" href="{{ path( "ez_urlalias", {"locationId": location.parentLocationId} ) }}">
                             {{ "Return to list"|trans }}
                         </a>
                     {% endif %}
                 {% else%}
-                    <a href="{{ path( "ez_urlalias", {"locationId": liste} ) }}">{{ "Return to list"|trans }}</a>
+                    <a href="{{ path( "ez_urlalias", {"locationId": list} ) }}">{{ "Return to list"|trans }}</a>
                 {% endif %}                
             </div>
         </div>

@@ -97,8 +97,8 @@ class ContentRepository extends ContainerAware
         $content = array();
         foreach( $searchResult->searchHits as $agendaEvent )
         {
-            $listeDates = $this->getChildren( $agendaEvent );
-            foreach( $listeDates->searchHits as $agendaSchedule )
+            $listDates = $this->getChildren( $agendaEvent );
+            foreach( $listDates->searchHits as $agendaSchedule )
             {
                 $content[] = array(
                     'AgendaEvent' => $agendaEvent->valueObject->contentInfo->mainLocationId,
