@@ -2,50 +2,18 @@
 
 namespace OpenWide\Publish\AgendaBundle\Service;
 
-use Closure;
+use eZ\Publish\API\Repository\Values\Content\LocationQuery;
 use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
 use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause\ContentId;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause\ContentName;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause\DateModified;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause\DatePublished;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause\LocationDepth;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause\LocationPathString;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause\LocationPriority;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause\SectionName;
 use eZ\Publish\Core\Repository\Values\Content\Location;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\DependencyInjection\ContainerAware;
+use eZ\Publish\API\Repository\Values\Content\Field;
 
 class ContentRepository extends ContainerAware
 {
-
-    /**
-     * @var Closure
-     */
-//    private $legacyKernelClosure;
-
-    /**
-     * @var array
-     */
-//    private $criterion = array();
-
-    /**
-     * @var array
-     */
-//    private $fetchParams = array();
-
-    /**
-     * @var string
-     */
-//    private $fetchModule = 'content';
-
-    /**
-     * @var string
-     */
-//    private $fetchFunction;
 
     /**
      * @var repository
@@ -56,9 +24,6 @@ class ContentRepository extends ContainerAware
      * @var container
      */
     protected $container;
-//    private $ContentService;
-//    private $LocationService;
-//    private $SearchService;
 
     public function __construct( $container )
     {
@@ -66,216 +31,41 @@ class ContentRepository extends ContainerAware
         $this->repository = $this->container->get( 'ezpublish.api.repository' );
     }
 
-//    public function fetchContent( $criterion )
-//    {
-//        $this->fetchModule = 'content';
-//        $this->fetchFunction = 'object';
-//        return $this->setCriterion( $criterion )->performFetch();
-//    }
-//
-//    public function fetchNode( $criterion )
-//    {
-//        $this->fetchModule = 'content';
-//        $this->fetchFunction = 'node';
-//        return $this->setCriterion( $criterion )->performFetch();
-//    }
-//
-//    public function fetchNodeList( $criterion )
-//    {
-//        $this->fetchModule = 'content';
-//        $this->fetchFunction = 'list';
-//        return $this->setCriterion( $criterion )->performFetch();
-//    }
-//
-//    public function countNodeList( $criterion )
-//    {
-//        $this->fetchModule = 'content';
-//        $this->fetchFunction = 'list_count';
-//        return (int) $this->setCriterion( $criterion )->performFetch();
-//    }
-//
-//    public function fetchNodeTree( $criterion )
-//    {
-//        $this->fetchModule = 'content';
-//        $this->fetchFunction = 'tree';
-//        return $this->setCriterion( $criterion )->performFetch();
-//    }
-//
-//    public function countNodeTree( $criterion )
-//    {
-//        $this->fetchModule = 'content';
-//        $this->fetchFunction = 'tree_count';
-//        return (int) $this->setCriterion( $criterion )->performFetch();
-//    }
-
-//    public function fetchObjectState( $criterion )
-//    {
-//        if( isset( $criterion['ObjectStateIdentifier'] ) )
-//        {
-//            list( $stateGroupIdentifier, $stateIdentifier ) = explode( '/', $criterion['ObjectStateIdentifier'] );
-//            return $this->getLegacyKernel()->runCallback(
-//                            function () use ( $stateGroupIdentifier, $stateIdentifier )
-//                    {
-//                        $objectStateGroup = \eZContentObjectStateGroup::fetchByIdentifier( $stateGroupIdentifier );
-//                        return $state = $objectStateGroup->stateByIdentifier( $stateIdentifier );
-//                    } );
-//        }
-//        if( isset( $criterion['ObjectStateId'] ) )
-//        {
-//            $stateId = $criterion['ObjectStateId'];
-//            return $this->getLegacyKernel()->runCallback(
-//                            function () use ( $stateId )
-//                    {
-//                        return \eZContentObjectState::fetchById( $stateId );
-//                    } );
-//        }
-//    }
-
-//    public function fetchMoreLikeThis( $criterion )
-//    {
-//        $this->fetchModule = 'ezfind';
-//        $this->fetchFunction = 'moreLikeThis';
-//        return $this->setCriterion( $criterion )->performFetch();
-//    }
-
-//    protected function performFetch()
-//    {
-//        $fetchModule = $this->fetchModule;
-//        $fetchFunction = $this->fetchFunction;
-//        $fetchParams = $this->fetchParams;
-//        return $this->getLegacyKernel()->runCallback(
-//                        function () use ( $fetchModule, $fetchFunction, $fetchParams )
-//                {
-//                    return \eZFunctionHandler::execute( $fetchModule, $fetchFunction, $fetchParams );
-//                } );
-//    }
-
-//    protected function transformCriterionInFetchParams()
-//    {
-//        $this->fetchParams = array();
-//        foreach( $this->criterion as $paramName => $value )
-//        {
-//            $paramName = $this->fromCamelCaseToUnderscores( $paramName );
-//            switch( $paramName )
-//            {
-//                case 'visibility':
-//                    if( $value == Criterion\Visibility::HIDDEN )
-//                    {
-//                        $this->fetchParams['ignore_visibility'] = true;
-//                    }
-//                    break;
-//                case 'content_type_identifier':
-//                    if( !is_array( $value ) )
-//                    {
-//                        $value = array( $value );
-//                    }
-//                    $this->fetchParams['class_filter_array'] = $value;
-//                    break;
-//                case 'content_type_identifier_operator':
-//                    $this->fetchParams['class_filter_type'] = $value;
-//                    break;
-//                case 'object_state_id':
-//                    $this->fetchParams['attribute_filter'][] = array( 'state', "=", $value );
-//                    break;
-//                case 'object_state_identifier':
-//                    $objectState = $this->fetchObjectState( array( 'ObjectStateIdentifier' => $value ) );
-//                    if( $objectState )
-//                    {
-//                        $this->fetchParams['attribute_filter'][] = array( 'state', "=", $objectState->attribute( 'id' ) );
-//                    }
-//                    break;
-//                default:
-//                    $this->fetchParams[$paramName] = $value;
-//                    break;
-//            }
-//        }
-//        if( isset( $this->fetchParams['class_filter_array'] ) && !isset( $this->fetchParams['class_filter_type'] ) )
-//        {
-//            $this->fetchParams['class_filter_type'] = 'include';
-//        }
-//
-//        if( isset( $this->fetchParams['parent_node_id'] ) && !isset( $this->fetchParams['sort_by'] ) && ( $this->fetchFunction == 'list' || $this->fetchFunction == 'tree') )
-//        {
-//            $parentNodeId = $this->fetchParams['parent_node_id'];
-//            $this->fetchParams['sort_by'] = $this->getLegacyKernel()->runCallback(
-//                    function () use ( $parentNodeId )
-//            {
-//                $parentNode = \eZContentObjectTreeNode::fetch( $parentNodeId );
-//                return $parentNode->attribute( 'sort_array' );
-//            } );
-//        }
-//    }
-
-//    protected function getLegacyKernel()
-//    {
-//        if( !isset( $this->legacyKernelClosure ) )
-//        {
-//            $this->legacyKernelClosure = $this->container->get( 'ezpublish_legacy.kernel' );
-//        }
-//
-//        $legacyKernelClosure = $this->legacyKernelClosure;
-//        return $legacyKernelClosure();
-//    }
+    /**
+     * 
+     * @return OpenWide\Publish\AgendaBundle\Service\AgendaFolderContentRepositiry
+     */
+    public function getAgendaFolderContentRepository()
+    {
+        return $this->container->get( 'open_wide_publish_agenda.agenda_folder_content_repository' );
+    }
 
     /**
-     * Return fetch criterion
-     *
-     * @return array
+     * 
+     * @return OpenWide\Publish\AgendaBundle\Service\AgendaContentRepositiry
      */
-//    protected function getCriterion()
-//    {
-//        return $this->criterion;
-//    }
+    public function getAgendaContentRepository()
+    {
+        return $this->container->get( 'open_wide_publish_agenda.agenda_content_repository' );
+    }
 
     /**
-     * Set fetch criterion
-     *
-     * @param array $criterion
-     * @return \Ow\Bundle\AgendaBundle\Helper\FetchByLegacy
+     * 
+     * @return OpenWide\Publish\AgendaBundle\Service\AgendaEventContentRepositiry
      */
-//    protected function setCriterion( $criterion )
-//    {
-//        $this->criterion = $criterion;
-//        $this->transformCriterionInFetchParams();
-//        return $this;
-//    }
+    public function getAgendaEventContentRepository()
+    {
+        return $this->container->get( 'open_wide_publish_agenda.agenda_event_content_repository' );
+    }
 
     /**
-     * Set fetch criterion
-     *
-     * @return \Ow\Bundle\AgendaBundle\Helper\FetchByLegacy
+     * 
+     * @return OpenWide\Publish\AgendaBundle\Service\AgendaScheduleContentRepositiry
      */
-//    protected function removeCriterion()
-//    {
-//        $this->criterion = array();
-//        $this->transformCriterionInFetchParams();
-//        return $this;
-//    }
-
-    /**
-     * Add a critera in the $criterion
-     *
-     * @param string $type
-     * @param mixed $value
-     * @return \Ow\Bundle\AgendaBundle\Helper\FetchByLegacy
-     */
-//    protected function addCriteria( $type, $value )
-//    {
-//        $this->criterion[$type] = $value;
-//        $this->transformCriterionInFetchParams();
-//        return $this;
-//    }
-
-    /**
-     * @param $str
-     * @return mixed
-     */
-//    protected function fromCamelCaseToUnderscores( $str )
-//    {
-//        $str[0] = strtolower( $str[0] );
-//        $func = create_function( '$c', 'return "_" . strtolower($c[1]);' );
-//        return preg_replace_callback( '/([A-Z])/', $func, $str );
-//    }
+    public function getAgendaScheduleContentRepository()
+    {
+        return $this->container->get( 'open_wide_publish_agenda.agenda_schedule_content_repository' );
+    }
 
     /**
      * Return list of event sorted 
@@ -292,7 +82,9 @@ class ContentRepository extends ContainerAware
             new Criterion\ContentTypeIdentifier( array( 'agenda_event' ) ),
             new Criterion\Visibility( Criterion\Visibility::VISIBLE ),
             new Criterion\Field( 'publish_start', Criterion\Operator::LT, time() ),
-            new Criterion\Field( 'publish_end', Criterion\Operator::GT, time() ),
+            new Criterion\LogicalOr(
+                    new Criterion\Field( 'publish_end', Criterion\Operator::GT, time() ), new Criterion\Field( 'publish_end', Criterion\Operator::EQ, 0 )
+            )
         );
         $query = new Query();
         $query->filter = new Criterion\LogicalAnd( $criteria );
@@ -311,7 +103,7 @@ class ContentRepository extends ContainerAware
                 $content[] = array(
                     'AgendaEvent' => $agendaEvent->valueObject->contentInfo->mainLocationId,
                     'AgendaSchedule' => $agendaSchedule->valueObject->contentInfo->mainLocationId,
-                    'start' => $this->childrenFormattedDate( $agendaSchedule, 'order' )
+                    'start' => $this->getFormattedDate( $agendaSchedule, 'order' )
                 );
             }
         }
@@ -349,21 +141,25 @@ class ContentRepository extends ContainerAware
         return (intval( $a['start'] ) < intval( $b['start'] )) ? -1 : 1;
     }
 
-    function getChildren( $parentNodeId )
+    function getChildren( Location $parentLocation, $criteria = array() )
     {
-
-        $criteria = array(
-            new Criterion\ParentLocationId( $parentNodeId->valueObject->contentInfo->mainLocationId ),
-            new Criterion\ContentTypeIdentifier( array( 'agenda_schedule' ) ),
+        $criteria += array(
+            new Criterion\ParentLocationId( $parentLocation->contentInfo->id ),
+            new Criterion\ContentTypeIdentifier( array( static::CHILDREN_TYPE ) ),
             new Criterion\Visibility( Criterion\Visibility::VISIBLE ),
         );
 
-        $query = new Query();
+        $query = new LocationQuery();
         $query->filter = new Criterion\LogicalAnd( $criteria );
 
-        $searchResult = $this->repository->getSearchService()->findContent( $query );
+        $searchResult = $this->repository->getSearchService()->findLocations( $query );
 
-        return $searchResult;
+        return $this->extractObjectsFromSearchResult( $searchResult );
+    }
+
+    function getLocationUrl( Location $location )
+    {
+        return $this->container->get( 'router' )->generate( $location );
     }
 
     /**
@@ -410,21 +206,14 @@ class ContentRepository extends ContainerAware
         }
     }
 
-    function childrenFormattedDate( $agendaSchedule, $type )
+    function getFormattedDate( $location, $type )
     {
-
         switch( $type )
         {
-            case 'start':
-                // ISO 8601 date_start
-                return date( "o-m-d", strtotime( $agendaSchedule->valueObject->getFieldValue( 'date_start' ) ) ) . 'T' . date( "H:i:s", strtotime( $agendaSchedule->valueObject->getFieldValue( 'hour_start' ) ) );
-            case 'end':
-                // ISO 8601 date_end
-                return date( "o-m-d", strtotime( $agendaSchedule->valueObject->getFieldValue( 'date_end' ) ) ) . 'T' . date( "H:i:s", strtotime( $agendaSchedule->valueObject->getFieldValue( 'hour_end' ) ) );
             case 'duration':
-                return date( "H:i", strtotime( $agendaSchedule->valueObject->getFieldValue( 'duration' ) ) );
+                return date( "H:i", strtotime( $this->getTranslatedLocationFieldValue( $location, 'duration' ) ) );
             case 'order':
-                return date( "Ymd", strtotime( $agendaSchedule->valueObject->getFieldValue( 'date_start' ) ) ) . date( "Hi", strtotime( $agendaSchedule->valueObject->getFieldValue( 'hour_start' ) ) );
+                return date( "Ymd", strtotime( $this->getTranslatedLocationFieldValue( $location, 'date_start' ) ) ) . date( "Hi", strtotime( $this->getTranslatedLocationFieldValue( $location, 'hour_start' ) ) );
             default: return "";
         }
     }
@@ -454,6 +243,74 @@ class ContentRepository extends ContainerAware
             $this->{$attribut} = call_user_func( array( $this->repository, $function ) );
         }
         return $this->{$attribut};
+    }
+
+    /**
+     * Get the translated field from a content object
+     * 
+     * @param \eZ\Publish\Core\Repository\Values\Content\Content $content
+     * @param string $fieldIdentifier
+     * @return \eZ\Publish\API\Repository\Values\Content\Field
+     */
+    protected function getTranslatedContentName( $content )
+    {
+        $translationHelper = $this->container->get( 'ezpublish.translation_helper' );
+        return $translationHelper->getTranslatedContentName( $content );
+    }
+
+    /**
+     * Get the translated field from a content object
+     * 
+     * @param \eZ\Publish\Core\Repository\Values\Content\Content $content
+     * @param string $fieldIdentifier
+     * @return \eZ\Publish\API\Repository\Values\Content\Field
+     */
+    protected function getTranslatedContentFieldValue( $content, $fieldIdentifier )
+    {
+        $translationHelper = $this->container->get( 'ezpublish.translation_helper' );
+        $field = $translationHelper->getTranslatedField( $content, $fieldIdentifier );
+        if( $field instanceof Field )
+        {
+            return $field->value;
+        }
+        return false;
+    }
+
+    /**
+     * Get the translated field from a content object
+     * 
+     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
+     * @param string $fieldIdentifier
+     * @return \eZ\Publish\API\Repository\Values\Content\Field
+     */
+    protected function getTranslatedLocationName( $location )
+    {
+        $content = $this->repository->getContentService()->loadContentByContentInfo( $location->getContentInfo() );
+        return $this->getTranslatedContentName( $content );
+    }
+
+    /**
+     * Get the translated field from a content object
+     * 
+     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
+     * @param string $fieldIdentifier
+     * @return \eZ\Publish\API\Repository\Values\Content\Field
+     */
+    protected function getTranslatedLocationFieldValue( $location, $fieldIdentifier )
+    {
+        $content = $this->repository->getContentService()->loadContentByContentInfo( $location->getContentInfo() );
+        return $this->getTranslatedContentFieldValue( $content, $fieldIdentifier );
+    }
+
+    protected function extractObjectsFromSearchResult( $searchResult )
+    {
+        $resultList = array();
+        foreach( $searchResult->searchHits as $searchHit )
+        {
+            $resultList[] = $searchHit->valueObject;
+        }
+
+        return $resultList;
     }
 
 }

@@ -16,63 +16,24 @@ class JsonController extends Controller
         $repository = $this->getRepository();
         $request = $this->getRequest();
 
-        $agendaLocationId = $request->query->get( 'locationId', 0 );
+        $agendaLocationId = $request->query->get( 'locationId', $this->getConfigResolver('content.tree_root.location_id') );
         $agendaLocation = $repository->getLocationService()->loadLocation( $agendaLocationId );
-        $admin = $request->query->get( 'admin', 0 );
-
-        $criteria = array(
-            new Criterion\ParentLocationId( $agendaLocation->contentInfo->mainLocationId ),
-            new Criterion\ContentTypeIdentifier( array( 'agenda_event' ) ),
-            new Criterion\Field( 'publish_start', Criterion\Operator::LT, time() ),
-            new Criterion\Field( 'publish_end', Criterion\Operator::GT, time() ),
-            new Criterion\Visibility( Criterion\Visibility::VISIBLE ),
+        $params = array(
+            'start' => $request->query->get( 'start', false ),
+            'end' => $request->query->get( 'end', false )
         );
 
-        $query = new Query();
-        $query->filter = new Criterion\LogicalAnd( $criteria );
-
-        $searchResult = $repository->getSearchService()->findContent( $query );
-
-        $date = new \DateTime();
-        $dateNow = $date->getTimestamp();
-        $content = array();
-
-        foreach( $searchResult->searchHits as $searchHit )
-        {
-            $listeDates = $this->getAgendaContentService()->getChildren( $searchHit );
-            foreach( $listeDates->searchHits as $agendaSchedule )
-            {
-                $content[] = array(
-                    'title' => $searchHit->valueObject->getFieldValue( 'title' )->__toString(),
-                    'description' => $searchHit->valueObject->getFieldValue( 'subtitle' )->__toString(),
-                    'start' => $this->getAgendaContentService()->childrenFormattedDate( $agendaSchedule, 'start' ),
-                    'end' => $this->getAgendaContentService()->childrenFormattedDate( $agendaSchedule, 'end' ),
-                    'duration' => $this->getAgendaContentService()->childrenFormattedDate( $agendaSchedule, 'duration' ),
-                    'url' => $this->getUrl( $searchHit, $admin ),
-                );
-            }
-        }
+        $jsonData = $this->get('open_wide_publish_agenda.agenda_folder_content_repository')->getJsonData( $agendaLocation, $params );
 
         $response = new Response();
         $response->headers->set( 'Content-Type', 'application/json' );
         $response->headers->set( 'Access-Control-Allow-Origin', '*' );
         $response->headers->set( 'Access-Control-Expose-Headers', 'Cache-Control,Content-Encoding' );
 
-        $response->setContent( json_encode( $content ) );
+        $response->setContent( json_encode( $jsonData ) );
 
 
         return $response;
-    }
-
-    function getUrl( $value, $admin )
-    {
-        $LocationId = $value->valueObject->versionInfo->contentInfo->mainLocationId;
-        $locationService = $this->getRepository()->getLocationService();
-        $hitLocation = $locationService->loadLocation( $LocationId );
-        $prefix = $admin == 1 ? "/Accueil-du-site" : "";
-        $url = $prefix . $this->generateUrl( $hitLocation );
-
-        return $url;
     }
 
 }
