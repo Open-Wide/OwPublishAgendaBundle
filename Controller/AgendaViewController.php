@@ -21,14 +21,17 @@ class AgendaViewController extends ViewController
     {
         $request = $this->getRequest();
 
+        $displayType = $request->query->get( 'agendaDispayType', 'calendar' );
         $params = array(
+            'agendaDispayType' => $displayType,
             'type' => 'normal'
         );
-
-        $currentPage = $request->query->get( 'page', 1 );
-        $result = $this->container->get( 'open_wide_publish_agenda.agenda_content_repository' )->getPaginatedAgendaEventList( $location, $params, $currentPage );
-        $params['paginatedItems'] = $result;
-
+        if( $displayType == 'list' )
+        {
+            $currentPage = $request->query->get( 'page', 1 );
+            $result = $this->container->get( 'open_wide_publish_agenda.agenda_content_repository' )->getPaginatedAgendaEventList( $location, $params, $currentPage );
+            $params['paginatedItems'] = $result;
+        }
         return $params;
     }
 

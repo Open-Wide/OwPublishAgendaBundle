@@ -1,50 +1,26 @@
 {% extends noLayout ? viewbaseLayout : "::pagelayout.html.twig" %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-xs-12">
-            <h1>{{ ez_render_field( content, 'name' ) }}</h1>
-            {% if paginatedItems.getNbResults %}
-                {% for result in paginatedItems.getCurrentPageResults %}
-                    <div class="agenda-event-list ">        
-                        {{ render( controller( "ez_content:viewLocation", {
-                                "locationId": result.id,
-                                "viewType": "line"
-                            } ) )
-                        }}
-                    </div>                    
-                {% endfor %}
-
-                {% if paginatedItems.haveToPaginate %}
-                    <nav style="text-align: center">
-                        <ul class="pagination">
-                            {% if paginatedItems.hasPreviousPage %}
-                                <li>
-                                    <a href="{{ url(location, {"page": paginatedItems.getPreviousPage }) }}" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                            {% endif %}
-                            {% for i in 1..paginatedItems.getNbPages %}
-                                <li {% if (i == paginatedItems.getCurrentPage) %} class="active" {% endif %}>
-                                    <a href="{{ url(location, {"page": i }) }}">{{ i }}</a>
-                                </li>
-                            {% endfor %}
-                            {% if next_page > 0 %}
-                                <li>
-                                    <a href="{{ url(location, {"page": paginatedItems.getNextPage }) }}" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            {% endif %}
-                        </ul>
-                    </nav>
-                {% else %}
-                    <nav style="text-align: center">
-                        &nbsp;<br/>&nbsp;
-                    </nav>
-                {% endif %}
-            {% endif %}
+    <div class="open-wide-publish-agenda agenda">
+        <div class="container-fluid">
+            <div class="row page-title">
+                <h1>{{ ez_render_field( content, 'name' ) }}</h1>
+            </div>
+            <div class="row display-type-choice">
+                <div class="text-right">
+                    <div class="btn-group" role="group" aria-label="{{ 'open_wide_publish_agenda.display_type'|trans() }}">
+                        <a href="{{ url( location, {'agendaDispayType': 'calendar'} ) }}" class="btn btn-default {{ agendaDispayType == 'calendar' ? 'active' : '' }}">{{ 'open_wide_publish_agenda.calendar'|trans() }}</a>
+                        <a href="{{ url( location, {'agendaDispayType': 'list'} ) }}" class="btn btn-default {{ agendaDispayType == 'list' ? 'active' : '' }}">{{ 'open_wide_publish_agenda.list'|trans() }}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row display-type-{{ agendaDispayType }}">
+                {% include 'OpenWidePublishAgendaBundle:' ~ agendaDispayType ~':main_area.html.twig' %}
+            </div>
+            <div class="display-type-liste">
+            </div>
+            <input type="hidden" name="locationId" id="locationId" value="{{location.id}}">
         </div>
+        {% include 'OpenWidePublishAgendaBundle:' ~ agendaDispayType ~':extra_area.html.twig' %}
     </div>
 {% endblock %}
