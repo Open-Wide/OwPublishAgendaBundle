@@ -33,14 +33,14 @@ ezpublish:
                         match:
                             Identifier\ContentType: agenda_schedule  
 
-                bloc:
+                calendar:
                     agenda_folder:
-                        template: OpenWidePublishAgendaBundle:LocationView/bloc:agenda_folder.html.twig
+                        template: OpenWidePublishAgendaBundle:LocationView/calendar:agenda_folder.html.twig
                         controller: "open_wide_publish_agenda.controller.agenda_folder.view:viewLocation"
                         match:
                             Identifier\ContentType: agenda_folder
                     agenda:
-                        template: OpenWidePublishAgendaBundle:LocationView/bloc:agenda.html.twig
+                        template: OpenWidePublishAgendaBundle:LocationView/calendar:agenda.html.twig
                         controller: "open_wide_publish_agenda.controller.agenda.view:viewLocation"
                         match:
                             Identifier\ContentType: agenda

@@ -12,8 +12,8 @@ class AgendaFolderViewController extends ViewController
             case 'full' :
                 $params += $this->getViewFullParams( $location );
                 break;
-            case 'bloc' :
-                $params += array( 'agendaLocationIdList' => $this->container->get( 'open_wide_publish_agenda.agenda_folder_content_repository' )->getAgendaLocationIdList( $location ) );
+            case 'calendar' :
+                $params += $this->getViewCalendarParams( $location );
                 break;
         }
 
@@ -36,6 +36,12 @@ class AgendaFolderViewController extends ViewController
             $params['agendaLocationIdList'] = $this->container->get( 'open_wide_publish_agenda.agenda_folder_content_repository' )->getAgendaLocationIdList( $location );
         }
         return $params;
+    }
+
+    protected function getViewCalendarParams( $location )
+    {
+
+        return array( 'agendaLocationIdList' => $this->container->get( 'open_wide_publish_agenda.agenda_folder_content_repository' )->getAgendaLocationIdList( $location ) );
     }
 
 }

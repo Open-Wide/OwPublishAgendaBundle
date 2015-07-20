@@ -153,59 +153,6 @@ Installation
     
         $ php ezpublish/console assetic:dump web
 
-12. Configure yours views in ``ezpublish/config/ezpublish.yml``:
-
-.. code-block:: yaml
-
-    ezpublish:
-        system:
-            your-siteaccess:
-                location_view:
-                    agenda_folder:
-                        template: OpenWidePublishAgendaBundle:full:agenda_folder.html.twig
-                        controller: "open_wide_publish_agenda.controller.agenda_folder.view:viewLocation"
-                        match:
-                            Identifier\ContentType: agenda_folder                                 
-
-                    agenda_event:
-                        template: OpenWidePublishAgendaBundle:full:agenda_event.html.twig
-                        controller: "open_wide_publish_agenda.controller.agenda_event.view:viewLocation"
-                        match:
-                            Identifier\ContentType: agenda_event
-
-                    agenda:
-                        template: OpenWidePublishAgendaBundle:full:agenda.html.twig
-                        controller: "open_wide_publish_agenda.controller.agenda.view:viewLocation"
-                        match:
-                            Identifier\ContentType: agenda
-                line:
-                    agenda_event:
-                        template: OpenWidePublishAgendaBundle:line:agenda_event.html.twig
-                        controller: "open_wide_publish_agenda.controller.agenda_event.view:viewLocation"
-                        match:
-                            Identifier\ContentType: agenda_event             
-
-                    agenda_schedule:
-                        template: OpenWidePublishAgendaBundle:line:agenda_schedule.html.twig
-                        controller: "open_wide_publish_agenda.controller.agenda_schedule.view:viewLocation"
-                        match:
-                            Identifier\ContentType: agenda_schedule  
-                bloc:
-                    agenda_folder:
-                        template: OpenWidePublishAgendaBundle:bloc:agenda_folder.html.twig
-                        controller: "open_wide_publish_agenda.controller.agenda_folder.view:viewLocation"
-                        match:
-                            Identifier\ContentType: agenda_folder                                
-            content_view:
-                embed_agenda:
-                    agenda_schedule:
-                        template: OpenWidePublishAgendaBundle:content_view/embed:agenda_schedule.html.twig
-                        controller: "open_wide_publish_agenda.controller.agenda_schedule.view:viewContent"
-                        match:
-                            Identifier\ContentType: agenda_schedule
-
-
-
 Usage
 =====
 
