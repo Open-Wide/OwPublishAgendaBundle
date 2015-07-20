@@ -1,0 +1,7 @@
+en:
+    open_wide_publish_agenda:
+        display_type: "Display type"
+        calendar: "Calendar"
+        list: "List"
+        close: "Close"
+        event_page: "Event page"

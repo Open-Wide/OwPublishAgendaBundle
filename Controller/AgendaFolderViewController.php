@@ -10,32 +10,30 @@ class AgendaFolderViewController extends ViewController
         switch( $viewType )
         {
             case 'full' :
+                $params += array( 'type' => 'normal' );
+                $params += $this->getViewFullParams( $location );
+                break;
             case 'bloc' :
-                $params += $this->getViewFullParams( $location, $viewType );
+                $params += array( 'type' => 'mini' );
                 break;
         }
 
         return parent::renderLocation( $location, $viewType, $layout, $params );
     }
 
-    protected function getViewFullParams( $location, $viewType )
+    protected function getViewFullParams( $location )
     {
-        $repository = $this->getRepository();
-        $contentService = $repository->getContentService();
-
-        $content = $contentService->loadContentByContentInfo( $location->getContentInfo() );
-
+        $request = $this->getRequest();
+        $displayType = $request->query->get( 'agendaDispayType', 'calendar' );
         $params = array(
-            'location' => $location,
-            'content' => $content,
-            'type' => ($viewType == 'full' ? 'normal' : 'mini')
+            'agendaDispayType' => $displayType
         );
-
-        $agenda_scheduleList = $this->getLegacyContentService()->getNodeList( array(
-            'ParentNodeId' => $location->id,
-            'ContentTypeIdentifier' => 'agenda_schedule'
-                ) );
-
+        if( $displayType == 'list' )
+        {
+            $currentPage = $request->query->get( 'page', 1 );
+            $result = $this->container->get( 'open_wide_publish_agenda.agenda_folder_content_repository' )->getPaginatedAgendaEventList( $location, $params, $currentPage );
+            $params['paginatedItems'] = $result;
+        }
         return $params;
     }
 

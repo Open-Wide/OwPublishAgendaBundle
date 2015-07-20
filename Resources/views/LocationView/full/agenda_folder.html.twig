@@ -1,28 +1,26 @@
 {% extends noLayout ? viewbaseLayout : "::pagelayout.html.twig" %}
 
 {% block content %}
-    {% include 'OpenWidePublishAgendaBundle::page_styles.html.twig' %}
-    {% include 'OpenWidePublishAgendaBundle::page_scripts.html.twig' %}
-
-    <div class="container-fluid">
-        <h1>{{ ez_render_field( content, 'name' ) }}</h1>
-        <div id='calendar'></div>
-        <input type="hidden" name="locationId" id="locationId" value="{{location.id}}">
-    </div>
-
-    <div id="fullCalModal" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                    <h4 id="modalTitle" class="modal-title"></h4>
-                </div>
-                <div id="modalBody" class="modal-body"></div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button class="btn btn-primary"><a id="eventUrl" target="_blank">Event Page</a></button>
+    <div class="open-wide-publish-agenda agenda-folder">
+        <div class="container-fluid">
+            <div class="row page-title">
+                <h1>{{ ez_render_field( content, 'name' ) }}</h1>
+            </div>
+            <div class="row display-type-choice">
+                <div class="text-right">
+                    <div class="btn-group" role="group" aria-label="{{ 'open_wide_publish_agenda.display_type'|trans() }}">
+                        <a href="{{ url( location, {'agendaDispayType': 'calendar'} ) }}" class="btn btn-default {{ agendaDispayType == 'calendar' ? 'active' : '' }}">{{ 'open_wide_publish_agenda.calendar'|trans() }}</a>
+                        <a href="{{ url( location, {'agendaDispayType': 'list'} ) }}" class="btn btn-default {{ agendaDispayType == 'list' ? 'active' : '' }}">{{ 'open_wide_publish_agenda.list'|trans() }}</a>
+                    </div>
                 </div>
             </div>
+            <div class="row display-type-{{ agendaDispayType }}">
+                {% include 'OpenWidePublishAgendaBundle:' ~ agendaDispayType ~':main_area.html.twig' %}
+            </div>
+            <div class="display-type-liste">
+            </div>
+            <input type="hidden" name="locationId" id="locationId" value="{{location.id}}">
         </div>
+        {% include 'OpenWidePublishAgendaBundle:' ~ agendaDispayType ~':extra_area.html.twig' %}
     </div>
 {% endblock %}

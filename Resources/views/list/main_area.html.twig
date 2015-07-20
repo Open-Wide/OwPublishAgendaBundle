@@ -1,0 +1,44 @@
+{% include 'OpenWidePublishAgendaBundle:calendar:page_styles.html.twig' %}
+{% include 'OpenWidePublishAgendaBundle:calendar:page_scripts.html.twig' %}
+
+{% if paginatedItems.getNbResults %}
+    {% for result in paginatedItems.getCurrentPageResults %}
+        <div class="agenda-event-list ">        
+            {{ render( controller( "ez_content:viewLocation", {
+                                "locationId": result.id,
+                                "viewType": "line"
+                            } ) )
+            }}
+        </div>                    
+    {% endfor %}
+
+    {% if paginatedItems.haveToPaginate %}
+        <nav style="text-align: center">
+            <ul class="pagination">
+                {% if paginatedItems.hasPreviousPage %}
+                    <li>
+                        <a href="{{ url(location, {"page": paginatedItems.getPreviousPage }) }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                {% endif %}
+                {% for i in 1..paginatedItems.getNbPages %}
+                    <li {% if (i == paginatedItems.getCurrentPage) %} class="active" {% endif %}>
+                        <a href="{{ url(location, {"page": i }) }}">{{ i }}</a>
+                    </li>
+                {% endfor %}
+                {% if next_page > 0 %}
+                    <li>
+                        <a href="{{ url(location, {"page": paginatedItems.getNextPage }) }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% else %}
+        <nav style="text-align: center">
+            &nbsp;<br/>&nbsp;
+        </nav>
+    {% endif %}
+{% endif %}

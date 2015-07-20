@@ -23,18 +23,6 @@ class AgendaContentRepository extends ContentRepository
      */
     public $adapter;
 
-    /**
-     * @var int
-     */
-    var $maxPerPage = 10;
-
-    public function __construct( $container )
-    {
-        parent::__construct( $container );
-
-        $this->maxPerPage = $this->getConfigParameter( 'open_wide_publish_agenda.paginate.max_per_page' );
-    }
-
     public function getAgendaEventList( Location $location, $params = array() )
     {
         $criteria = $this->getAgendaEventListCriteria( $location, $params );

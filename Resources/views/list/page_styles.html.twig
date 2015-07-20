@@ -1,0 +1,18 @@
+{% stylesheets filter='cssrewrite'
+    '@OpenWidePublishAgendaBundle/Resources/public/css/bootstrap.min.css'
+    '@OpenWidePublishAgendaBundle/Resources/public/css/bootstrap-theme.min.css'
+%}
+<link rel="stylesheet" type="text/css" href="{{ asset_url }}" media="screen" />
+{% endstylesheets %}
+
+{% stylesheets filter='cssrewrite'
+    '@OpenWidePublishAgendaBundle/Resources/public/css/open_wide_publish_agenda.css'
+%}
+<link rel="stylesheet" type="text/css" href="{{ asset_url }}" media="screen" />
+{% endstylesheets %}
+
+<style type="text/css">
+    @import url("{{ asset('extension/ezwt/design/standard/stylesheets/websitetoolbar.css') }}");
+</style>
+
+{{ ez_legacy_render_css() }}

@@ -26,11 +26,8 @@ class AgendaViewController extends ViewController
         );
 
         $currentPage = $request->query->get( 'page', 1 );
-
         $result = $this->container->get( 'open_wide_publish_agenda.agenda_content_repository' )->getPaginatedAgendaEventList( $location, $params, $currentPage );
-
         $params['paginatedItems'] = $result;
-        $params['items'] = $this->container->get( 'open_wide_publish_agenda.agenda_content_repository' )->getAgendaEventList( $location );
 
         return $params;
     }

@@ -16,8 +16,8 @@
     {% stylesheets filter='cssrewrite'
         '@OpenWidePublishAgendaBundle/Resources/public/css/fullcalendar_mini.css'
     %}
-    <link rel="stylesheet" type="text/css" href="{{ asset_url }}" media="screen" />
-    {% endstylesheets %}
+<link rel="stylesheet" type="text/css" href="{{ asset_url }}" media="screen" />
+{% endstylesheets %}
 {% else %}
     {% stylesheets filter='cssrewrite'
         '@OpenWidePublishAgendaBundle/Resources/public/css/fullcalendar.css'
@@ -25,6 +25,12 @@
     <link rel="stylesheet" type="text/css" href="{{ asset_url }}" media="screen" />
     {% endstylesheets %}
 {% endif %}
+
+{% stylesheets filter='cssrewrite'
+    '@OpenWidePublishAgendaBundle/Resources/public/css/open_wide_publish_agenda.css'
+%}
+<link rel="stylesheet" type="text/css" href="{{ asset_url }}" media="screen" />
+{% endstylesheets %}
 
 <style type="text/css">
     @import url("{{ asset('extension/ezwt/design/standard/stylesheets/websitetoolbar.css') }}");

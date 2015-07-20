@@ -25,10 +25,17 @@ class ContentRepository extends ContainerAware
      */
     protected $container;
 
+    /**
+     * @var int
+     */
+    var $maxPerPage = 10;
+
     public function __construct( $container )
     {
         $this->container = $container;
         $this->repository = $this->container->get( 'ezpublish.api.repository' );
+        
+        $this->maxPerPage = $this->getConfigParameter( 'open_wide_publish_agenda.paginate.max_per_page' );
     }
 
     /**
