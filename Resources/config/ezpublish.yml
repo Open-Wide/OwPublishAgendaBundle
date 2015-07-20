@@ -38,19 +38,9 @@ ezpublish:
                         template: OpenWidePublishAgendaBundle:LocationView/bloc:agenda_folder.html.twig
                         controller: "open_wide_publish_agenda.controller.agenda_folder.view:viewLocation"
                         match:
-                            Identifier\ContentType: agenda_folder                                
-
-            content_view:
-                embed_agenda:
-                    agenda_schedule:
-                        template: OpenWidePublishAgendaBundle:ContentView/embed_agenda:agenda_schedule.html.twig
-                        controller: "open_wide_publish_agenda.controller.agenda_schedule.view:viewContent"
+                            Identifier\ContentType: agenda_folder
+                    agenda:
+                        template: OpenWidePublishAgendaBundle:LocationView/bloc:agenda.html.twig
+                        controller: "open_wide_publish_agenda.controller.agenda_folder.view:viewLocation"
                         match:
-                            Identifier\ContentType: agenda_schedule
-
-            image_variations:
-                agenda_event_embed:
-                    reference: original
-                    filters:
-                        - { name: geometry/scalewidthdownonly, params: [220] }
-                        - { name: geometry/crop, params: [220, 165, 0, 0] }
+                            Identifier\ContentType: agenda

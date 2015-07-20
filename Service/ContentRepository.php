@@ -223,30 +223,19 @@ class ContentRepository extends ContainerAware
     }
 
     /**
-     * Renvoie l'objet de l'image correspondant au contentId
-     * @param type $contentId
-     * @return type
+     * Return the Content object with the Id $contentId
+     * @param int $contentId
+     * @return Content
      */
-    public function getImageByContentId( $contentId )
+    public function getContentByContentId( $contentId )
     {
-        $contentImage = null;
+        $content = null;
         if( $contentId )
         {
-            $image_info = $this->loadService( 'Content' )->loadContentInfo( $contentId );
-            $contentImage = $this->loadService( 'Content' )->loadContentByContentInfo( $image_info );
+            $contentInfo = $this->repository->getContentService()->loadContentInfo( $contentId );
+            $content = $this->repository->getContentService()->loadContentByContentInfo( $contentInfo );
         }
-        return $contentImage;
-    }
-
-    public function loadService( $service )
-    {
-        $attribut = $service . 'Service';
-        $function = 'get' . $attribut;
-        if( !$this->{$attribut} )
-        {
-            $this->{$attribut} = call_user_func( array( $this->repository, $function ) );
-        }
-        return $this->{$attribut};
+        return $content;
     }
 
     /**

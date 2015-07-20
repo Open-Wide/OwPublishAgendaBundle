@@ -441,13 +441,34 @@ class ViewController extends Controller
     }
 
     /**
-     * Return the legacy content service
-     *
-     * return OpenWide\Publish\AgendaBundle\Helper\FetchByLegacy
+     * Get the translated field from a content object
+     * 
+     * @param \eZ\Publish\Core\Repository\Values\Content\Content $content
+     * @param string $fieldIdentifier
+     * @return \eZ\Publish\API\Repository\Values\Content\Field
      */
-    public function getAgendaContentService()
+    protected function getTranslatedContentFieldValue( $content, $fieldIdentifier )
     {
-        return $this->container->get( 'open_wide_publish_agenda.content_repository' );
+        $translationHelper = $this->container->get( 'ezpublish.translation_helper' );
+        $field = $translationHelper->getTranslatedField( $content, $fieldIdentifier );
+        if( $field instanceof Field )
+        {
+            return $field->value;
+        }
+        return false;
+    }
+
+    /**
+     * Get the translated field from a content object
+     * 
+     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
+     * @param string $fieldIdentifier
+     * @return \eZ\Publish\API\Repository\Values\Content\Field
+     */
+    protected function getTranslatedLocationFieldValue( $location, $fieldIdentifier )
+    {
+        $content = $this->getRepository()->getContentService()->loadContentByContentInfo( $location->getContentInfo() );
+        return $this->getTranslatedContentFieldValue( $content, $fieldIdentifier );
     }
 
 }

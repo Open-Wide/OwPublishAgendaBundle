@@ -15,11 +15,12 @@ class AgendaScheduleContentRepository extends ContentRepository
         $startDate = $this->getTranslatedLocationFieldValue( $location, 'date_start' )->date;
         $startTime = $this->getTranslatedLocationFieldValue( $location, 'hour_start' )->time;
         $endDate = $this->getTranslatedLocationFieldValue( $location, 'date_end' )->date;
+        $endTime = (string) $this->getTranslatedLocationFieldValue( $location, 'hour_end' )->time;
         if( !$endDate )
         {
             $endDate = clone $startDate;
+            $endDate->add( new \DateInterval( 'P1D' ) );
         }
-        $endTime = (string) $this->getTranslatedLocationFieldValue( $location, 'hour_end' )->time;
         $interval = new \DateInterval( 'P1D' );
         $dateRange = new \DatePeriod( $startDate, $interval, $endDate );
         foreach( $dateRange as $periodDate )

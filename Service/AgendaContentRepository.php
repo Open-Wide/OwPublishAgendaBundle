@@ -23,6 +23,44 @@ class AgendaContentRepository extends ContentRepository
      */
     public $adapter;
 
+    public function getJsonData( Location $location, $params = array() )
+    {
+        $agendaEventList = $this->getAgendaEventList( $location, $params );
+        $contentJson = array();
+        foreach( $agendaEventList as $agendaEvent )
+        {
+            $agendaScheduleList = $this->getAgendaEventContentRepository()->getAgendaScheduleList( $agendaEvent, $params );
+            foreach( $agendaScheduleList as $agendaSchedule )
+            {
+                $periodList = $this->getAgendaScheduleContentRepository()->getPeriodList( $agendaSchedule );
+                if( !$periodList )
+                {
+                    continue;
+                }
+                $contentJsonItem = array(
+                    'title' => (string) $this->getTranslatedLocationName( $agendaEvent ),
+                    'start' => $this->getFormattedDate( $agendaSchedule, 'start' ),
+                    'url' => $this->getLocationUrl( $agendaEvent ),
+                );
+                $description = (string) $this->getTranslatedLocationFieldValue( $agendaEvent, 'subtitle' );
+                if( empty( $description ) )
+                {
+                    $contentJsonItem['description'] = $contentJsonItem['title'];
+                } else
+                {
+                    $contentJsonItem['description'] = $description;
+                }
+                foreach( $periodList as $period )
+                {
+                    $contentJsonItem['start'] = $period['start']->format( "Y-m-d" ) . 'T' . $period['start']->format( "H:i:s" );
+                    $contentJsonItem['end'] = $period['end']->format( "Y-m-dTH:i:s" ) . 'T' . $period['end']->format( "H:i:s" );
+                    $contentJson[] = $contentJsonItem;
+                }
+            }
+        }
+        return $contentJson;
+    }
+
     public function getAgendaEventList( Location $location, $params = array() )
     {
         $criteria = $this->getAgendaEventListCriteria( $location, $params );

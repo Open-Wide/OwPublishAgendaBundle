@@ -1,4 +1,4 @@
-open_wide_publish_agenda_list_json:
+open_wide_publish_agenda_event_list_json:
     path:     /agenda/list/events.json
-    defaults: { _controller: OpenWidePublishAgendaBundle:Json:eventsListJSON, _format: json }
+    defaults: { _controller: open_wide_publish_agenda.controller.json:eventsListJSONAction, _format: json }
     requirements: { _format: (xml|json), _method: GET }

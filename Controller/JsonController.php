@@ -16,14 +16,28 @@ class JsonController extends Controller
         $repository = $this->getRepository();
         $request = $this->getRequest();
 
-        $agendaLocationId = $request->query->get( 'locationId', $this->getConfigResolver('content.tree_root.location_id') );
-        $agendaLocation = $repository->getLocationService()->loadLocation( $agendaLocationId );
+        $locationId = $request->query->get( 'locationId', $this->getConfigResolver( 'content.tree_root.location_id' ) );
+        $location = $repository->getLocationService()->loadLocation( $locationId );
+
+        $contentTypeService = $repository->getContentTypeService();
+        $contentType = $contentTypeService->loadContentType( $location->getContentInfo()->contentTypeId );
+
         $params = array(
             'start' => $request->query->get( 'start', false ),
             'end' => $request->query->get( 'end', false )
         );
 
-        $jsonData = $this->get('open_wide_publish_agenda.agenda_folder_content_repository')->getJsonData( $agendaLocation, $params );
+        switch( $contentType->identifier )
+        {
+            case 'agenda_folder':
+                $jsonData = $this->get( 'open_wide_publish_agenda.agenda_folder_content_repository' )->getJsonData( $location, $params );
+                break;
+            case 'agenda':
+                $jsonData = $this->get( 'open_wide_publish_agenda.agenda_content_repository' )->getJsonData( $location, $params );
+                break;
+            default:
+                $jsonData = array();
+        }
 
         $response = new Response();
         $response->headers->set( 'Content-Type', 'application/json' );

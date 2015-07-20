@@ -4,36 +4,41 @@
     <div class="row">
         <div class="col-md-12">
             <div class="content-view-full class-event">
-                <h2>{{ ez_render_field( content, 'title' ) }}</h2>
+                <h2>{{ ez_render_field( content, 'name' ) }}</h2>
 
-                {% if image %}
-                    {{ ez_render_field( image, "image", {parameters:{ alias:'agenda_event_embed', no_tag: true} } ) }}
+                {% if contentImage %}
+                    {{ ez_render_field( contentImage, "image", {parameters:{ alias:'medium', no_tag: true} } ) }}
                 {% endif %} 
 
                 {% if not ez_is_field_empty( content, 'description' ) %}
                     {{ ez_render_field( content, 'description' ) }}
                 {% endif %}
 
-                {% if agenda_schedule|length > 0 %}
-                    {% for date in agenda_schedule %}
-                        {{ render( controller( "ez_content:viewContent", {
-                    "contentId": date,
-                    "viewType": "embed_agenda"
-                } ) )
-                        }}
-                    {% endfor %}
-                {% endif %}
+                {% if agendaScheduleList|length > 0 %}
+                    <div class="panel panel-default">
+                        <div class="panel-heading">{{ 'open_wide_publish_agenda.schedule'|trans() }}</div>
+                        <div class="panel-body"></div>
+                        <ul>
+                            {% for agendaSchedule in agendaScheduleList %}
+                                <li>
+                                    {{ render( controller( "ez_content:viewLocation", {
+                                            "locationId": agendaSchedule.id,
+                                            "viewType": "line"
+                                        } ) )
+                                    }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
 
-                {% if list == 0 %}
-                    {% if location.parentLocationId is defined %}
-                        <a class="btn btn-default" href="{{ path( "ez_urlalias", {"locationId": location.parentLocationId} ) }}">
-                            {{ "Return to list"|trans }}
-                        </a>
-                    {% endif %}
-                {% else%}
-                    <a href="{{ path( "ez_urlalias", {"locationId": list} ) }}">{{ "Return to list"|trans }}</a>
-                {% endif %}                
-            </div>
+            {% if location.parentLocationId is defined %}
+                <a class="btn btn-default" href="{{ path( "ez_urlalias", {"locationId": location.parentLocationId} ) }}">
+                    {{ "Return to list"|trans }}
+                </a>
+            {% endif %}         
         </div>
     </div>
+</div>
 {% endblock %}

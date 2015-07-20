@@ -2,7 +2,8 @@ parameters:
     open_wide_publish_agenda.controller.agenda_folder.view.class: OpenWide\Publish\AgendaBundle\Controller\AgendaFolderViewController
     open_wide_publish_agenda.controller.agenda.view.class:  OpenWide\Publish\AgendaBundle\Controller\AgendaViewController
     open_wide_publish_agenda.controller.agenda_event.view.class: OpenWide\Publish\AgendaBundle\Controller\AgendaEventViewController    
-    open_wide_publish_agenda.controller.agenda_schedule.view.class:   OpenWide\Publish\AgendaBundle\Controller\AgendaScheduleViewController    
+    open_wide_publish_agenda.controller.agenda_schedule.view.class:   OpenWide\Publish\AgendaBundle\Controller\AgendaScheduleViewController
+    open_wide_publish_agenda.controller.json.view.class:   OpenWide\Publish\AgendaBundle\Controller\JsonController
 
 services:
     open_wide_publish_agenda.controller.agenda_folder.view:
@@ -31,4 +32,10 @@ services:
         arguments:
             - @ezpublish.view_manager
             - @security.context
-        parent: ezpublish.controller.content.view      
+        parent: ezpublish.controller.content.view
+
+    open_wide_publish_agenda.controller.json:
+        class: %open_wide_publish_agenda.controller.json.view.class%
+        arguments: [@service_container]
+        calls:
+            - [ setContainer,[ @service_container ] ]

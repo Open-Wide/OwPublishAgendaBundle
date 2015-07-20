@@ -109,6 +109,23 @@ Installation
         # Assetic Configuration
         assetic:
             bundles:        [ OtherBundle, OpenWidePublishAgendaBundle ]
+            ...
+            assets:
+                glyphicons-halflings-regular-eot:
+                    inputs: '@OpenWidePublishAgendaBundle/Resources/public/fonts/glyphicons-halflings-regular.eot'
+                    output: 'fonts/glyphicons-halflings-regular.otf'
+                glyphicons-halflings-regular-ttf:
+                    inputs: '@OpenWidePublishAgendaBundle/Resources/public/fonts/glyphicons-halflings-regular.ttf'
+                    output: 'fonts/glyphicons-halflings-regular.ttf'
+                glyphicons-halflings-regular-woff2:
+                    inputs: '@OpenWidePublishAgendaBundle/Resources/public/fonts/glyphicons-halflings-regular.woff2'
+                    output: 'fonts/glyphicons-halflings-regular.woff2'
+                glyphicons-halflings-regular-svg:
+                    inputs: '@OpenWidePublishAgendaBundle/Resources/public/fonts/glyphicons-halflings-regular.svg'
+                    output: 'fonts/glyphicons-halflings-regular.svg'
+                glyphicons-halflings-regular-woff:
+                    inputs: '@OpenWidePublishAgendaBundle/Resources/public/fonts/glyphicons-halflings-regular.woff'
+                    output: 'fonts/glyphicons-halflings-regular.woff'
 
 
 9. Import ezpublish.yml configuration in ``ezpublish/config/ezpublish.yml``:
