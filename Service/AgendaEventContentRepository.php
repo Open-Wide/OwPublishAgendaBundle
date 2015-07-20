@@ -17,7 +17,9 @@ class AgendaEventContentRepository extends ContentRepository
         $criteria = $this->getAgendaScheduleListCriteria( $location, $params );
         $sortClause = array(
             new SortClause\Field( static::CHILDREN_TYPE, 'date_start', Query::SORT_ASC ),
-            new SortClause\Field( static::CHILDREN_TYPE, 'date_end', Query::SORT_ASC )
+            new SortClause\Field( static::CHILDREN_TYPE, 'hour_start', Query::SORT_ASC ),
+            new SortClause\Field( static::CHILDREN_TYPE, 'date_end', Query::SORT_ASC ),
+            new SortClause\Field( static::CHILDREN_TYPE, 'hour_end', Query::SORT_ASC )
         );
         return $this->getLocationSearchResult( $criteria, $sortClause );
     }
