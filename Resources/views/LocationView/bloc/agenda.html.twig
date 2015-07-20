@@ -1,6 +1,6 @@
 <!-- START BLOCK EVENT FOLDER -->
 {% include 'OpenWidePublishAgendaBundle:calendar:page_styles.html.twig' %}
 {% include 'OpenWidePublishAgendaBundle:calendar:page_scripts.html.twig' %}
-<div class="fullcalendar-calendar-mini" data-event-url="{{ path('open_wide_publish_agenda_event_list_json', { 'locationId': location.id } ) }}"></div>
+<div class="fullcalendar-calendar-mini fullcalendar-calendar-agenda" data-event-url="{{ path('open_wide_publish_agenda_event_list_json', { 'locationId': location.id } ) }}"></div>
 {% include 'OpenWidePublishAgendaBundle:calendar:extra_area.html.twig' %}
 <!-- END BLOCK EVENT FOLDER -->

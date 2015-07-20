@@ -1,6 +1,39 @@
+.fullcalendar-calendar,.fullcalendar-calendar-mini {
+    clear: both;
+    font-size: 10px;
+    margin: 0 auto;
+    width: 100%
+}
+
 .fc-toolbar h2:first-letter {
     text-transform: uppercase;
 }
 .fc-row.fc-rigid {
     overflow: inherit;
+}
+
+.fullcalendar-calendar-mini .fc-toolbar h2 {
+    font-size: 1.8em;
+    white-space: normal !important;
+}
+.fullcalendar-calendar-mini .fc-toolbar h2:first-letter {
+    text-transform: uppercase;
+}
+.fullcalendar-calendar-mini .fc-view-month .fc-event, .fc-view-agendaWeek .fc-event {
+    font-size: 0;
+    overflow: hidden;
+    height: 2px;
+}
+.fullcalendar-calendar-mini .fc-view-agendaWeek .fc-event-vert {
+    font-size: 0;
+    overflow: hidden;
+    width: 2px !important;
+}
+.fullcalendar-calendar-mini .fc-agenda-axis {
+    width: 20px !important;
+    font-size: .7em;
+}
+
+.fullcalendar-calendar-mini .fc-button-content {
+    padding: 0;
 }

@@ -2,21 +2,26 @@
 {% include 'OpenWidePublishAgendaBundle:list:page_scripts.html.twig' %}
 
 {% if paginatedItems.getNbResults %}
-    {{ render( controller( "ez_content:viewLocation", {
+    <div class="row">
+        <div class="col-md-4">
+            {{ render( controller( "ez_content:viewLocation", {
             "locationId": location.id,
             "viewType": "bloc"
         } ) )
-    }}
-    {% for result in paginatedItems.getCurrentPageResults %}
-        <div class="agenda-event-list ">        
-            {{ render( controller( "ez_content:viewLocation", {
+            }}
+        </div>
+        <div class="col-md-8">
+            {% for result in paginatedItems.getCurrentPageResults %}
+                <div class="agenda-event-list ">        
+                    {{ render( controller( "ez_content:viewLocation", {
                     "locationId": result.id,
                     "viewType": "line"
                 } ) )
-            }}
-        </div>                    
-    {% endfor %}
-
+                    }}
+                </div>                    
+            {% endfor %}
+        </div>
+    </div>
     {% if paginatedItems.haveToPaginate %}
         <nav style="text-align: center">
             <ul class="pagination">

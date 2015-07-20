@@ -10,11 +10,10 @@ class AgendaFolderViewController extends ViewController
         switch( $viewType )
         {
             case 'full' :
-                $params += array( 'type' => 'normal' );
                 $params += $this->getViewFullParams( $location );
                 break;
             case 'bloc' :
-                $params += array( 'type' => 'mini' );
+                $params += array( 'agendaLocationIdList' => $this->container->get( 'open_wide_publish_agenda.agenda_folder_content_repository' )->getAgendaLocationIdList( $location ) );
                 break;
         }
 
@@ -32,7 +31,8 @@ class AgendaFolderViewController extends ViewController
         {
             $currentPage = $request->query->get( 'page', 1 );
             $params['paginatedItems'] = $this->container->get( 'open_wide_publish_agenda.agenda_folder_content_repository' )->getPaginatedAgendaEventList( $location, $params, $currentPage );
-        } else {
+        } else
+        {
             $params['agendaLocationIdList'] = $this->container->get( 'open_wide_publish_agenda.agenda_folder_content_repository' )->getAgendaLocationIdList( $location );
         }
         return $params;

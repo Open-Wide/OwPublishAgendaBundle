@@ -12,20 +12,11 @@
     %}
     <link rel="stylesheet" type="text/css" href="{{ asset_url }}" media="print" />
     {% endstylesheets %}
-
-    {% if type == 'mini' %}
-        {% stylesheets filter='cssrewrite'
-        '@OpenWidePublishAgendaBundle/Resources/public/css/fullcalendar_mini.css'
-        %}
-        <link rel="stylesheet" type="text/css" href="{{ asset_url }}" media="screen" />
-        {% endstylesheets %}
-    {% else %}
-        {% stylesheets filter='cssrewrite'
+    {% stylesheets filter='cssrewrite'
         '@OpenWidePublishAgendaBundle/Resources/public/css/fullcalendar.css'
-        %}
-        <link rel="stylesheet" type="text/css" href="{{ asset_url }}" media="screen" />
-        {% endstylesheets %}
-    {% endif %}
+    %}
+    <link rel="stylesheet" type="text/css" href="{{ asset_url }}" media="screen" />
+    {% endstylesheets %}
 
     {% stylesheets filter='cssrewrite'
         '@OpenWidePublishAgendaBundle/Resources/public/css/open_wide_publish_agenda.css'

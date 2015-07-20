@@ -41,6 +41,6 @@ ezpublish:
                             Identifier\ContentType: agenda_folder
                     agenda:
                         template: OpenWidePublishAgendaBundle:LocationView/bloc:agenda.html.twig
-                        controller: "open_wide_publish_agenda.controller.agenda_folder.view:viewLocation"
+                        controller: "open_wide_publish_agenda.controller.agenda.view:viewLocation"
                         match:
                             Identifier\ContentType: agenda
