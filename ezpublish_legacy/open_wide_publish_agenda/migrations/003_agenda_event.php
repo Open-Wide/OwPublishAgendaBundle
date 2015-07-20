@@ -65,6 +65,7 @@ class OWPAgenda_003_AgendaEvent
         $migration->addAttribute( 'publish_start', array(
             'data_type_string' => 'ezdatetime',
             'is_required' => TRUE,
+            'can_translate' => FALSE,
             'name' => array(
                 'eng-GB' => 'Publish date',
                 'fre-FR' => 'Date de publication',
@@ -74,6 +75,7 @@ class OWPAgenda_003_AgendaEvent
         ) );
         $migration->addAttribute( 'publish_end', array(
             'data_type_string' => 'ezdatetime',
+            'can_translate' => FALSE,
             'name' => array(
                 'eng-GB' => 'Unpublish date',
                 'fre-FR' => 'Date de dépublication',

@@ -3,6 +3,8 @@
 namespace OpenWide\Publish\AgendaBundle\Service;
 
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
+use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
+use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\Core\Repository\Values\Content\Location;
 
 class AgendaEventContentRepository extends ContentRepository
@@ -13,7 +15,11 @@ class AgendaEventContentRepository extends ContentRepository
     public function getAgendaScheduleList( Location $location, $params = array() )
     {
         $criteria = $this->getAgendaScheduleListCriteria( $location, $params );
-        return $this->getLocationSearchResult( $criteria );
+        $sortClause = array(
+            new SortClause\Field( static::CHILDREN_TYPE, 'date_start', Query::SORT_ASC ),
+            new SortClause\Field( static::CHILDREN_TYPE, 'date_end', Query::SORT_ASC )
+        );
+        return $this->getLocationSearchResult( $criteria, $sortClause );
     }
 
     protected function getAgendaScheduleListCriteria( Location $location, $params = array() )

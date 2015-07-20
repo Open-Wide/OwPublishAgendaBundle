@@ -10,6 +10,7 @@ class OWPAgenda_004_AgendaSchedule
         $migration->createIfNotExists();
 
         $migration->contentobject_name = '<date_start> - <date_end>';
+        $migration->always_available = TRUE;
         $migration->name = array(
             'eng-GB' => 'Event schedule',
             'fre-FR' => 'Programmation d\'événement',
@@ -19,6 +20,7 @@ class OWPAgenda_004_AgendaSchedule
         $migration->addAttribute( 'date_start', array(
             'data_type_string' => 'ezdate',
             'is_required' => TRUE,
+            'can_translate' => FALSE,
             'name' => array(
                 'eng-GB' => 'Start date',
                 'fre-FR' => 'Date de début',
@@ -27,6 +29,7 @@ class OWPAgenda_004_AgendaSchedule
         ) );
         $migration->addAttribute( 'date_end', array(
             'data_type_string' => 'ezdate',
+            'can_translate' => FALSE,
             'name' => array(
                 'eng-GB' => 'End date',
                 'fre-FR' => 'Date de fin',
@@ -36,6 +39,7 @@ class OWPAgenda_004_AgendaSchedule
         $migration->addAttribute( 'hour_start', array(
             'data_type_string' => 'eztime',
             'is_required' => TRUE,
+            'can_translate' => FALSE,
             'is_searchable' => FALSE,
             'name' => array(
                 'eng-GB' => 'Start hour',
@@ -46,6 +50,7 @@ class OWPAgenda_004_AgendaSchedule
         $migration->addAttribute( 'hour_end', array(
             'data_type_string' => 'eztime',
             'is_required' => TRUE,
+            'can_translate' => FALSE,
             'is_searchable' => FALSE,
             'name' => array(
                 'eng-GB' => 'End hour',
@@ -56,6 +61,7 @@ class OWPAgenda_004_AgendaSchedule
         $migration->addAttribute( 'duration', array(
             'data_type_string' => 'eztime',
             'is_searchable' => FALSE,
+            'can_translate' => FALSE,
             'name' => array(
                 'eng-GB' => 'Duration',
                 'fre-FR' => 'Durée',
