@@ -1,7 +1,8 @@
 open_wide_publish_agenda:
     display_type: "Type d'affichage"
-    calendar: "Calendier"
+    calendar: "Calendrier"
     list: "Liste"
     close: "Fermer"
     event_page: "Plus d'information"
     schedule: "Programmation"
+    return_to_agenda: "Retouner à l'agenda"

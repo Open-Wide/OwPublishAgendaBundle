@@ -5,3 +5,4 @@ open_wide_publish_agenda:
     close: "Close"
     event_page: "Event page"
     schedule: "Schedule"
+    return_to_agenda: "Return to the aganda"
