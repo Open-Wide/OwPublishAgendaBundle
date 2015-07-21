@@ -30,18 +30,17 @@ class AgendaFolderViewController extends ViewController
         if( $displayType == 'list' )
         {
             $currentPage = $request->query->get( 'page', 1 );
-            $params['paginatedItems'] = $this->container->get( 'open_wide_publish_agenda.agenda_folder_content_repository' )->getPaginatedAgendaEventList( $location, $params, $currentPage );
+            $params['paginatedItems'] = $this->getAgendaFolderContentRepository()->getPaginatedAgendaEventList( $location, $params, $currentPage );
         } else
         {
-            $params['agendaLocationIdList'] = $this->container->get( 'open_wide_publish_agenda.agenda_folder_content_repository' )->getAgendaLocationIdList( $location );
+            $params['agendaLocationIdList'] = $this->getAgendaFolderContentRepository()->getAgendaLocationIdList( $location );
         }
         return $params;
     }
 
     protected function getViewCalendarParams( $location )
     {
-
-        return array( 'agendaLocationIdList' => $this->container->get( 'open_wide_publish_agenda.agenda_folder_content_repository' )->getAgendaLocationIdList( $location ) );
+        return array( 'agendaLocationIdList' => $this->getAgendaFolderContentRepository()->getAgendaLocationIdList( $location ) );
     }
 
 }

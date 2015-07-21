@@ -30,10 +30,10 @@ class JsonController extends Controller
         switch( $contentType->identifier )
         {
             case 'agenda_folder':
-                $jsonData = $this->get( 'open_wide_publish_agenda.agenda_folder_content_repository' )->getJsonData( $location, $params );
+                $jsonData = $this->getAgendaFolderContentRepository()->getJsonData( $location, $params );
                 break;
             case 'agenda':
-                $jsonData = $this->get( 'open_wide_publish_agenda.agenda_content_repository' )->getJsonData( $location, $params );
+                $jsonData = $this->getAgendaContentRepository()->getJsonData( $location, $params );
                 break;
             default:
                 $jsonData = array();
@@ -48,6 +48,24 @@ class JsonController extends Controller
 
 
         return $response;
+    }
+
+    /**
+     * 
+     * @return OpenWide\Publish\AgendaBundle\Service\AgendaFolderContentRepository
+     */
+    public function getAgendaFolderContentRepository()
+    {
+        return $this->get( 'open_wide_publish_agenda.agenda_folder_content_repository' );
+    }
+
+    /**
+     * 
+     * @return OpenWide\Publish\AgendaBundle\Service\AgendaContentRepository
+     */
+    public function getAgendaContentRepository()
+    {
+        return $this->get( 'open_wide_publish_agenda.agenda_content_repository' );
     }
 
 }

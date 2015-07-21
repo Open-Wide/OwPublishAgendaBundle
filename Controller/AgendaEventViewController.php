@@ -24,10 +24,10 @@ class AgendaEventViewController extends ViewController
         $image = $this->getTranslatedLocationFieldValue( $location, 'image' );
         if( $image )
         {
-            $contentImage = $this->container->get( 'open_wide_publish_agenda.agenda_event_content_repository' )->getContentByContentId( $image->destinationContentId );
+            $contentImage = $this->getAgendaEventContentRepository()->getContentByContentId( $image->destinationContentId );
         }
         return array(
-            'agendaScheduleList' => $this->container->get( 'open_wide_publish_agenda.agenda_event_content_repository' )->getAgendaScheduleList( $location ),
+            'agendaScheduleList' => $this->getAgendaEventContentRepository()->getAgendaScheduleList( $location ),
             'contentImage' => $contentImage
         );
     }

@@ -471,4 +471,40 @@ class ViewController extends Controller
         return $this->getTranslatedContentFieldValue( $content, $fieldIdentifier );
     }
 
+    /**
+     * 
+     * @return OpenWide\Publish\AgendaBundle\Service\AgendaFolderContentRepository
+     */
+    public function getAgendaFolderContentRepository()
+    {
+        return $this->container->get( 'open_wide_publish_agenda.agenda_folder_content_repository' );
+    }
+
+    /**
+     * 
+     * @return OpenWide\Publish\AgendaBundle\Service\AgendaContentRepository
+     */
+    public function getAgendaContentRepository()
+    {
+        return $this->container->get( 'open_wide_publish_agenda.agenda_content_repository' );
+    }
+
+    /**
+     * 
+     * @return OpenWide\Publish\AgendaBundle\Service\AgendaEventContentRepository
+     */
+    public function getAgendaEventContentRepository()
+    {
+        return $this->container->get( 'open_wide_publish_agenda.agenda_event_content_repository' );
+    }
+
+    /**
+     * 
+     * @return OpenWide\Publish\AgendaBundle\Service\AgendaScheduleContentRepository
+     */
+    public function getAgendaScheduleContentRepository()
+    {
+        return $this->container->get( 'open_wide_publish_agenda.agenda_schedule_content_repository' );
+    }
+
 }
