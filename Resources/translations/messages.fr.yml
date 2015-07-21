@@ -1,8 +1,7 @@
-fr:
-    open_wide_publish_agenda:
-        display_type: "Type d'affichage"
-        calendar: "Calendier"
-        list: "Liste"
-        close: "Fermer"
-        event_page: "Plus d'information"
-        schedule: "Programmation"
+open_wide_publish_agenda:
+    display_type: "Type d'affichage"
+    calendar: "Calendier"
+    list: "Liste"
+    close: "Fermer"
+    event_page: "Plus d'information"
+    schedule: "Programmation"
