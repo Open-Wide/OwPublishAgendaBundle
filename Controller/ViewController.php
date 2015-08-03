@@ -477,7 +477,7 @@ class ViewController extends Controller
      */
     public function getAgendaFolderContentRepository()
     {
-        return $this->container->get( 'open_wide_publish_agenda.agenda_folder_content_repository' );
+        return $this->container->get( 'open_wide_publish_agenda.repository.content.agenda_folder' );
     }
 
     /**
@@ -486,7 +486,7 @@ class ViewController extends Controller
      */
     public function getAgendaContentRepository()
     {
-        return $this->container->get( 'open_wide_publish_agenda.agenda_content_repository' );
+        return $this->container->get( 'open_wide_publish_agenda.repository.content.agenda' );
     }
 
     /**
@@ -495,7 +495,7 @@ class ViewController extends Controller
      */
     public function getAgendaEventContentRepository()
     {
-        return $this->container->get( 'open_wide_publish_agenda.agenda_event_content_repository' );
+        return $this->container->get( 'open_wide_publish_agenda.repository.content.agenda_event' );
     }
 
     /**
@@ -504,7 +504,7 @@ class ViewController extends Controller
      */
     public function getAgendaScheduleContentRepository()
     {
-        return $this->container->get( 'open_wide_publish_agenda.agenda_schedule_content_repository' );
+        return $this->container->get( 'open_wide_publish_agenda.repository.content.agenda_schedule' );
     }
 
 }

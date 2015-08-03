@@ -1,10 +1,10 @@
 <?php
 
-namespace OpenWide\Publish\AgendaBundle\Service;
+namespace OpenWide\Publish\AgendaBundle\Repository\Content;
 
 use eZ\Publish\Core\Repository\Values\Content\Location;
 
-class AgendaScheduleContentRepository extends ContentRepository
+class AgendaSchedule extends ContentRepository
 {
 
     const CHILDREN_TYPE = 'agenda_schedule';

@@ -56,7 +56,7 @@ class JsonController extends Controller
      */
     public function getAgendaFolderContentRepository()
     {
-        return $this->get( 'open_wide_publish_agenda.agenda_folder_content_repository' );
+        return $this->get( 'open_wide_publish_agenda.repository.content.agenda_folder' );
     }
 
     /**
@@ -65,7 +65,7 @@ class JsonController extends Controller
      */
     public function getAgendaContentRepository()
     {
-        return $this->get( 'open_wide_publish_agenda.agenda_content_repository' );
+        return $this->get( 'open_wide_publish_agenda.repository.content.agenda' );
     }
 
 }

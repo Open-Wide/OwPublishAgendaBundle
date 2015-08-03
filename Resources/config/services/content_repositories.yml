@@ -1,0 +1,30 @@
+parameters:
+    open_wide_publish_agenda.repository.content.class: 'OpenWide\Publish\AgendaBundle\Repository\Content\ContentRepository'
+    open_wide_publish_agenda.repository.content.agenda_folder.class: 'OpenWide\Publish\AgendaBundle\Repository\Content\AgendaFolder'
+    open_wide_publish_agenda.repository.content.agenda.class: 'OpenWide\Publish\AgendaBundle\Repository\Content\Agenda'
+    open_wide_publish_agenda.repository.content.agenda_event.class: 'OpenWide\Publish\AgendaBundle\Repository\Content\AgendaEvent'
+    open_wide_publish_agenda.repository.content.agenda_schedule.class: 'OpenWide\Publish\AgendaBundle\Repository\Content\AgendaSchedule'
+
+services:
+            
+    open_wide_publish_agenda.repository.content:
+        class: %open_wide_publish_agenda.repository.content.class%
+        arguments: [@service_container]
+        calls:
+            - [ setContainer,[ @service_container ] ]
+            
+    open_wide_publish_agenda.repository.content.agenda_folder:
+        class: %open_wide_publish_agenda.repository.content.agenda_folder.class%
+        parent: open_wide_publish_agenda.repository.content
+            
+    open_wide_publish_agenda.repository.content.agenda:
+        class: %open_wide_publish_agenda.repository.content.agenda.class%
+        parent: open_wide_publish_agenda.repository.content
+            
+    open_wide_publish_agenda.repository.content.agenda_event:
+        class: %open_wide_publish_agenda.repository.content.agenda_event.class%
+        parent: open_wide_publish_agenda.repository.content
+            
+    open_wide_publish_agenda.repository.content.agenda_schedule:
+        class: %open_wide_publish_agenda.repository.content.agenda_schedule.class%
+        parent: open_wide_publish_agenda.repository.content

@@ -1,13 +1,13 @@
 <?php
 
-namespace OpenWide\Publish\AgendaBundle\Service;
+namespace OpenWide\Publish\AgendaBundle\Repository\Content;
 
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
 use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
 use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\Core\Repository\Values\Content\Location;
 
-class AgendaEventContentRepository extends ContentRepository
+class AgendaEvent extends ContentRepository
 {
 
     const CHILDREN_TYPE = 'agenda_schedule';

@@ -1,10 +1,5 @@
 parameters:
     open_wide_publish_agenda.configuration_mapper.class: 'OpenWide\Publish\AgendaBundle\LegacyMapper\Configuration'
-    open_wide_publish_agenda.content_repository.class: 'OpenWide\Publish\AgendaBundle\Service\ContentRepository'
-    open_wide_publish_agenda.agenda_folder_content_repository.class: 'OpenWide\Publish\AgendaBundle\Service\AgendaFolderContentRepository'
-    open_wide_publish_agenda.agenda_content_repository.class: 'OpenWide\Publish\AgendaBundle\Service\AgendaContentRepository'
-    open_wide_publish_agenda.agenda_event_content_repository.class: 'OpenWide\Publish\AgendaBundle\Service\AgendaEventContentRepository'
-    open_wide_publish_agenda.agenda_schedule_content_repository.class: 'OpenWide\Publish\AgendaBundle\Service\AgendaScheduleContentRepository'
 
 services:
 
@@ -14,25 +9,3 @@ services:
             - @ezpublish.config.resolver
         tags:
             - { name: kernel.event_subscriber }
-            
-    open_wide_publish_agenda.content_repository:
-        class: %open_wide_publish_agenda.content_repository.class%
-        arguments: [@service_container]
-        calls:
-            - [ setContainer,[ @service_container ] ]
-            
-    open_wide_publish_agenda.agenda_folder_content_repository:
-        class: %open_wide_publish_agenda.agenda_folder_content_repository.class%
-        parent: open_wide_publish_agenda.content_repository
-            
-    open_wide_publish_agenda.agenda_content_repository:
-        class: %open_wide_publish_agenda.agenda_content_repository.class%
-        parent: open_wide_publish_agenda.content_repository
-            
-    open_wide_publish_agenda.agenda_event_content_repository:
-        class: %open_wide_publish_agenda.agenda_event_content_repository.class%
-        parent: open_wide_publish_agenda.content_repository
-            
-    open_wide_publish_agenda.agenda_schedule_content_repository:
-        class: %open_wide_publish_agenda.agenda_schedule_content_repository.class%
-        parent: open_wide_publish_agenda.content_repository

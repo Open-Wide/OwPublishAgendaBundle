@@ -1,6 +1,6 @@
 <?php
 
-namespace OpenWide\Publish\AgendaBundle\Service;
+namespace OpenWide\Publish\AgendaBundle\Repository\Content;
 
 use Pagerfanta\Pagerfanta;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
@@ -8,7 +8,7 @@ use eZ\Publish\Core\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
 use OpenWide\Publish\AgendaBundle\Pagerfanta\Adapter\LocationQueryAdapter;
 
-class AgendaContentRepository extends ContentRepository
+class Agenda extends ContentRepository
 {
 
     const CHILDREN_TYPE = 'agenda_event';

@@ -1,6 +1,6 @@
 <?php
 
-namespace OpenWide\Publish\AgendaBundle\Service;
+namespace OpenWide\Publish\AgendaBundle\Repository\Content;
 
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
 use eZ\Publish\API\Repository\Values\Content\Query;
@@ -44,7 +44,7 @@ class ContentRepository extends ContainerAware
      */
     public function getAgendaFolderContentRepository()
     {
-        return $this->container->get( 'open_wide_publish_agenda.agenda_folder_content_repository' );
+        return $this->container->get( 'open_wide_publish_agenda.repository.content.agenda_folder' );
     }
 
     /**
@@ -53,7 +53,7 @@ class ContentRepository extends ContainerAware
      */
     public function getAgendaContentRepository()
     {
-        return $this->container->get( 'open_wide_publish_agenda.agenda_content_repository' );
+        return $this->container->get( 'open_wide_publish_agenda.repository.content.agenda' );
     }
 
     /**
@@ -62,7 +62,7 @@ class ContentRepository extends ContainerAware
      */
     public function getAgendaEventContentRepository()
     {
-        return $this->container->get( 'open_wide_publish_agenda.agenda_event_content_repository' );
+        return $this->container->get( 'open_wide_publish_agenda.repository.content.agenda_event' );
     }
 
     /**
@@ -71,7 +71,7 @@ class ContentRepository extends ContainerAware
      */
     public function getAgendaScheduleContentRepository()
     {
-        return $this->container->get( 'open_wide_publish_agenda.agenda_schedule_content_repository' );
+        return $this->container->get( 'open_wide_publish_agenda.repository.content.agenda_schedule' );
     }
 
     /**

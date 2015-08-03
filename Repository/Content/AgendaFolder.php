@@ -1,6 +1,6 @@
 <?php
 
-namespace OpenWide\Publish\AgendaBundle\Service;
+namespace OpenWide\Publish\AgendaBundle\Repository\Content;
 
 use Pagerfanta\Pagerfanta;
 use OpenWide\Publish\AgendaBundle\Pagerfanta\Adapter\LocationQueryAdapter;
@@ -8,7 +8,7 @@ use eZ\Publish\Core\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
 
-class AgendaFolderContentRepository extends ContentRepository
+class AgendaFolder extends ContentRepository
 {
 
     /**
