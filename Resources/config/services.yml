@@ -1,4 +1,5 @@
 imports:
+    - { resource: services/content_repositories.yml }
     - { resource: services/controllers.yml }
     - { resource: services/services.yml }
     - { resource: services/twig.yml }
