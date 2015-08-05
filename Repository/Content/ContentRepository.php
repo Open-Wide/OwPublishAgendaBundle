@@ -169,7 +169,7 @@ class ContentRepository extends ContainerAware
     /**
      * Renvoie le tri paramétré dans un node
      * @param Location $location
-     * @return SectionName|LocationDepth|DateModified|LocationPriority|LocationPathString|ContentName|ContentId|DatePublished
+     * @return SectionName|LocationDepth|DateModified|Location\Priority|Location\PathString|ContentName|ContentId|DatePublished
      */
     public function sortClauseAuto( Location $location )
     {
@@ -191,7 +191,7 @@ class ContentRepository extends ContainerAware
                 return new SortClause\SectionName( $sortOrder );
 
             case 5 : // Profondeur
-                return new SortClause\LocationDepth( $sortOrder );
+                return new SortClause\Location\Depth( $sortOrder );
 
             case 6 : // Identifiant
                 return new SortClause\ContentId( $sortOrder );
@@ -200,13 +200,13 @@ class ContentRepository extends ContainerAware
                 return new SortClause\ContentName( $sortOrder );
 
             case 8 : // Priorité
-                return new SortClause\LocationPriority( $sortOrder );
+                return new SortClause\Location\Priority( $sortOrder );
 
             case 9 : // Nom du node
                 return new SortClause\ContentName( $sortOrder );
 
             default :
-                return new SortClause\LocationPriority( $sortOrder );
+                return new SortClause\Location\Priority( $sortOrder );
         }
     }
 
