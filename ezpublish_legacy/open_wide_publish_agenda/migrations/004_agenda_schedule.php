@@ -81,5 +81,3 @@ class OWPAgenda_004_AgendaSchedule
     }
 
 }
-
-?>

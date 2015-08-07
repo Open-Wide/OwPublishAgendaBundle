@@ -46,5 +46,3 @@ class OWPAgenda_002_Agenda
     }
 
 }
-
-?>

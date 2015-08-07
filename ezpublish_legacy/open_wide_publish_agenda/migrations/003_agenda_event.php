@@ -95,5 +95,3 @@ class OWPAgenda_003_AgendaEvent
     }
 
 }
-
-?>

@@ -47,5 +47,3 @@ class OWPAgenda_001_AgendaFolder
     }
 
 }
-
-?>
