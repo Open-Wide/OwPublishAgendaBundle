@@ -1,7 +1,7 @@
 {% include 'OpenWidePublishAgendaBundle:calendar:page_styles.html.twig' %}
-{% include 'OpenWidePublishAgendaBundle:calendar:page_scripts.html.twig' %}
 {% if agendaLocationIdList is defined %}
     <div class="fullcalendar-calendar fullcalendar-calendar-folder" data-event-url="{{ path('open_wide_publish_agenda_event_list_json' )}}" data-event-source="{{ agendaLocationIdList|join(',') }}"></div>
 {% else %}
     <div class="fullcalendar-calendar fullcalendar-calendar-agenda" data-event-url="{{ path('open_wide_publish_agenda_event_list_json', { 'locationId': location.id } ) }}"></div>
 {% endif %}
+{% include 'OpenWidePublishAgendaBundle:calendar:page_scripts.html.twig' %}
