@@ -51,8 +51,7 @@ $(document).ready(function () {
         var eventSources = [];
         locationIds.forEach(function (entry) {
             eventSources.push({
-                url: baseUrl + "?locationId=" + entry,
-                color: '#' + Math.floor((Math.random() * 1000000) + 1)
+                url: baseUrl + "?locationId=" + entry
             });
         });
         var calendarConfig = baseCalendarConfig;
