@@ -21,7 +21,20 @@ class AgendaEvent extends ContentRepository
             new SortClause\Field( static::CHILDREN_TYPE, 'date_end', Query::SORT_ASC ),
             new SortClause\Field( static::CHILDREN_TYPE, 'hour_end', Query::SORT_ASC )
         );
-        return $this->getLocationSearchResult( $criteria, $sortClause );
+        
+        if(isset($params['limit'])){
+            $limit = $params['limit'];
+        }else{
+            $limit = null;
+        }
+        
+        if(isset($params['offset'])){
+            $offset = $params['offset'];
+        }else{
+            $offset = null;
+        }        
+        
+        return $this->getLocationSearchResult( $criteria, $sortClause,$limit , $offset );
     }
 
     protected function getAgendaScheduleListCriteria( Location $location, $params = array() )

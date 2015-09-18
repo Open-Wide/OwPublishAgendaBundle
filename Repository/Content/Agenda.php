@@ -41,6 +41,7 @@ class Agenda extends ContentRepository
                     'title' => (string) $this->getTranslatedLocationName( $agendaEvent ),
                     'start' => $this->getFormattedDate( $agendaSchedule, 'start' ),
                     'url' => $this->getLocationUrl( $agendaEvent ),
+                    'locationId' => $agendaEvent->id
                 );
                 $description = (string) $this->getTranslatedLocationFieldValue( $agendaEvent, 'subtitle' );
                 if( empty( $description ) )

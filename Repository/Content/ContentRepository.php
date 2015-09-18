@@ -148,7 +148,7 @@ class ContentRepository extends ContainerAware
         return (intval( $a['start'] ) < intval( $b['start'] )) ? -1 : 1;
     }
 
-    function getLocationSearchResult( array $criteria, array $sortClause = array() )
+    function getLocationSearchResult( array $criteria, array $sortClause = array(), $limit = null, $offset = null )
     {
         $query = new LocationQuery();
         $query->filter = new Criterion\LogicalAnd( $criteria );
@@ -156,6 +156,14 @@ class ContentRepository extends ContainerAware
         {
             $query->sortClauses = $sortClause;
         }
+        
+        if($limit){
+            $query->limit = $limit;
+        }
+        if($offset){
+            $query->offset = $offset;
+        }
+        
         $searchResult = $this->repository->getSearchService()->findLocations( $query );
 
         return $this->extractObjectsFromSearchResult( $searchResult );
