@@ -29,6 +29,13 @@ class Agenda extends ContentRepository
         $contentJson = array();
         foreach( $agendaEventList as $agendaEvent )
         {
+        
+            if($agendaEvent->getContentInfo() && $agendaEvent->getContentInfo()->mainLocationId){
+                $mainLocationId = $agendaEvent->getContentInfo()->mainLocationId;
+            }else{
+                $mainLocationId = $agendaEvent->id;
+            }
+        
             $agendaScheduleList = $this->getAgendaEventContentRepository()->getAgendaScheduleList( $agendaEvent, $params );
             foreach( $agendaScheduleList as $agendaSchedule )
             {
@@ -41,7 +48,7 @@ class Agenda extends ContentRepository
                     'title' => (string) $this->getTranslatedLocationName( $agendaEvent ),
                     'start' => $this->getFormattedDate( $agendaSchedule, 'start' ),
                     'url' => $this->getLocationUrl( $agendaEvent ),
-                    'locationId' => $agendaEvent->id
+                    'locationId' => $mainLocationId
                 );
                 $description = (string) $this->getTranslatedLocationFieldValue( $agendaEvent, 'subtitle' );
                 if( empty( $description ) )
