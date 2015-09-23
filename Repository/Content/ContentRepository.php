@@ -306,6 +306,23 @@ class ContentRepository extends ContainerAware
     }
 
     /**
+     * Get the selection field from a content object
+     * 
+     * @param \eZ\Publish\Core\Repository\Values\Content\Content $content
+     * @param string $fieldIdentifier
+     * @return \eZ\Publish\API\Repository\Values\Content\Field
+     */
+    protected function getTranslatedContentFieldSelection( $content, $fieldIdentifier )
+    {
+        $field = $content->getFieldValue($fieldIdentifier);
+        if( is_object($field) )
+        {
+            return $field->selection;
+        }
+        return false;
+    }
+    
+    /**
      * Get the translated field from a content object
      * 
      * @param \eZ\Publish\API\Repository\Values\Content\Location $location
@@ -331,12 +348,26 @@ class ContentRepository extends ContainerAware
         return $this->getTranslatedContentFieldValue( $content, $fieldIdentifier );
     }
 
+    /**
+     * Get the selection field from a content object
+     * 
+     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
+     * @param string $fieldIdentifier
+     * @return \eZ\Publish\API\Repository\Values\Content\Field
+     */
+    protected function getTranslatedLocationFieldSelection( $location, $fieldIdentifier )
+    {
+        $content = $this->repository->getContentService()->loadContentByContentInfo( $location->getContentInfo() );
+        return $this->getTranslatedContentFieldSelection( $content, $fieldIdentifier );
+    }
+
     protected function extractObjectsFromSearchResult( $searchResult )
     {
         $resultList = array();
         foreach( $searchResult->searchHits as $searchHit )
         {
             $resultList[] = $searchHit->valueObject;
+            //print "<pre>".print_($searchHit->valueObject,true). "</pre>"; exit();
         }
 
         return $resultList;
