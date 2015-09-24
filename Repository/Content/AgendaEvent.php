@@ -49,7 +49,7 @@ class AgendaEvent extends ContentRepository
         if( isset( $params['start'] ) && isset( $params['end'] ) )
         {
             $startTime = strtotime( $params['start'] );
-            $endTime = strtotime( $params['end'] ) + 24 * 60;
+            $endTime = strtotime( $params['end'] ) + 24 * 60 * 60;
             $criteria[] = new Criterion\LogicalOr( array(
                 new Criterion\LogicalAnd( array(
                     new Criterion\Field( 'date_start', Criterion\Operator::GTE, $startTime ),
