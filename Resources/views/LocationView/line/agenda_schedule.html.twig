@@ -1,6 +1,10 @@
 {% set date_start = ez_field_value( content, "date_start" )|date("d/m/Y") %}
+{% if not ez_is_field_empty(content, "date_end") %}
 {% set date_end = ez_field_value( content, "date_end" )|date("d/m/Y") %}
-{% if date_start==date_end %}
+{% else %}
+{% set date_end = null %}
+{% endif %}
+{% if date_end is null  %}
     <p>
         Le
         {{ ez_field_value( content, "date_start" )|date("d/m/Y")  }}
