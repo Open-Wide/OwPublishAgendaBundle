@@ -9,7 +9,7 @@ class AgendaSchedule extends ContentRepository
 
     const CHILDREN_TYPE = 'agenda_schedule';
 
-    public function getPeriodList( Location $location )
+    public function getPeriodList( Location $location, $params )
     {
         $periodList = array();
         $startDate = $this->getTranslatedLocationFieldValue( $location, 'date_start' )->date;
