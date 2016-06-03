@@ -104,8 +104,7 @@ class Agenda extends ContentRepository
             new Criterion\Field( 'publish_start', Criterion\Operator::LT, $time ),
             new Criterion\LogicalOr( array(
                 new Criterion\Field( 'publish_end', Criterion\Operator::GT, time() ),
-                new Criterion\Field( 'publish_end', Criterion\Operator::EQ, 0 )
-                    ) ),
+            ) ),
             new Criterion\Visibility( Criterion\Visibility::VISIBLE ),
         );
         return $criteria;
